@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | OSINT & Security Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="tools.html" class="nav-link active">OSINT Tools</a></li>
+        </ul>
+    </nav>
+
+    <section class="tools-hero">
+        <div class="container">
+            <h1 class="glitch" data-text="OSINT_TOOLS">OSINT_TOOLS</h1>
+            <p>Live Open Source Intelligence & Security Analysis Tools</p>
+        </div>
+    </section>
+
+    <section class="tools-grid">
+        <div class="container">
+            <!-- IP Lookup Tool -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>IP Geolocation</h3>
+                </div>
+                <div class="tool-body">
+                    <input type="text" id="ipInput" placeholder="Enter IP address" class="cyber-input">
+                    <button onclick="runIPLookup()" class="cyber-button">Trace IP</button>
+                    <div id="ipResults" class="tool-results"></div>
+                </div>
+            </div>
+
+            <!-- Password Analyzer -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <i class="fas fa-lock"></i>
+                    <h3>Password Strength</h3>
+                </div>
+                <div class="tool-body">
+                    <input type="password" id="passwordInput" placeholder="Test password strength" class="cyber-input">
+                    <button onclick="analyzePassword()" class="cyber-button">Analyze</button>
+                    <div id="passwordResults" class="tool-results"></div>
+                </div>
+            </div>
+
+            <!-- Port Scanner -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Port Scanner</h3>
+                </div>
+                <div class="tool-body">
+                    <input type="text" id="scanTarget" placeholder="target.com" class="cyber-input">
+                    <button onclick="simulatePortScan()" class="cyber-button">Scan Ports</button>
+                    <div id="scanResults" class="tool-results"></div>
+                </div>
+            </div>
+
+            <!-- Header Analyzer -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <i class="fas fa-code"></i>
+                    <h3>HTTP Header Check</h3>
+                </div>
+                <div class="tool-body">
+                    <input type="text" id="headerUrl" placeholder="https://example.com" class="cyber-input">
+                    <button onclick="checkHeaders()" class="cyber-button">Analyze Headers</button>
+                    <div id="headerResults" class="tool-results"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="tools.js"></script>
+</body>
+</html>
