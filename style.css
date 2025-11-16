@@ -1,4 +1,4 @@
-/* style.css - Main Site */
+/* style.css - Main Bedusec Site */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body {
     background: #0a0a0a;
     color: #00ff00;
     overflow-x: hidden;
-    position: relative;
+    line-height: 1.6;
 }
 
 /* Matrix Background */
@@ -52,7 +52,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #00ff00;
     padding: 1rem 2rem;
@@ -146,22 +146,24 @@ body {
     box-shadow: 0 0 15px #ff0080;
 }
 
-/* Terminal Hero */
+/* Hero Section */
 .cyber-hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 2rem;
+    padding-top: 80px;
 }
 
 .terminal-window {
     width: 100%;
     max-width: 800px;
-    background: rgba(0, 20, 0, 0.8);
+    background: rgba(0, 20, 0, 0.9);
     border: 2px solid #00ff00;
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .terminal-header {
@@ -227,15 +229,17 @@ body {
     50% { opacity: 0; }
 }
 
-/* Services Section */
-.cyber-services {
-    padding: 6rem 2rem;
-    background: rgba(0, 10, 0, 0.6);
-}
-
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Services Section */
+.cyber-services {
+    padding: 6rem 0;
+    background: rgba(0, 10, 0, 0.6);
 }
 
 .section-title {
@@ -253,7 +257,7 @@ body {
 }
 
 .service-card {
-    background: rgba(0, 30, 0, 0.6);
+    background: rgba(0, 30, 0, 0.8);
     border: 1px solid #00ff00;
     padding: 2rem;
     border-radius: 8px;
@@ -315,9 +319,9 @@ body {
     border: 1px solid rgba(0, 255, 0, 0.3);
 }
 
-/* Tools Scroller */
+/* Tools Section */
 .cyber-tools {
-    padding: 4rem 2rem;
+    padding: 4rem 0;
     background: rgba(10, 0, 20, 0.6);
 }
 
@@ -349,11 +353,12 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-    background: rgba(0, 30, 0, 0.6);
+    background: rgba(0, 30, 0, 0.8);
     border: 1px solid #0088ff;
     border-radius: 8px;
     min-width: 120px;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .tool-item:hover {
@@ -373,12 +378,12 @@ body {
 
 /* Contact Section */
 .cyber-contact {
-    padding: 6rem 2rem;
+    padding: 6rem 0;
     background: rgba(0, 10, 0, 0.8);
 }
 
 .contact-terminal {
-    background: rgba(0, 20, 0, 0.8);
+    background: rgba(0, 20, 0, 0.9);
     border: 2px solid #ff0080;
     border-radius: 8px;
     padding: 2rem;
@@ -387,19 +392,24 @@ body {
     box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
 }
 
+.contact-line {
+    margin-bottom: 1rem;
+}
+
 .contact-form {
     margin-top: 2rem;
 }
 
 .cyber-input, .cyber-textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     border: 1px solid #ff0080;
     color: #ffffff;
     padding: 1rem;
     margin-bottom: 1rem;
     font-family: 'Share Tech Mono', monospace;
     border-radius: 4px;
+    font-size: 1rem;
 }
 
 .cyber-input::placeholder, .cyber-textarea::placeholder {
@@ -422,6 +432,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
+    font-size: 1rem;
 }
 
 .cyber-button:hover {
@@ -439,6 +450,8 @@ body {
     
     .nav-links {
         gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .section-title {
@@ -447,5 +460,13 @@ body {
     
     .terminal-body {
         padding: 1rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cyber-hero {
+        padding-top: 120px;
     }
 }

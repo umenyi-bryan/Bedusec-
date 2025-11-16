@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Main Container -->
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="cyber-sidebar">
@@ -24,34 +23,26 @@
             </div>
 
             <nav class="sidebar-nav">
-                <a href="#overview" class="nav-item active">
+                <a href="#" class="nav-item active" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#scans" class="nav-item">
+                <a href="#" class="nav-item" data-tab="scans">
                     <i class="fas fa-radar"></i>
                     <span>Active Scans</span>
                     <span class="nav-badge">3</span>
                 </a>
-                <a href="#vulnerabilities" class="nav-item">
+                <a href="#" class="nav-item" data-tab="vulnerabilities">
                     <i class="fas fa-bug"></i>
                     <span>Vulnerabilities</span>
                     <span class="nav-badge">12</span>
                 </a>
-                <a href="#clients" class="nav-item">
+                <a href="#" class="nav-item" data-tab="clients">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
                     <span class="nav-badge">8</span>
                 </a>
-                <a href="#reports" class="nav-item">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Reports</span>
-                </a>
-                <a href="#tools" class="nav-item">
-                    <i class="fas fa-tools"></i>
-                    <span>Tools</span>
-                </a>
-                <a href="#terminal" class="nav-item">
+                <a href="#" class="nav-item" data-tab="terminal">
                     <i class="fas fa-terminal"></i>
                     <span>Live Terminal</span>
                 </a>
@@ -71,6 +62,12 @@
                             <div class="progress-fill" style="width: 42%"></div>
                         </div>
                     </div>
+                    <div class="stat">
+                        <span>NETWORK</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 28%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,152 +78,190 @@
             <header class="dashboard-header">
                 <div class="header-left">
                     <h1>COMMAND CENTER</h1>
-                    <span class="datetime" id="liveDateTime">LOADING...</span>
+                    <span class="datetime" id="liveDateTime">LOADING SYSTEM TIME...</span>
                 </div>
                 <div class="header-right">
                     <div class="alert-indicator">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>CRITICAL: 2</span>
                     </div>
-                    <button class="cyber-btn">
+                    <button class="cyber-btn" id="lockSystem">
                         <i class="fas fa-power-off"></i> LOCK SYSTEM
                     </button>
                 </div>
             </header>
 
-            <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- System Status -->
-                <div class="grid-card wide">
-                    <div class="card-header">
-                        <h3>SYSTEM STATUS</h3>
-                        <span class="card-badge online">OPERATIONAL</span>
-                    </div>
-                    <div class="status-grid">
-                        <div class="status-item">
-                            <div class="status-icon scanning">
-                                <i class="fas fa-satellite-dish"></i>
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Overview Tab -->
+                <div class="tab-content active" id="overview">
+                    <div class="dashboard-grid">
+                        <!-- System Status -->
+                        <div class="grid-card wide">
+                            <div class="card-header">
+                                <h3>SYSTEM STATUS</h3>
+                                <span class="card-badge online">OPERATIONAL</span>
                             </div>
-                            <div class="status-info">
-                                <span class="status-title">Active Scans</span>
-                                <span class="status-value">3 Running</span>
+                            <div class="status-grid">
+                                <div class="status-item">
+                                    <div class="status-icon scanning">
+                                        <i class="fas fa-satellite-dish"></i>
+                                    </div>
+                                    <div class="status-info">
+                                        <span class="status-title">Active Scans</span>
+                                        <span class="status-value">3 Running</span>
+                                    </div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-icon critical">
+                                        <i class="fas fa-skull-crossbones"></i>
+                                    </div>
+                                    <div class="status-info">
+                                        <span class="status-title">Critical Vulnerabilities</span>
+                                        <span class="status-value">2 Detected</span>
+                                    </div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-icon warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="status-info">
+                                        <span class="status-title">Warnings</span>
+                                        <span class="status-value">5 Active</span>
+                                    </div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-icon safe">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="status-info">
+                                        <span class="status-title">Secured Systems</span>
+                                        <span class="status-value">24/24</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="status-item">
-                            <div class="status-icon critical">
-                                <i class="fas fa-skull-crossbones"></i>
+
+                        <!-- Live Terminal -->
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>LIVE TERMINAL</h3>
+                                <div class="terminal-controls">
+                                    <button class="ctrl-btn" id="termPlay"><i class="fas fa-play"></i></button>
+                                    <button class="ctrl-btn" id="termStop"><i class="fas fa-stop"></i></button>
+                                    <button class="ctrl-btn" id="termClear"><i class="fas fa-redo"></i></button>
+                                </div>
                             </div>
-                            <div class="status-info">
-                                <span class="status-title">Critical Vulnerabilities</span>
-                                <span class="status-value">2 Detected</span>
+                            <div class="terminal-output" id="terminalOutput">
+                                <div class="terminal-line">
+                                    <span class="prompt">[root@bedusec]#</span> system_init --security_level=maximum
+                                </div>
+                                <div class="terminal-line">
+                                    Initializing Bedusec Security Framework...
+                                </div>
+                                <div class="terminal-line">
+                                    All systems operational. Monitoring active.
+                                </div>
+                                <div class="terminal-line">
+                                    <span class="prompt">[root@bedusec]#</span> <span class="cursor">|</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="status-item">
-                            <div class="status-icon warning">
-                                <i class="fas fa-exclamation-triangle"></i>
+
+                        <!-- Recent Activity -->
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>INTRUSION ALERTS</h3>
+                                <span class="card-badge danger">LIVE</span>
                             </div>
-                            <div class="status-info">
-                                <span class="status-title">Warnings</span>
-                                <span class="status-value">5 Active</span>
+                            <div class="activity-feed" id="activityFeed">
+                                <div class="activity-item critical">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <span class="activity-title">SQL Injection Attempt</span>
+                                        <span class="activity-time">2 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item warning">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <span class="activity-title">Port Scan Detected</span>
+                                        <span class="activity-time">15 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item safe">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <span class="activity-title">Firewall Updated</span>
+                                        <span class="activity-time">1 hour ago</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="status-item">
-                            <div class="status-icon safe">
-                                <i class="fas fa-shield-alt"></i>
+
+                        <!-- Quick Tools -->
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>QUICK TOOLS</h3>
                             </div>
-                            <div class="status-info">
-                                <span class="status-title">Secured Systems</span>
-                                <span class="status-value">24/24</span>
+                            <div class="tools-grid">
+                                <button class="tool-btn" data-tool="network-scan">
+                                    <i class="fas fa-network-wired"></i>
+                                    <span>Network Scan</span>
+                                </button>
+                                <button class="tool-btn" data-tool="web-crawler">
+                                    <i class="fas fa-spider"></i>
+                                    <span>Web Crawler</span>
+                                </button>
+                                <button class="tool-btn" data-tool="vuln-scanner">
+                                    <i class="fas fa-bug"></i>
+                                    <span>Vuln Scanner</span>
+                                </button>
+                                <button class="tool-btn" data-tool="generate-report">
+                                    <i class="fas fa-file-contract"></i>
+                                    <span>Generate Report</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Live Terminal -->
-                <div class="grid-card">
-                    <div class="card-header">
-                        <h3>LIVE TERMINAL</h3>
-                        <div class="terminal-controls">
-                            <button class="ctrl-btn"><i class="fas fa-play"></i></button>
-                            <button class="ctrl-btn"><i class="fas fa-stop"></i></button>
-                            <button class="ctrl-btn"><i class="fas fa-redo"></i></button>
-                        </div>
-                    </div>
-                    <div class="terminal-output">
-                        <div class="terminal-line">
-                            <span class="prompt">[root@bedusec]#</span> nmap -sS 192.168.1.0/24
-                        </div>
-                        <div class="terminal-line">
-                            Starting Nmap 7.80 scan...
-                        </div>
-                        <div class="terminal-line">
-                            Discovered 4 hosts online
-                        </div>
-                        <div class="terminal-line">
-                            <span class="prompt">[root@bedusec]#</span> <span class="cursor">|</span>
-                        </div>
+                <!-- Other tabs would go here -->
+                <div class="tab-content" id="scans">
+                    <div class="tab-placeholder">
+                        <i class="fas fa-radar fa-3x"></i>
+                        <h3>ACTIVE SCANS</h3>
+                        <p>Network penetration testing in progress...</p>
                     </div>
                 </div>
 
-                <!-- Recent Activity -->
-                <div class="grid-card">
-                    <div class="card-header">
-                        <h3>INTRUSION ALERTS</h3>
-                        <span class="card-badge danger">LIVE</span>
-                    </div>
-                    <div class="activity-feed">
-                        <div class="activity-item critical">
-                            <div class="activity-icon">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <div class="activity-content">
-                                <span class="activity-title">SQL Injection Attempt</span>
-                                <span class="activity-time">2 minutes ago</span>
-                            </div>
-                        </div>
-                        <div class="activity-item warning">
-                            <div class="activity-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="activity-content">
-                                <span class="activity-title">Port Scan Detected</span>
-                                <span class="activity-time">15 minutes ago</span>
-                            </div>
-                        </div>
-                        <div class="activity-item safe">
-                            <div class="activity-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="activity-content">
-                                <span class="activity-title">Firewall Updated</span>
-                                <span class="activity-time">1 hour ago</span>
-                            </div>
-                        </div>
+                <div class="tab-content" id="vulnerabilities">
+                    <div class="tab-placeholder">
+                        <i class="fas fa-bug fa-3x"></i>
+                        <h3>VULNERABILITY DATABASE</h3>
+                        <p>12 critical vulnerabilities detected</p>
                     </div>
                 </div>
 
-                <!-- Quick Tools -->
-                <div class="grid-card">
-                    <div class="card-header">
-                        <h3>QUICK TOOLS</h3>
+                <div class="tab-content" id="clients">
+                    <div class="tab-placeholder">
+                        <i class="fas fa-users fa-3x"></i>
+                        <h3>CLIENT PORTFOLIO</h3>
+                        <p>8 active security engagements</p>
                     </div>
-                    <div class="tools-grid">
-                        <button class="tool-btn">
-                            <i class="fas fa-network-wired"></i>
-                            <span>Network Scan</span>
-                        </button>
-                        <button class="tool-btn">
-                            <i class="fas fa-spider"></i>
-                            <span>Web Crawler</span>
-                        </button>
-                        <button class="tool-btn">
-                            <i class="fas fa-bug"></i>
-                            <span>Vuln Scanner</span>
-                        </button>
-                        <button class="tool-btn">
-                            <i class="fas fa-file-contract"></i>
-                            <span>Generate Report</span>
-                        </button>
+                </div>
+
+                <div class="tab-content" id="terminal">
+                    <div class="tab-placeholder">
+                        <i class="fas fa-terminal fa-3x"></i>
+                        <h3>ADVANCED TERMINAL</h3>
+                        <p>Full system command access</p>
                     </div>
                 </div>
             </div>
