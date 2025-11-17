@@ -23,26 +23,30 @@
             </div>
 
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-tab="overview">
+                <a href="#overview" class="nav-item active" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="nav-item" data-tab="scans">
+                <a href="tools.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>OSINT Tools</span>
+                </a>
+                <a href="#scans" class="nav-item" data-tab="scans">
                     <i class="fas fa-radar"></i>
                     <span>Active Scans</span>
                     <span class="nav-badge">3</span>
                 </a>
-                <a href="#" class="nav-item" data-tab="vulnerabilities">
+                <a href="#vulnerabilities" class="nav-item" data-tab="vulnerabilities">
                     <i class="fas fa-bug"></i>
                     <span>Vulnerabilities</span>
                     <span class="nav-badge">12</span>
                 </a>
-                <a href="#" class="nav-item" data-tab="clients">
+                <a href="#clients" class="nav-item" data-tab="clients">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
                     <span class="nav-badge">8</span>
                 </a>
-                <a href="#" class="nav-item" data-tab="terminal">
+                <a href="#terminal" class="nav-item" data-tab="terminal">
                     <i class="fas fa-terminal"></i>
                     <span>Live Terminal</span>
                 </a>
@@ -238,6 +242,12 @@
                         <i class="fas fa-radar fa-3x"></i>
                         <h3>ACTIVE SCANS</h3>
                         <p>Network penetration testing in progress...</p>
+                        <div class="scan-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                            <span>65% Complete</span>
+                        </div>
                     </div>
                 </div>
 
@@ -246,6 +256,11 @@
                         <i class="fas fa-bug fa-3x"></i>
                         <h3>VULNERABILITY DATABASE</h3>
                         <p>12 critical vulnerabilities detected</p>
+                        <div class="vuln-stats">
+                            <div class="vuln-stat critical">Critical: 2</div>
+                            <div class="vuln-stat high">High: 4</div>
+                            <div class="vuln-stat medium">Medium: 6</div>
+                        </div>
                     </div>
                 </div>
 
@@ -254,6 +269,11 @@
                         <i class="fas fa-users fa-3x"></i>
                         <h3>CLIENT PORTFOLIO</h3>
                         <p>8 active security engagements</p>
+                        <div class="client-stats">
+                            <div class="client-stat">Penetration Tests: 5</div>
+                            <div class="client-stat">Security Audits: 3</div>
+                            <div class="client-stat">Incident Response: 2</div>
+                        </div>
                     </div>
                 </div>
 
@@ -262,6 +282,17 @@
                         <i class="fas fa-terminal fa-3x"></i>
                         <h3>ADVANCED TERMINAL</h3>
                         <p>Full system command access</p>
+                        <div class="terminal-full">
+                            <div class="terminal-line">
+                                <span class="prompt">[root@bedusec]#</span> access_granted --level=admin
+                            </div>
+                            <div class="terminal-line">
+                                Welcome to Bedusec Advanced Terminal
+                            </div>
+                            <div class="terminal-line">
+                                Type 'help' for available commands
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
