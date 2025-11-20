@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | Admin Login</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.03) 2px,
+                    rgba(0, 255, 0, 0.03) 4px
+                );
+            animation: matrix 20s linear infinite;
+            pointer-events: none;
+        }
+
+        .login-terminal {
+            background: rgba(0, 20, 0, 0.95);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .login-header p {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #00ff00;
+            font-weight: 500;
+        }
+
+        .login-input {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        }
+
+        .login-input::placeholder {
+            color: #88ff88;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #00ff00, #0088ff);
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(45deg, #0088ff, #00ff00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .login-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .security-notice {
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid #ff0080;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .security-notice h4 {
+            color: #ff0080;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-notice p {
+            color: #ff88cc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .alert {
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid #ff0080;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #ff0080;
+            text-align: center;
+            display: none;
+        }
+
+        .alert.success {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .alert.warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: #ffaa00;
+            color: #ffaa00;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+            color: #88ff88;
+            font-size: 0.8rem;
+        }
+
+        .attempts-warning {
+            color: #ffaa00;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .lock-warning {
+            color: #ff0080;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-terminal">
+            <div class="login-header">
+                <h1>BEDUSEC ADMIN</h1>
+                <p>Secure Creator Access</p>
+            </div>
+
+            <div class="alert" id="loginAlert"></div>
+            <div class="attempts-warning" id="attemptsWarning"></div>
+            <div class="lock-warning" id="lockWarning"></div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> USERNAME
+                    </label>
+                    <input type="text" id="username" class="login-input" placeholder="admin" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> PASSWORD
+                    </label>
+                    <input type="password" id="password" class="login-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <i class="fas fa-terminal"></i> ACCESS CONTROL PANEL
+                </button>
+            </form>
+
+            <div class="security-notice">
+                <h4>⚠️ SECURITY NOTICE</h4>
+                <p>This area is restricted to authorized personnel only. All access attempts are logged and monitored.</p>
+            </div>
+
+            <div class="login-footer">
+                <p>Bedusec Security System v2.0</p>
+                <p>Encrypted Connection 🔒</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginAlert = document.getElementById('loginAlert');
+            const attemptsWarning = document.getElementById('attemptsWarning');
+            const lockWarning = document.getElementById('lockWarning');
+
+            // Check URL parameters for messages
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('logout') === 'success') {
+                showAlert('Logged out successfully', 'success');
+            }
+            if (urlParams.get('session') === 'expired') {
+                showAlert('Session expired. Please login again.', 'warning');
+            }
+
+            // Check if account is locked
+            if (bedusecAuth.isLocked()) {
+                const minutesLeft = bedusecAuth.getLockTimeRemaining();
+                showLockWarning(minutesLeft);
+                loginBtn.disabled = true;
+            }
+
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (!username || !password) {
+                    showAlert('Please enter both username and password', 'error');
+                    return;
+                }
+
+                // Update button state
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AUTHENTICATING...';
+
+                try {
+                    const success = await bedusecAuth.login(username, password);
+                    
+                    if (success) {
+                        showAlert('Access granted! Redirecting...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'admin.html';
+                        }, 1000);
+                    }
+                } catch (error) {
+                    showAlert(error.message, 'error');
+                    
+                    // Show attempts warning
+                    if (bedusecAuth.attempts > 0) {
+                        attemptsWarning.style.display = 'block';
+                        attemptsWarning.textContent = 
+                            `${bedusecAuth.maxAttempts - bedusecAuth.attempts} attempts remaining`;
+                    }
+
+                    // Show lock warning if locked
+                    if (bedusecAuth.isLocked()) {
+                        const minutesLeft = bedusecAuth.getLockTimeRemaining();
+                        showLockWarning(minutesLeft);
+                        loginBtn.disabled = true;
+                    }
+
+                    // Shake effect for wrong credentials
+                    loginForm.classList.add('shake');
+                    setTimeout(() => loginForm.classList.remove('shake'), 500);
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<i class="fas fa-terminal"></i> ACCESS CONTROL PANEL';
+                }
+            });
+
+            function showAlert(message, type) {
+                loginAlert.textContent = message;
+                loginAlert.className = 'alert';
+                loginAlert.classList.add(type);
+                loginAlert.style.display = 'block';
+                
+                // Auto-hide success messages
+                if (type === 'success') {
+                    setTimeout(() => {
+                        loginAlert.style.display = 'none';
+                    }, 3000);
+                }
+            }
+
+            function showLockWarning(minutesLeft) {
+                lockWarning.style.display = 'block';
+                lockWarning.textContent = 
+                    `Account locked. Try again in ${minutesLeft} minutes.`;
+                lockWarning.innerHTML += '<br><i class="fas fa-shield-alt"></i> Security protocol engaged';
+            }
+
+            // Focus on username field
+            document.getElementById('username').focus();
+        });
+    </script>
+</body>
+</html>
