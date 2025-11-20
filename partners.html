@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | Partnerships</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="tools.html" class="nav-link">OSINT Tools</a></li>
+            <li><a href="partners.html" class="nav-link active">Partnerships</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section class="partners-hero">
+        <div class="container">
+            <h1 class="glitch" data-text="STRATEGIC_PARTNERSHIPS">STRATEGIC_PARTNERSHIPS</h1>
+            <p>Collaborating with industry leaders to enhance cybersecurity worldwide</p>
+        </div>
+    </section>
+
+    <section class="partners-showcase">
+        <div class="container">
+            <h2 class="section-title">OUR PARTNERS</h2>
+            <div class="partners-grid" id="partnersGrid">
+                <div class="loading">Loading partners...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partnership-cta">
+        <div class="container">
+            <div class="cta-terminal">
+                <div class="terminal-line">
+                    <span class="prompt">partnerships@bedusec:~$</span>
+                    <span class="command">initiate_collaboration</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Seeking strategic cybersecurity partnerships...</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Areas: Penetration Testing • Vulnerability Research • Security Training</span>
+                </div>
+                <div class="partnership-form">
+                    <h3>BECOME A PARTNER</h3>
+                    <input type="text" id="partnerName" class="cyber-input" placeholder="Organization Name">
+                    <input type="email" id="partnerEmail" class="cyber-input" placeholder="Contact Email">
+                    <textarea id="partnerProposal" class="cyber-textarea" placeholder="Partnership proposal..." rows="4"></textarea>
+                    <button class="cyber-button" onclick="submitPartnership()">
+                        <i class="fas fa-handshake"></i> SUBMIT PROPOSAL
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="partners.js"></script>
+</body>
+</html>

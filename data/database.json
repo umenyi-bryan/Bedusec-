@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Welcome to Bedusec Security",
+      "content": "Your trusted partner in ethical hacking and cybersecurity solutions.",
+      "category": "announcement",
+      "date": "2024-01-15",
+      "published": true,
+      "author": "admin"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "subject": "Security Consultation",
+      "message": "I need help with penetration testing for our web application.",
+      "date": "2024-01-15T10:30:00Z",
+      "read": false,
+      "type": "inquiry"
+    }
+  ],
+  "partners": [
+    {
+      "id": 1,
+      "name": "CyberShield Inc",
+      "logo": "/assets/cybershield-logo.png",
+      "website": "https://cybershield.example.com",
+      "description": "Leading provider of enterprise security solutions",
+      "featured": true,
+      "joined": "2024-01-10"
+    }
+  ],
+  "settings": {
+    "siteTitle": "Bedusec | Ethical Hacking & Cybersecurity",
+    "maintenanceMode": false,
+    "allowMessages": true,
+    "adminEmail": "admin@bedusec.com"
+  }
+}
