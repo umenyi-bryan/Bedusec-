@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | Organization</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .org-hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 0, 128, 0.05) 10px,
+                    rgba(255, 0, 128, 0.05) 20px
+                );
+            animation: scan 20s linear infinite;
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .org-card {
+            background: rgba(0, 30, 0, 0.9);
+            border: 1px solid;
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .org-card:hover::before {
+            left: 100%;
+        }
+
+        .org-card.critical { border-color: #ff0080; }
+        .org-card.warning { border-color: #ffaa00; }
+        .org-card.safe { border-color: #00ff00; }
+        .org-card.info { border-color: #0088ff; }
+
+        .org-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .org-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .org-card.critical .org-icon { color: #ff0080; }
+        .org-card.warning .org-icon { color: #ffaa00; }
+        .org-card.safe .org-icon { color: #00ff00; }
+        .org-card.info .org-icon { color: #0088ff; }
+
+        .org-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #88ff88;
+        }
+
+        .threat-level {
+            background: rgba(255, 0, 128, 0.2);
+            border: 1px solid #ff0080;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .threat-level h4 {
+            color: #ff0080;
+            margin-bottom: 0.5rem;
+        }
+
+        .threat-level p {
+            color: #ff88cc;
+            margin: 0;
+        }
+
+        .subscription-terminal {
+            background: rgba(0, 20, 0, 0.95);
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 4rem auto;
+            max-width: 600px;
+            box-shadow: 0 0 40px rgba(255, 0, 128, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subscription-terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 128, 0.05) 2px,
+                    rgba(255, 0, 128, 0.05) 4px
+                );
+            animation: matrix 15s linear infinite;
+            pointer-events: none;
+        }
+
+        .access-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .access-card {
+            background: rgba(0, 30, 0, 0.9);
+            border: 1px solid;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .access-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
+        }
+
+        .access-card.tier-1 { border-color: #00ff00; }
+        .access-card.tier-2 { border-color: #0088ff; }
+        .access-card.tier-3 { border-color: #ff0080; }
+
+        .access-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff0080;
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .access-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin: 1rem 0;
+        }
+
+        .access-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .access-features li {
+            color: #88ff88;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .access-features li::before {
+            content: '▶';
+            color: #00ff00;
+            position: absolute;
+            left: 0;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 128, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 128, 0); }
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="organization.html" class="nav-link active">Organization</a></li>
+            <li><a href="tools.html" class="nav-link">OSINT Tools</a></li>
+            <li><a href="partners.html" class="nav-link">Partnerships</a></li>
+            <li><a href="login.html" class="nav-login">
+                <i class="fas fa-terminal"></i> Control Panel
+            </a></li>
+        </ul>
+    </nav>
+
+    <section class="org-hero">
+        <div class="container">
+            <h1 class="glitch" data-text="SHADOW_ORGANIZATION">SHADOW_ORGANIZATION</h1>
+            <p>Operating in the digital shadows to secure the future</p>
+        </div>
+    </section>
+
+    <section class="cyber-services">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="OPERATIONS">OPERATIONS</h2>
+            <div class="org-grid">
+                <div class="org-card critical">
+                    <i class="fas fa-skull-crossbones org-icon"></i>
+                    <h3>OFFENSIVE SECURITY</h3>
+                    <p>Proactive threat neutralization and vulnerability exploitation. We operate where others fear to tread.</p>
+                    <div class="threat-level">
+                        <h4>THREAT LEVEL: MAXIMUM</h4>
+                        <p>24/7 active operations</p>
+                    </div>
+                </div>
+
+                <div class="org-card warning">
+                    <i class="fas fa-shield-alt org-icon"></i>
+                    <h3>DEFENSIVE INTELLIGENCE</h3>
+                    <p>Advanced threat intelligence and digital fortification. Protecting assets before attacks manifest.</p>
+                    <ul class="access-features">
+                        <li>Real-time threat monitoring</li>
+                        <li>Predictive attack analysis</li>
+                        <li>Zero-day vulnerability research</li>
+                    </ul>
+                </div>
+
+                <div class="org-card safe">
+                    <i class="fas fa-user-secret org-icon"></i>
+                    <h3>COVERT OPERATIONS</h3>
+                    <p>Underground intelligence gathering and digital espionage. Silent, invisible, effective.</p>
+                    <div class="org-stats">
+                        <div class="stat-box">
+                            <span class="stat-number">247</span>
+                            <span class="stat-label">Operations</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Success Rate</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Compromised</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="org-card info">
+                    <i class="fas fa-database org-icon"></i>
+                    <h3>DATA WARFARE</h3>
+                    <p>Information dominance through advanced cyber operations. Controlling the digital battlefield.</p>
+                    <ul class="access-features">
+                        <li>Mass data analysis</li>
+                        <li>Pattern recognition</li>
+                        <li>Predictive modeling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cyber-tools">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="ACCESS_LEVELS">ACCESS_LEVELS</h2>
+            <div class="access-levels">
+                <div class="access-card tier-1">
+                    <h3>OBSERVER</h3>
+                    <div class="access-price">FREE</div>
+                    <ul class="access-features">
+                        <li>Basic threat intelligence</li>
+                        <li>Public OSINT tools</li>
+                        <li>Security alerts</li>
+                        <li>Community access</li>
+                    </ul>
+                    <button class="cyber-button" onclick="subscribe('observer')">
+                        <i class="fas fa-eye"></i> SUBSCRIBE
+                    </button>
+                </div>
+
+                <div class="access-card tier-2">
+                    <h3>OPERATIVE</h3>
+                    <div class="access-price">$99<span>/mo</span></div>
+                    <div class="access-badge">RECOMMENDED</div>
+                    <ul class="access-features">
+                        <li>Advanced OSINT tools</li>
+                        <li>Real-time threat data</li>
+                        <li>Custom reports</li>
+                        <li>Priority support</li>
+                        <li>Training materials</li>
+                    </ul>
+                    <button class="cyber-button" onclick="subscribe('operative')">
+                        <i class="fas fa-user-shield"></i> UPGRADE
+                    </button>
+                </div>
+
+                <div class="access-card tier-3 pulse">
+                    <h3>SHADOW</h3>
+                    <div class="access-price">$499<span>/mo</span></div>
+                    <ul class="access-features">
+                        <li>All offensive tools</li>
+                        <li>Zero-day intelligence</li>
+                        <li>Direct operator access</li>
+                        <li>Custom operations</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Encrypted comms</li>
+                    </ul>
+                    <button class="cyber-button" onclick="subscribe('shadow')">
+                        <i class="fas fa-ghost"></i> GO SHADOW
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cyber-contact">
+        <div class="container">
+            <div class="subscription-terminal">
+                <div class="terminal-line">
+                    <span class="prompt">subscription@bedusec:~$</span>
+                    <span class="command">initiate_secure_enrollment</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Secure channel established...</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Encryption: AES-256 | Protocol: Secure</span>
+                </div>
+                <div class="subscription-form">
+                    <h3>REQUEST ACCESS</h3>
+                    <input type="text" id="subName" class="cyber-input" placeholder="[CODENAME]" required>
+                    <input type="email" id="subEmail" class="cyber-input" placeholder="[ENCRYPTED_CONTACT]" required>
+                    <select id="subLevel" class="cyber-input">
+                        <option value="observer">Observer - Public Access</option>
+                        <option value="operative">Operative - $99/month</option>
+                        <option value="shadow">Shadow - $499/month</option>
+                    </select>
+                    <textarea id="subMessage" class="cyber-textarea" placeholder="[BACKGROUND_CHECK_INFO]" rows="3"></textarea>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="subAgree" required>
+                        <span class="toggle-slider"></span>
+                        I accept the risks and understand operational security
+                    </label>
+                    <button class="cyber-button" onclick="processSubscription()">
+                        <i class="fas fa-fingerprint"></i> REQUEST CLEARANCE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="organization.js"></script>
+</body>
+</html>
