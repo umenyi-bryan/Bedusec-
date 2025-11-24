@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | Access Console</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.03) 2px,
+                    rgba(0, 255, 0, 0.03) 4px
+                );
+            animation: matrix 20s linear infinite;
+            pointer-events: none;
+        }
+
+        .auth-terminal {
+            background: rgba(0, 20, 0, 0.95);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        .auth-header h1 {
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .auth-header p {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #00ff00;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .auth-input {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        }
+
+        .auth-input::placeholder {
+            color: #88ff88;
+        }
+
+        .auth-btn {
+            background: linear-gradient(45deg, #00ff00, #0088ff);
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .auth-btn:hover {
+            background: linear-gradient(45deg, #0088ff, #00ff00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .auth-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .auth-footer a {
+            color: #0088ff;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            color: #00ff00;
+        }
+
+        .alert {
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid #ff0080;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #ff0080;
+            text-align: center;
+            display: none;
+        }
+
+        .alert.success {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .security-notice {
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid #ff0080;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .security-notice h4 {
+            color: #ff0080;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-notice p {
+            color: #ff88cc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @keyframes matrix {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-terminal">
+            <div class="auth-header">
+                <h1>ACCESS CONSOLE</h1>
+                <p>Authenticate to continue</p>
+            </div>
+
+            <div class="alert" id="authAlert"></div>
+
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> ENCRYPTED CONTACT
+                    </label>
+                    <input type="email" id="email" class="auth-input" placeholder="secure@provider.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> ACCESS CODE
+                    </label>
+                    <input type="password" id="password" class="auth-input" placeholder="Your secure access code" required>
+                </div>
+
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <i class="fas fa-terminal"></i> AUTHENTICATE & ENTER
+                </button>
+            </form>
+
+            <div class="security-notice">
+                <h4>⚠️ SECURITY NOTICE</h4>
+                <p>Multiple failed attempts will trigger security protocols</p>
+            </div>
+
+            <div class="auth-footer">
+                <p>No secure account? <a href="register.html">Join the network</a></p>
+                <p style="font-size: 0.8rem; color: #88ff88; margin-top: 1rem;">
+                    <i class="fas fa-shield-alt"></i> Encrypted connection established
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth-system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const authAlert = document.getElementById('authAlert');
+
+            // Check for existing session
+            if (userAuth.checkSession()) {
+                window.location.href = 'user-dashboard.html';
+            }
+
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (!email || !password) {
+                    showAlert('Both fields are required', 'error');
+                    return;
+                }
+
+                // Update button state
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> VERIFYING CREDENTIALS...';
+
+                try {
+                    const user = await userAuth.login(email, password);
+                    
+                    showAlert('Authentication successful! Access granted...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'user-dashboard.html';
+                    }, 1000);
+                    
+                } catch (error) {
+                    showAlert(error.message, 'error');
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<i class="fas fa-terminal"></i> AUTHENTICATE & ENTER';
+                }
+            });
+
+            function showAlert(message, type) {
+                authAlert.textContent = message;
+                authAlert.className = 'alert';
+                authAlert.classList.add(type);
+                authAlert.style.display = 'block';
+                
+                if (type === 'success') {
+                    setTimeout(() => {
+                        authAlert.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedusec | User Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="cyber-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 id="userUsername">OPERATIVE</h3>
+                <span class="status-indicator">
+                    <i class="fas fa-circle"></i> <span id="userPlan">FREE</span>
+                </span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active" data-tab="overview">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#tools" class="nav-item" data-tab="tools">
+                    <i class="fas fa-tools"></i>
+                    <span>OSINT Tools</span>
+                </a>
+                <a href="#profile" class="nav-item" data-tab="profile">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Main Site</span>
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>OPERATIVE DASHBOARD</h1>
+                    <span class="datetime" id="liveDateTime">USER CONSOLE</span>
+                </div>
+                <div class="header-right">
+                    <div class="alert-indicator">
+                        <i class="fas fa-bell"></i>
+                        <span id="notificationCount">0</span>
+                    </div>
+                    <button class="cyber-btn" onclick="upgradeAccount()">
+                        <i class="fas fa-rocket"></i> UPGRADE
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Overview Tab -->
+                <div class="tab-content active" id="overview">
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>YOUR STATS</h3>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <i class="fas fa-tools"></i>
+                                    <span class="stat-number" id="toolsUsed">0</span>
+                                    <span class="stat-label">Tools Used</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span class="stat-number" id="securityLevel">1</span>
+                                    <span class="stat-label">Security Level</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span class="stat-number" id="memberDays">1</span>
+                                    <span class="stat-label">Days Active</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star"></i>
+                                    <span class="stat-number" id="userXP">0</span>
+                                    <span class="stat-label">Experience</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>QUICK ACTIONS</h3>
+                            </div>
+                            <div class="actions-grid">
+                                <button class="action-btn" onclick="showTab('tools')">
+                                    <i class="fas fa-search"></i>
+                                    <span>OSINT Tools</span>
+                                </button>
+                                <button class="action-btn" onclick="openPentestAI()">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI Assistant</span>
+                                </button>
+                                <button class="action-btn" onclick="showTab('profile')">
+                                    <i class="fas fa-user-cog"></i>
+                                    <span>Edit Profile</span>
+                                </button>
+                                <button class="action-btn" onclick="viewTutorials()">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Tutorials</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid-card wide">
+                            <div class="card-header">
+                                <h3>RECENT ACTIVITY</h3>
+                            </div>
+                            <div class="activity-feed" id="userActivity">
+                                <div class="activity-item safe">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <span class="activity-title">Account Created</span>
+                                        <span class="activity-time">Just now</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid-card">
+                            <div class="card-header">
+                                <h3>SECURITY STATUS</h3>
+                            </div>
+                            <div class="security-status">
+                                <div class="status-item online">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Account Secure</span>
+                                </div>
+                                <div class="status-item warning">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Free Tier Active</span>
+                                </div>
+                                <div class="status-item offline">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI Assistant Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Tab -->
+                <div class="tab-content" id="tools">
+                    <div class="tab-header">
+                        <h2>OSINT TOOLS</h2>
+                        <span class="plan-badge" id="toolsAccess">FREE ACCESS</span>
+                    </div>
+                    <div class="tools-grid">
+                        <div class="tool-card" onclick="useTool('ipLookup')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>IP Geolocation</h4>
+                            <p>Trace IP addresses and get location data</p>
+                            <span class="tool-access free">FREE</span>
+                        </div>
+                        <div class="tool-card" onclick="useTool('passwordAnalyzer')">
+                            <i class="fas fa-lock"></i>
+                            <h4>Password Strength</h4>
+                            <p>Analyze password security and get recommendations</p>
+                            <span class="tool-access free">FREE</span>
+                        </div>
+                        <div class="tool-card" onclick="useTool('headerAnalyzer')">
+                            <i class="fas fa-code"></i>
+                            <h4>HTTP Headers</h4>
+                            <p>Analyze website security headers</p>
+                            <span class="tool-access free">FREE</span>
+                        </div>
+                        <div class="tool-card pro-tool" onclick="upgradeForTool('networkScanner')">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>Network Scanner</h4>
+                            <p>Advanced port scanning and network mapping</p>
+                            <span class="tool-access pro">PRO</span>
+                        </div>
+                        <div class="tool-card pro-tool" onclick="upgradeForTool('vulnerabilityScanner')">
+                            <i class="fas fa-bug"></i>
+                            <h4>Vulnerability Scan</h4>
+                            <p>Comprehensive security vulnerability assessment</p>
+                            <span class="tool-access pro">PRO</span>
+                        </div>
+                        <div class="tool-card shadow-tool" onclick="upgradeForTool('socialEngineering')">
+                            <i class="fas fa-user-secret"></i>
+                            <h4>Social Engineering</h4>
+                            <p>Advanced human factor testing tools</p>
+                            <span class="tool-access shadow">SHADOW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div class="tab-content" id="profile">
+                    <div class="tab-header">
+                        <h2>USER PROFILE</h2>
+                    </div>
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label>Operative Name</label>
+                            <input type="text" id="profileUsername" class="cyber-input" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Encrypted Contact</label>
+                            <input type="email" id="profileEmail" class="cyber-input" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Security Clearance</label>
+                            <input type="text" id="profilePlan" class="cyber-input" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Member Since</label>
+                            <input type="text" id="profileCreated" class="cyber-input" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Login</label>
+                            <input type="text" id="profileLastLogin" class="cyber-input" readonly>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <button class="cyber-btn" onclick="changePassword()">
+                                <i class="fas fa-key"></i> CHANGE ACCESS CODE
+                            </button>
+                            <button class="cyber-btn warning" onclick="deleteAccount()">
+                                <i class="fas fa-trash"></i> DELETE ACCOUNT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth-system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!userAuth.checkSession()) {
+                window.location.href = 'user-login.html';
+                return;
+            }
+
+            // Load user data
+            loadUserDashboard();
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+
+        function loadUserDashboard() {
+            const user = userAuth.currentUser;
+            
+            // Update user info
+            document.getElementById('userUsername').textContent = user.username;
+            document.getElementById('userPlan').textContent = user.plan.toUpperCase();
+            document.getElementById('profileUsername').value = user.username;
+            document.getElementById('profileEmail').value = user.email;
+            document.getElementById('profilePlan').value = user.plan.toUpperCase();
+            document.getElementById('profileCreated').value = new Date(user.createdAt).toLocaleDateString();
+            document.getElementById('profileLastLogin').value = user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'First login';
+
+            // Update stats based on user activity
+            updateUserStats(user);
+        }
+
+        function updateUserStats(user) {
+            // Calculate member days
+            const created = new Date(user.createdAt);
+            const today = new Date();
+            const diffTime = Math.abs(today - created);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('memberDays').textContent = diffDays;
+
+            // Calculate experience based on activity
+            const experience = diffDays * 10 + (user.profile?.experience || 0);
+            document.getElementById('userXP').textContent = experience;
+
+            // Update security level based on experience
+            const securityLevel = Math.min(Math.floor(experience / 100) + 1, 10);
+            document.getElementById('securityLevel').textContent = securityLevel;
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate corresponding nav item
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        function useTool(toolName) {
+            // Track tool usage
+            const user = userAuth.currentUser;
+            if (!user.profile.toolsUsed) {
+                user.profile.toolsUsed = [];
+            }
+            
+            if (!user.profile.toolsUsed.includes(toolName)) {
+                user.profile.toolsUsed.push(toolName);
+                user.profile.experience = (user.profile.experience || 0) + 5;
+                userAuth.updateProfile(user.profile);
+                
+                // Update stats
+                document.getElementById('toolsUsed').textContent = user.profile.toolsUsed.length;
+                document.getElementById('userXP').textContent = user.profile.experience;
+            }
+
+            // Redirect to tools page or open specific tool
+            switch(toolName) {
+                case 'ipLookup':
+                    window.open('tools.html#ipLookup', '_blank');
+                    break;
+                case 'passwordAnalyzer':
+                    window.open('tools.html#passwordAnalyzer', '_blank');
+                    break;
+                case 'headerAnalyzer':
+                    window.open('tools.html#headerAnalyzer', '_blank');
+                    break;
+                default:
+                    window.open('tools.html', '_blank');
+            }
+
+            // Add activity
+            addUserActivity(`Used ${toolName.replace(/([A-Z])/g, ' $1').toLowerCase()} tool`);
+        }
+
+        function upgradeForTool(toolName) {
+            alert('This tool requires a PRO or SHADOW subscription. Upgrade your account to access advanced features.');
+            upgradeAccount();
+        }
+
+        function upgradeAccount() {
+            window.open('organization.html', '_blank');
+        }
+
+        function openPentestAI() {
+            // Open AI chatbot or redirect to AI page
+            alert('Pentesting AI Assistant - This feature will be available in the next update!');
+        }
+
+        function viewTutorials() {
+            window.open('https://bedusec.netlify.app/tools.html', '_blank');
+        }
+
+        function changePassword() {
+            const newPassword = prompt('Enter new access code (min 8 characters):');
+            if (newPassword && newPassword.length >= 8) {
+                // In a real app, this would update the password in the backend
+                alert('Access code change request sent. You will receive confirmation shortly.');
+            } else if (newPassword) {
+                alert('Access code must be at least 8 characters long.');
+            }
+        }
+
+        function deleteAccount() {
+            if (confirm('WARNING: This will permanently delete your account and all data. This action cannot be undone.')) {
+                if (confirm('FINAL CONFIRMATION: Type "DELETE" to confirm account deletion:')) {
+                    // In a real app, this would call backend to delete account
+                    userAuth.logout();
+                    alert('Account deletion scheduled. You have been logged out.');
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+
+        function addUserActivity(activity) {
+            const activityFeed = document.getElementById('userActivity');
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item safe';
+            activityItem.innerHTML = `
+                <div class="activity-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="activity-content">
+                    <span class="activity-title">${activity}</span>
+                    <span class="activity-time">Just now</span>
+                </div>
+            `;
+            activityFeed.insertBefore(activityItem, activityFeed.firstChild);
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                userAuth.logout();
+                window.location.href = 'user-login.html';
+            }
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('liveDateTime').textContent = now.toLocaleString();
+        }
+
+        // Setup tab navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabName = this.getAttribute('data-tab');
+                if (tabName) {
+                    showTab(tabName);
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .plan-badge {
+            background: #ff0080;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(0, 30, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
+        }
+
+        .tool-card.pro-tool {
+            border-color: #0088ff;
+            opacity: 0.7;
+        }
+
+        .tool-card.shadow-tool {
+            border-color: #ff0080;
+            opacity: 0.5;
+        }
+
+        .tool-card i {
+            font-size: 2.5rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tool-card.pro-tool i {
+            color: #0088ff;
+        }
+
+        .tool-card.shadow-tool i {
+            color: #ff0080;
+        }
+
+        .tool-card h4 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card p {
+            color: #88ff88;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-access {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .tool-access.free {
+            background: #00ff00;
+            color: #000000;
+        }
+
+        .tool-access.pro {
+            background: #0088ff;
+            color: #ffffff;
+        }
+
+        .tool-access.shadow {
+            background: #ff0080;
+            color: #ffffff;
+        }
+
+        .profile-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-actions .cyber-btn.warning {
+            background: linear-gradient(45deg, #ff0080, #ff3399);
+        }
+
+        .security-status {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+        }
+
+        .status-item.warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: #ffaa00;
+        }
+
+        .status-item.offline {
+            background: rgba(0, 136, 255, 0.1);
+            border-color: #0088ff;
+        }
+
+        .status-item i {
+            color: #00ff00;
+        }
+
+        .status-item.warning i {
+            color: #ffaa00;
+        }
+
+        .status-item.offline i {
+            color: #0088ff;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
