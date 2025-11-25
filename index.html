@@ -3,26 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedusec | Cybersecurity Solutions</title>
+    <title>Bedusec | Ethical Hacking & Cybersecurity</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<<<<<<< HEAD
-    <!-- Your existing website content goes here -->
-    <header>
-        <nav>
-            <div class="logo">BEDUSEC</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="tools.html">Tools</a></li>
-                <li><a href="pentest-ai.html">Pentest AI</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-    </header>
-=======
     <!-- Matrix Background -->
     <div class="matrix-bg"></div>
 
@@ -36,52 +22,46 @@
             <li><a href="#tools" class="nav-link">Tools</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
             <li><a href="tools.html" class="nav-link">OSINT Tools</a></li>
-                <li><a href="partners.html" class="nav-link">Partnerships</a></li>
+            <li><a href="partners.html" class="nav-link">Partnerships</a></li>
             <li><a href="dashboard.html" class="nav-login">
                 <i class="fas fa-terminal"></i> Command Center
             </a></li>
         </ul>
     </nav>
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
 
-    <main>
-        <section class="hero">
-            <h1>Advanced Cybersecurity Solutions</h1>
-            <p>Protecting your digital assets with cutting-edge technology</p>
-            <div class="cta-buttons">
-                <a href="pentest-ai.html" class="cta-button">Start Pentesting</a>
-                <a href="tools.html" class="cta-button secondary">Explore Tools</a>
+    <!-- Hero Section -->
+    <section class="cyber-hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
+                </div>
+                <span class="terminal-title">root@bedusec:~</span>
             </div>
-        </section>
-
-        <!-- Your other sections -->
-    </main>
-
-    <!-- ShadowGPT Chatbot Integration -->
-    <div id="shadowGPTChatbot" class="shadowgpt-chatbot">
-        <div class="chatbot-header">
-            <div class="chatbot-title">
-                <i class="fas fa-robot"></i>
-                <span>SHADOWGPT v2.1</span>
-                <span class="status-indicator online"></span>
-            </div>
-            <div class="chatbot-controls">
-                <button class="chatbot-btn" onclick="clearShadowGPT()" title="Clear Conversation">
-                    <i class="fas fa-eraser"></i>
-                </button>
-                <button class="chatbot-btn" onclick="toggleShadowGPT()">
-                    <i class="fas fa-times"></i>
-                </button>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">whoami</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">ethical_hacker | cybersecurity_specialist | penetration_tester</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">cat mission.txt</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">"Securing digital frontiers through ethical penetration testing and vulnerability assessment."</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command typed-command"></span>
+                    <span class="cursor">|</span>
+                </div>
             </div>
         </div>
-<<<<<<< HEAD
-        
-        <div class="chatbot-messages" id="shadowGPTMessages">
-            <div class="message ai-message">
-                <div class="message-sender">ShadowGPT</div>
-                <div class="message-content">
-                    ShadowGPT online. I can discuss pentesting tools or just chat. How can I assist?
-=======
     </section>
 
     <!-- Services Section -->
@@ -126,29 +106,78 @@
                         <span class="tag">Physical Security</span>
                         <span class="tag">Training</span>
                     </div>
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
                 </div>
-                <div class="message-time" id="currentTime"></div>
             </div>
         </div>
-        
-        <div class="chatbot-input">
-            <input type="text" id="shadowGPTInput" placeholder="Ask about pentesting or just chat..." onkeypress="handleShadowGPTKeypress(event)">
-            <button onclick="sendShadowGPTMessage()" id="sendButton">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
+    </section>
 
-        <div class="quick-actions">
-            <button class="quick-btn" onclick="insertQuickQuestion('nmap commands')">Nmap</button>
-            <button class="quick-btn" onclick="insertQuickQuestion('How are you?')">Chat</button>
-            <button class="quick-btn" onclick="insertQuickQuestion('SQL injection')">SQLi</button>
-            <button class="quick-btn" onclick="insertQuickQuestion('Tell me a joke')">Fun</button>
+    <!-- Tools Section -->
+    <section id="tools" class="cyber-tools">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="ARSENAL">ARSENAL</h2>
+            <div class="tools-scroller">
+                <div class="tool-item">
+                    <i class="fab fa-linux"></i>
+                    <span>Kali Linux</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Metasploit</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-search"></i>
+                    <span>Burp Suite</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-code"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-terminal"></i>
+                    <span>Nmap</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-wifi"></i>
+                    <span>Aircrack-ng</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-database"></i>
+                    <span>SQLmap</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-key"></i>
+                    <span>John the Ripper</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-<<<<<<< HEAD
-=======
+    <!-- Contact Section -->
+    <section id="contact" class="cyber-contact">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="ENCRYPTED_COMMS">ENCRYPTED_COMMS</h2>
+            <div class="contact-terminal">
+                <div class="contact-line">
+                    <span class="prompt">contact@bedusec:~$</span>
+                    <span class="command">initiate_secure_connection</span>
+                </div>
+                <div class="contact-line">
+                    <span class="output">Establishing encrypted channel...</span>
+                </div>
+                <div class="contact-line">
+                    <span class="output">Protocol: PGP | Status: SECURE</span>
+                </div>
+                <div class="contact-form">
+                    <input type="text" placeholder="[SUBJECT]" class="cyber-input">
+                    <textarea placeholder="[ENCRYPTED_MESSAGE]" class="cyber-textarea"></textarea>
+                    <button class="cyber-button">
+                        <i class="fas fa-paper-plane"></i> SEND ENCRYPTED
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 
     <!-- SHADOWGPT CHATBOT -->
@@ -194,17 +223,12 @@
         </div>
     </div>
 
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <button class="shadowgpt-toggle" onclick="toggleShadowGPT()">
         <i class="fas fa-robot"></i>
         <span class="pulse-dot"></span>
     </button>
 
-<<<<<<< HEAD
-    <!-- Chatbot Styles -->
-=======
     <script src="shadowgpt-enhanced.js"></script>
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <style>
     .shadowgpt-chatbot {
         position: fixed;
@@ -218,11 +242,7 @@
         box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
         display: none;
         flex-direction: column;
-<<<<<<< HEAD
-        z-index: 1000;
-=======
         z-index: 10000;
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
         backdrop-filter: blur(10px);
         font-family: 'Share Tech Mono', monospace;
     }
@@ -409,11 +429,7 @@
         font-size: 1.5rem;
         cursor: pointer;
         box-shadow: 0 0 30px rgba(255, 0, 128, 0.6);
-<<<<<<< HEAD
-        z-index: 999;
-=======
         z-index: 9999;
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
         display: flex;
         align-items: center;
         justify-content: center;
@@ -479,11 +495,6 @@
     }
     </style>
 
-<<<<<<< HEAD
-    <!-- Chatbot JavaScript -->
-    <script src="assets/js/shadowgpt-enhanced.js"></script>
-=======
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <script>
     let shadowGPTChat = null;
 
@@ -587,11 +598,5 @@
 
     setInterval(updateTime, 60000);
     </script>
-<<<<<<< HEAD
-
-    <!-- Your existing scripts -->
-    <script src="assets/js/script.js"></script>
-=======
->>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
 </body>
 </html>
