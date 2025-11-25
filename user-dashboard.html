@@ -105,7 +105,7 @@
                                     <i class="fas fa-search"></i>
                                     <span>OSINT Tools</span>
                                 </button>
-                                <button class="action-btn" onclick="openPentestAI()">
+                                <button class="action-btn" onclick="openShadowGPT()">
                                     <i class="fas fa-robot"></i>
                                     <span>AI Assistant</span>
                                 </button>
@@ -357,10 +357,14 @@
             window.open('organization.html', '_blank');
         }
 
-        function openPentestAI() {
-            // Open AI chatbot or redirect to AI page
-            alert('Pentesting AI Assistant - This feature will be available in the next update!');
-        }
+function openShadowGPT() {
+    // Open ShadowGPT chatbot
+    if (typeof toggleShadowGPT !== "undefined") {
+        toggleShadowGPT();
+    } else {
+        alert("ShadowGPT AI Assistant - Access through the main site chatbot!");
+    }
+}
 
         function viewTutorials() {
             window.open('https://bedusec.netlify.app/tools.html', '_blank');
