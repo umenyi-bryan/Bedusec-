@@ -1,0 +1,420 @@
+<!-- SHADOWGPT CHATBOT - ADD THIS BEFORE CLOSING </body> TAG -->
+<div id="shadowGPTChatbot" class="shadowgpt-chatbot">
+    <div class="chatbot-header">
+        <div class="chatbot-title">
+            <i class="fas fa-robot"></i>
+            <span>SHADOWGPT v2.1</span>
+            <span class="status-indicator online"></span>
+        </div>
+        <div class="chatbot-controls">
+            <button class="chatbot-btn" onclick="clearShadowGPT()" title="Clear Conversation">
+                <i class="fas fa-eraser"></i>
+            </button>
+            <button class="chatbot-btn" onclick="toggleShadowGPT()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="chatbot-messages" id="shadowGPTMessages">
+        <div class="message ai-message">
+            <div class="message-sender">ShadowGPT</div>
+            <div class="message-content">
+                ShadowGPT online. I can discuss pentesting tools or just chat. How can I assist?
+            </div>
+            <div class="message-time" id="currentTime"></div>
+        </div>
+    </div>
+    
+    <div class="chatbot-input">
+        <input type="text" id="shadowGPTInput" placeholder="Ask about pentesting or just chat..." onkeypress="handleShadowGPTKeypress(event)">
+        <button onclick="sendShadowGPTMessage()" id="sendButton">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+
+    <div class="quick-actions">
+        <button class="quick-btn" onclick="insertQuickQuestion('nmap commands')">Nmap</button>
+        <button class="quick-btn" onclick="insertQuickQuestion('How are you?')">Chat</button>
+        <button class="quick-btn" onclick="insertQuickQuestion('SQL injection')">SQLi</button>
+        <button class="quick-btn" onclick="insertQuickQuestion('Tell me a joke')">Fun</button>
+    </div>
+</div>
+
+<button class="shadowgpt-toggle" onclick="toggleShadowGPT()">
+    <i class="fas fa-robot"></i>
+    <span class="pulse-dot"></span>
+</button>
+
+<style>
+/* CHATBOT STYLES ONLY - WON'T AFFECT YOUR EXISTING DESIGN */
+.shadowgpt-chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    height: 550px;
+    background: rgba(0, 20, 0, 0.98);
+    border: 2px solid #ff0080;
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
+    display: none;
+    flex-direction: column;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.shadowgpt-chatbot.active {
+    display: flex;
+}
+
+.chatbot-header {
+    background: rgba(255, 0, 128, 0.2);
+    padding: 1rem;
+    border-bottom: 1px solid #ff0080;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-title {
+    color: #ff0080;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff00;
+    animation: pulse 2s infinite;
+}
+
+.chatbot-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chatbot-btn {
+    background: none;
+    border: none;
+    color: #ff0080;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.3rem;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.chatbot-btn:hover {
+    background: rgba(255, 0, 128, 0.2);
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    max-width: 85%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    animation: messageSlide 0.3s ease;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: rgba(0, 136, 255, 0.2);
+    border: 1px solid #0088ff;
+    color: #ffffff;
+}
+
+.ai-message {
+    align-self: flex-start;
+    background: rgba(255, 0, 128, 0.1);
+    border: 1px solid #ff0080;
+    color: #ff88cc;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #ff0080;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.user-message .message-sender {
+    color: #0088ff;
+}
+
+.message-content {
+    line-height: 1.4;
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    color: #88ff88;
+    margin-top: 0.3rem;
+    text-align: right;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 0, 128, 0.3);
+    gap: 0.5rem;
+}
+
+.chatbot-input input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #ff0080;
+    border-radius: 4px;
+    padding: 0.8rem;
+    color: #ffffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.chatbot-input input:focus {
+    outline: none;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.chatbot-input button {
+    background: #ff0080;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.chatbot-input button:hover {
+    background: #ff3399;
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
+}
+
+.quick-actions {
+    display: flex;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 0, 128, 0.2);
+    flex-wrap: wrap;
+}
+
+.quick-btn {
+    background: rgba(255, 0, 128, 0.2);
+    border: 1px solid #ff0080;
+    color: #ff88cc;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.quick-btn:hover {
+    background: rgba(255, 0, 128, 0.4);
+    transform: translateY(-2px);
+}
+
+.shadowgpt-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff0080, #8000ff);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 0, 128, 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.shadowgpt-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(255, 0, 128, 0.8);
+}
+
+.pulse-dot {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    background: #00ff00;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+    100% { transform: scale(0.95); opacity: 1; }
+}
+
+@keyframes messageSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: #ff0080;
+    border-radius: 3px;
+}
+
+.message-content pre {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 0.8rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+}
+
+.message-content code {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #88ff88;
+}
+</style>
+
+<script src="shadowgpt-enhanced.js"></script>
+<script>
+// ShadowGPT Chatbot Functionality
+let shadowGPTChat = null;
+
+window.addEventListener('DOMContentLoaded', function() {
+    shadowGPTChat = new ShadowGPT();
+    updateTime();
+});
+
+function toggleShadowGPT() {
+    const chatbot = document.getElementById('shadowGPTChatbot');
+    const isActive = chatbot.classList.contains('active');
+    
+    if (isActive) {
+        chatbot.classList.remove('active');
+    } else {
+        chatbot.classList.add('active');
+        setTimeout(() => {
+            document.getElementById('shadowGPTInput').focus();
+        }, 300);
+    }
+}
+
+function sendShadowGPTMessage() {
+    const input = document.getElementById('shadowGPTInput');
+    const message = input.value.trim();
+    
+    if (!message || !shadowGPTChat) return;
+    
+    addMessageToChat('user', message, 'You');
+    input.value = '';
+    
+    shadowGPTChat.sendMessage(message).then(response => {
+        addMessageToChat('ai', response, 'ShadowGPT');
+    });
+}
+
+function handleShadowGPTKeypress(event) {
+    if (event.key === 'Enter') {
+        sendShadowGPTMessage();
+    }
+}
+
+function addMessageToChat(type, content, sender) {
+    const messagesContainer = document.getElementById('shadowGPTMessages');
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${type}-message`;
+    
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    messageElement.innerHTML = `
+        <div class="message-sender">${sender}</div>
+        <div class="message-content">${formatMessageContent(content)}</div>
+        <div class="message-time">${time}</div>
+    `;
+    
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function formatMessageContent(content) {
+    let formatted = content
+        .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+    
+    return formatted;
+}
+
+function clearShadowGPT() {
+    const messagesContainer = document.getElementById('shadowGPTMessages');
+    messagesContainer.innerHTML = `
+        <div class="message ai-message">
+            <div class="message-sender">ShadowGPT</div>
+            <div class="message-content">
+                Conversation cleared. ShadowGPT ready for new inquiries.
+            </div>
+            <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        </div>
+    `;
+    
+    if (shadowGPTChat) {
+        shadowGPTChat.clearConversation();
+    }
+}
+
+function insertQuickQuestion(question) {
+    const input = document.getElementById('shadowGPTInput');
+    input.value = question;
+    input.focus();
+}
+
+function updateTime() {
+    const timeElement = document.getElementById('currentTime');
+    if (timeElement) {
+        timeElement.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+}
+
+setInterval(updateTime, 60000);
+</script>
