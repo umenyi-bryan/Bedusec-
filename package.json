@@ -1,58 +1,22 @@
 {
-  "name": "bedusec-ultra-secure",
+  "name": "bedusec-netlify",
   "version": "1.0.0",
-  "description": "Ultra Secure Bedusec Mega Organization Platform",
-  "main": "ultra-secure-server.js",
+  "description": "Bedusec Ultra Secure Platform - Netlify Edition",
+  "type": "module",
   "scripts": {
-    "start": "node ultra-secure-server.js",
-    "dev": "nodemon ultra-secure-server.js",
-    "prod": "NODE_ENV=production node ultra-secure-server.js",
-    "security-audit": "npm audit --audit-level critical",
-    "test": "jest --coverage",
-    "lint": "eslint .",
-    "docker:build": "docker build -t bedusec-ultra-secure .",
-    "docker:run": "docker run -p 3000:3000 bedusec-ultra-secure"
+    "build": "echo 'Building Bedusec...'",
+    "dev": "netlify dev",
+    "functions:serve": "netlify functions:serve"
   },
-  "keywords": [
-    "cybersecurity",
-    "authentication",
-    "security",
-    "ultra-secure",
-    "bedusec",
-    "enterprise"
-  ],
-  "author": "Bedusec Security Team <security@bedusec.com>",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
-    "express-rate-limit": "^6.8.1",
-    "helmet": "^7.0.0",
-    "cors": "^2.8.5",
-    "validator": "^13.9.0",
-    "express-validator": "^7.0.1",
-    "node-cron": "^3.0.2",
-    "compression": "^1.7.4",
-    "morgan": "^1.10.0"
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
-    "jest": "^29.5.0",
-    "supertest": "^6.3.3",
-    "eslint": "^8.44.0",
-    "@types/node": "^20.4.2"
+    "@netlify/functions": "^2.0.0",
+    "netlify-cli": "^15.0.0"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bedusec/ultra-secure-platform"
-  },
-  "bugs": {
-    "url": "https://github.com/bedusec/ultra-secure-platform/issues"
-  },
-  "homepage": "https://bedusec.com"
+    "node": ">=18.0.0"
+  }
 }

@@ -3,310 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedusec Command Center | Admin Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <title>Dashboard | Bedusec</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="#profile" class="nav-link">Profile</a></li>
+            <li><a href="#security" class="nav-link">Security</a></li>
+            <li><button onclick="netlifyAuth.logout()" class="nav-login">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button></li>
+        </ul>
+    </nav>
+
     <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="cyber-sidebar">
-            <div class="sidebar-header">
-                <div class="admin-avatar">
-                    <i class="fas fa-user-secret"></i>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
                 </div>
-                <h3>root@bedusec</h3>
-                <span class="status-indicator">
-                    <i class="fas fa-circle"></i> ONLINE
-                </span>
+                <span class="terminal-title">user@bedusec:~</span>
             </div>
-
-            <nav class="sidebar-nav">
-                <a href="#overview" class="nav-item active" data-tab="overview">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="partners.html" class="nav-item">
-                    <i class="fas fa-handshake"></i>
-                    <span>Partnerships</span>
-                </a>
-                <a href="organization.html" class="nav-item">
-                    <i class="fas fa-building"></i>
-                    <span>Organization</span>
-                </a>
-                <a href="tools.html" class="nav-item">
-                    <i class="fas fa-search"></i>
-                    <span>OSINT Tools</span>
-                </a>
-                <a href="#scans" class="nav-item" data-tab="scans">
-                    <i class="fas fa-radar"></i>
-                    <span>Active Scans</span>
-                    <span class="nav-badge">3</span>
-                </a>
-                <a href="#vulnerabilities" class="nav-item" data-tab="vulnerabilities">
-                    <i class="fas fa-bug"></i>
-                    <span>Vulnerabilities</span>
-                    <span class="nav-badge">12</span>
-                </a>
-                <a href="#clients" class="nav-item" data-tab="clients">
-                    <i class="fas fa-users"></i>
-                    <span>Clients</span>
-                    <span class="nav-badge">8</span>
-                </a>
-                <a href="#terminal" class="nav-item" data-tab="terminal">
-                    <i class="fas fa-terminal"></i>
-                    <span>Live Terminal</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="system-stats">
-                    <div class="stat">
-                        <span>CPU</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 65%"></div>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <span>RAM</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 42%"></div>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <span>NETWORK</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 28%"></div>
-                        </div>
-                    </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">user@bedusec:~$</span>
+                    <span class="command">whoami</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" id="userInfo">Loading user information...</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">user@bedusec:~$</span>
+                    <span class="command">system_status</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Security Level: <span style="color: #00ff00">ULTRA SECURE</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Session: <span style="color: #00ff00">ACTIVE</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">user@bedusec:~$</span>
+                    <span class="command">access_granted</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">Welcome to Bedusec Secure Dashboard</span>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="dashboard-main">
-            <!-- Header -->
-            <header class="dashboard-header">
-                <div class="header-left">
-                    <h1>COMMAND CENTER</h1>
-                    <span class="datetime" id="liveDateTime">LOADING SYSTEM TIME...</span>
-                </div>
-                <div class="header-right">
-                    <div class="alert-indicator">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>CRITICAL: 2</span>
-                    </div>
-                    <button class="cyber-btn" id="lockSystem">
-                        <i class="fas fa-power-off"></i> LOCK SYSTEM
-                    </button>
-                </div>
-            </header>
-
-            <!-- Dashboard Content -->
-            <div class="dashboard-content">
-                <!-- Overview Tab -->
-                <div class="tab-content active" id="overview">
-                    <div class="dashboard-grid">
-                        <!-- System Status -->
-                        <div class="grid-card wide">
-                            <div class="card-header">
-                                <h3>SYSTEM STATUS</h3>
-                                <span class="card-badge online">OPERATIONAL</span>
-                            </div>
-                            <div class="status-grid">
-                                <div class="status-item">
-                                    <div class="status-icon scanning">
-                                        <i class="fas fa-satellite-dish"></i>
-                                    </div>
-                                    <div class="status-info">
-                                        <span class="status-title">Active Scans</span>
-                                        <span class="status-value">3 Running</span>
-                                    </div>
-                                </div>
-                                <div class="status-item">
-                                    <div class="status-icon critical">
-                                        <i class="fas fa-skull-crossbones"></i>
-                                    </div>
-                                    <div class="status-info">
-                                        <span class="status-title">Critical Vulnerabilities</span>
-                                        <span class="status-value">2 Detected</span>
-                                    </div>
-                                </div>
-                                <div class="status-item">
-                                    <div class="status-icon warning">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </div>
-                                    <div class="status-info">
-                                        <span class="status-title">Warnings</span>
-                                        <span class="status-value">5 Active</span>
-                                    </div>
-                                </div>
-                                <div class="status-item">
-                                    <div class="status-icon safe">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div class="status-info">
-                                        <span class="status-title">Secured Systems</span>
-                                        <span class="status-value">24/24</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Live Terminal -->
-                        <div class="grid-card">
-                            <div class="card-header">
-                                <h3>LIVE TERMINAL</h3>
-                                <div class="terminal-controls">
-                                    <button class="ctrl-btn" id="termPlay"><i class="fas fa-play"></i></button>
-                                    <button class="ctrl-btn" id="termStop"><i class="fas fa-stop"></i></button>
-                                    <button class="ctrl-btn" id="termClear"><i class="fas fa-redo"></i></button>
-                                </div>
-                            </div>
-                            <div class="terminal-output" id="terminalOutput">
-                                <div class="terminal-line">
-                                    <span class="prompt">[root@bedusec]#</span> system_init --security_level=maximum
-                                </div>
-                                <div class="terminal-line">
-                                    Initializing Bedusec Security Framework...
-                                </div>
-                                <div class="terminal-line">
-                                    All systems operational. Monitoring active.
-                                </div>
-                                <div class="terminal-line">
-                                    <span class="prompt">[root@bedusec]#</span> <span class="cursor">|</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recent Activity -->
-                        <div class="grid-card">
-                            <div class="card-header">
-                                <h3>INTRUSION ALERTS</h3>
-                                <span class="card-badge danger">LIVE</span>
-                            </div>
-                            <div class="activity-feed" id="activityFeed">
-                                <div class="activity-item critical">
-                                    <div class="activity-icon">
-                                        <i class="fas fa-fire"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="activity-title">SQL Injection Attempt</span>
-                                        <span class="activity-time">2 minutes ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-item warning">
-                                    <div class="activity-icon">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="activity-title">Port Scan Detected</span>
-                                        <span class="activity-time">15 minutes ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-item safe">
-                                    <div class="activity-icon">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="activity-title">Firewall Updated</span>
-                                        <span class="activity-time">1 hour ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Quick Tools -->
-                        <div class="grid-card">
-                            <div class="card-header">
-                                <h3>QUICK TOOLS</h3>
-                            </div>
-                            <div class="tools-grid">
-                                <button class="tool-btn" data-tool="network-scan">
-                                    <i class="fas fa-network-wired"></i>
-                                    <span>Network Scan</span>
-                                </button>
-                                <button class="tool-btn" data-tool="web-crawler">
-                                    <i class="fas fa-spider"></i>
-                                    <span>Web Crawler</span>
-                                </button>
-                                <button class="tool-btn" data-tool="vuln-scanner">
-                                    <i class="fas fa-bug"></i>
-                                    <span>Vuln Scanner</span>
-                                </button>
-                                <button class="tool-btn" data-tool="generate-report">
-                                    <i class="fas fa-file-contract"></i>
-                                    <span>Generate Report</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other tabs would go here -->
-                <div class="tab-content" id="scans">
-                    <div class="tab-placeholder">
-                        <i class="fas fa-radar fa-3x"></i>
-                        <h3>ACTIVE SCANS</h3>
-                        <p>Network penetration testing in progress...</p>
-                        <div class="scan-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 65%"></div>
-                            </div>
-                            <span>65% Complete</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="vulnerabilities">
-                    <div class="tab-placeholder">
-                        <i class="fas fa-bug fa-3x"></i>
-                        <h3>VULNERABILITY DATABASE</h3>
-                        <p>12 critical vulnerabilities detected</p>
-                        <div class="vuln-stats">
-                            <div class="vuln-stat critical">Critical: 2</div>
-                            <div class="vuln-stat high">High: 4</div>
-                            <div class="vuln-stat medium">Medium: 6</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="clients">
-                    <div class="tab-placeholder">
-                        <i class="fas fa-users fa-3x"></i>
-                        <h3>CLIENT PORTFOLIO</h3>
-                        <p>8 active security engagements</p>
-                        <div class="client-stats">
-                            <div class="client-stat">Penetration Tests: 5</div>
-                            <div class="client-stat">Security Audits: 3</div>
-                            <div class="client-stat">Incident Response: 2</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="terminal">
-                    <div class="tab-placeholder">
-                        <i class="fas fa-terminal fa-3x"></i>
-                        <h3>ADVANCED TERMINAL</h3>
-                        <p>Full system command access</p>
-                        <div class="terminal-full">
-                            <div class="terminal-line">
-                                <span class="prompt">[root@bedusec]#</span> access_granted --level=admin
-                            </div>
-                            <div class="terminal-line">
-                                Welcome to Bedusec Advanced Terminal
-                            </div>
-                            <div class="terminal-line">
-                                Type 'help' for available commands
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="security-status">
+            <h3>SECURITY STATUS</h3>
+            <div class="status-item">
+                <i class="fas fa-shield-alt" style="color: #00ff00"></i>
+                <span>Authentication: SECURE</span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-lock" style="color: #00ff00"></i>
+                <span>Encryption: ACTIVE</span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-clock" style="color: #00ff00"></i>
+                <span>Session: VALID</span>
             </div>
         </div>
     </div>
 
-    <script src="dashboard.js"></script>
+    <script src="netlify-auth.js"></script>
+    <script>
+        // Check authentication on page load
+        if (!netlifyAuth.isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        // Load user profile
+        async function loadUserProfile() {
+            try {
+                const profile = await netlifyAuth.getProfile();
+                const user = profile.user;
+                document.getElementById('userInfo').textContent = 
+                    `${user.firstName} ${user.lastName} | ${user.role} | ${user.email}`;
+            } catch (error) {
+                console.error('Failed to load profile:', error);
+                netlifyAuth.showNotification('Failed to load profile', 'error');
+            }
+        }
+
+        // Auto-logout after 30 minutes
+        setTimeout(() => {
+            netlifyAuth.showNotification('Session expired for security', 'warning');
+            netlifyAuth.logout();
+        }, 30 * 60 * 1000);
+
+        document.addEventListener('DOMContentLoaded', loadUserProfile);
+    </script>
+
+    <style>
+        .dashboard-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        .security-status {
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            color: #00ff00;
+        }
+    </style>
 </body>
 </html>
