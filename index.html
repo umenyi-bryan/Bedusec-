@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Your existing website content goes here -->
     <header>
         <nav>
@@ -21,6 +22,27 @@
             </ul>
         </nav>
     </header>
+=======
+    <!-- Matrix Background -->
+    <div class="matrix-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#tools" class="nav-link">Tools</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="tools.html" class="nav-link">OSINT Tools</a></li>
+                <li><a href="partners.html" class="nav-link">Partnerships</a></li>
+            <li><a href="dashboard.html" class="nav-login">
+                <i class="fas fa-terminal"></i> Command Center
+            </a></li>
+        </ul>
+    </nav>
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
 
     <main>
         <section class="hero">
@@ -36,6 +58,100 @@
     </main>
 
     <!-- ShadowGPT Chatbot Integration -->
+    <div id="shadowGPTChatbot" class="shadowgpt-chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <span>SHADOWGPT v2.1</span>
+                <span class="status-indicator online"></span>
+            </div>
+            <div class="chatbot-controls">
+                <button class="chatbot-btn" onclick="clearShadowGPT()" title="Clear Conversation">
+                    <i class="fas fa-eraser"></i>
+                </button>
+                <button class="chatbot-btn" onclick="toggleShadowGPT()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+<<<<<<< HEAD
+        
+        <div class="chatbot-messages" id="shadowGPTMessages">
+            <div class="message ai-message">
+                <div class="message-sender">ShadowGPT</div>
+                <div class="message-content">
+                    ShadowGPT online. I can discuss pentesting tools or just chat. How can I assist?
+=======
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="cyber-services">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="SERVICES">SERVICES</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive security assessments simulating real-world attacks on web applications, networks, and infrastructure.</p>
+                    <div class="service-tags">
+                        <span class="tag">Web Apps</span>
+                        <span class="tag">Networks</span>
+                        <span class="tag">Mobile</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Vulnerability Research</h3>
+                    <p>Zero-day discovery, vulnerability analysis, and security research for emerging threats and CVEs.</p>
+                    <div class="service-tags">
+                        <span class="tag">CVE Research</span>
+                        <span class="tag">Reverse Engineering</span>
+                        <span class="tag">Exploit Development</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Social Engineering</h3>
+                    <p>Human factor security testing, phishing assessments, and security awareness training for organizations.</p>
+                    <div class="service-tags">
+                        <span class="tag">Phishing</span>
+                        <span class="tag">Physical Security</span>
+                        <span class="tag">Training</span>
+                    </div>
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
+                </div>
+                <div class="message-time" id="currentTime"></div>
+            </div>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="shadowGPTInput" placeholder="Ask about pentesting or just chat..." onkeypress="handleShadowGPTKeypress(event)">
+            <button onclick="sendShadowGPTMessage()" id="sendButton">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="insertQuickQuestion('nmap commands')">Nmap</button>
+            <button class="quick-btn" onclick="insertQuickQuestion('How are you?')">Chat</button>
+            <button class="quick-btn" onclick="insertQuickQuestion('SQL injection')">SQLi</button>
+            <button class="quick-btn" onclick="insertQuickQuestion('Tell me a joke')">Fun</button>
+        </div>
+    </div>
+
+<<<<<<< HEAD
+=======
+    <script src="script.js"></script>
+
+    <!-- SHADOWGPT CHATBOT -->
     <div id="shadowGPTChatbot" class="shadowgpt-chatbot">
         <div class="chatbot-header">
             <div class="chatbot-title">
@@ -78,12 +194,17 @@
         </div>
     </div>
 
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <button class="shadowgpt-toggle" onclick="toggleShadowGPT()">
         <i class="fas fa-robot"></i>
         <span class="pulse-dot"></span>
     </button>
 
+<<<<<<< HEAD
     <!-- Chatbot Styles -->
+=======
+    <script src="shadowgpt-enhanced.js"></script>
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <style>
     .shadowgpt-chatbot {
         position: fixed;
@@ -97,7 +218,11 @@
         box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
         display: none;
         flex-direction: column;
+<<<<<<< HEAD
         z-index: 1000;
+=======
+        z-index: 10000;
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
         backdrop-filter: blur(10px);
         font-family: 'Share Tech Mono', monospace;
     }
@@ -284,7 +409,11 @@
         font-size: 1.5rem;
         cursor: pointer;
         box-shadow: 0 0 30px rgba(255, 0, 128, 0.6);
+<<<<<<< HEAD
         z-index: 999;
+=======
+        z-index: 9999;
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
         display: flex;
         align-items: center;
         justify-content: center;
@@ -350,8 +479,11 @@
     }
     </style>
 
+<<<<<<< HEAD
     <!-- Chatbot JavaScript -->
     <script src="assets/js/shadowgpt-enhanced.js"></script>
+=======
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
     <script>
     let shadowGPTChat = null;
 
@@ -455,8 +587,11 @@
 
     setInterval(updateTime, 60000);
     </script>
+<<<<<<< HEAD
 
     <!-- Your existing scripts -->
     <script src="assets/js/script.js"></script>
+=======
+>>>>>>> b39bc89 (feat: Add ShadowGPT chatbot to homepage without affecting original design)
 </body>
 </html>
