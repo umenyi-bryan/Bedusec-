@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="threat-intel.html" class="nav-link">Threat Intel</a></li>
+            <li><a href="training.html" class="nav-link">Training</a></li>
+            <li><a href="#forum" class="nav-link">Forum</a></li>
+        </ul>
+    </nav>
+
+    <!-- Live Cyber Range -->
+    <section class="cyber-hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
+                </div>
+                <span class="terminal-title">community@bedusec:~</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">community@bedusec:~$</span>
+                    <span class="command">connect_global_cyber_range</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Connected to Bedusec Cyber Range</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Live Participants: <span id="liveUsers">24</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Active Scenarios: <span id="activeScenarios">3</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Collaboration -->
+    <section class="cyber-services">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="LIVE_COLLABORATION">LIVE COLLABORATION</h2>
+            
+            <div class="collab-dashboard">
+                <div class="collab-room">
+                    <h3>Active Cyber Range</h3>
+                    <div class="room-participants" id="participantsList">
+                        <!-- Participants will be listed here -->
+                    </div>
+                    <div class="room-controls">
+                        <button class="cyber-button" onclick="joinCyberRange()">
+                            <i class="fas fa-plug"></i> JOIN CYBER RANGE
+                        </button>
+                        <button class="cyber-button secondary" onclick="createScenario()">
+                            <i class="fas fa-plus"></i> CREATE SCENARIO
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scenario-browser">
+                    <h3>Available Scenarios</h3>
+                    <div class="scenarios-list" id="scenariosList">
+                        <!-- Scenarios will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Forum -->
+    <section id="forum" class="cyber-tools">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="SECURITY_FORUM">SECURITY FORUM</h2>
+            
+            <div class="forum-container">
+                <div class="forum-sidebar">
+                    <div class="forum-stats">
+                        <h4>Community Stats</h4>
+                        <div class="stat">
+                            <span class="stat-value" id="totalMembers">1,247</span>
+                            <span class="stat-label">Members</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="activeNow">42</span>
+                            <span class="stat-label">Online Now</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="totalPosts">8,956</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-categories">
+                        <h4>Categories</h4>
+                        <div class="category active" data-category="all">
+                            <i class="fas fa-globe"></i>
+                            <span>All Discussions</span>
+                        </div>
+                        <div class="category" data-category="vulnerabilities">
+                            <i class="fas fa-bug"></i>
+                            <span>Vulnerabilities</span>
+                        </div>
+                        <div class="category" data-category="tools">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools & Techniques</span>
+                        </div>
+                        <div class="category" data-category="career">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Career Advice</span>
+                        </div>
+                        <div class="category" data-category="news">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Security News</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-main">
+                    <div class="forum-header">
+                        <h3>Latest Discussions</h3>
+                        <button class="cyber-button" onclick="showNewPostModal()">
+                            <i class="fas fa-plus"></i> NEW POST
+                        </button>
+                    </div>
+
+                    <div class="discussions-list" id="discussionsList">
+                        <!-- Discussions will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Threat Map -->
+    <section class="cyber-contact">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="GLOBAL_THREAT_MAP">GLOBAL THREAT MAP</h2>
+            
+            <div class="threat-map-container">
+                <div class="threat-map" id="threatMap">
+                    <!-- Threat map visualization -->
+                    <div class="map-overlay">
+                        <div class="map-stats">
+                            <div class="map-stat">
+                                <span class="stat-value" id="attacksPerMinute">1,284</span>
+                                <span class="stat-label">Attacks/Min</span>
+                            </div>
+                            <div class="map-stat">
+                                <span class="stat-value" id="topSource">China</span>
+                                <span class="stat-label">Top Source</span>
+                            </div>
+                            <div class="map-stat">
+                                <span class="stat-value" id="topTarget">USA</span>
+                                <span class="stat-label">Top Target</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="threat-legend">
+                    <h4>Attack Types</h4>
+                    <div class="legend-item ddos">
+                        <span class="legend-color"></span>
+                        <span>DDoS Attacks</span>
+                    </div>
+                    <div class="legend-item malware">
+                        <span class="legend-color"></span>
+                        <span>Malware</span>
+                    </div>
+                    <div class="legend-item phishing">
+                        <span class="legend-color"></span>
+                        <span>Phishing</span>
+                    </div>
+                    <div class="legend-item intrusion">
+                        <span class="legend-color"></span>
+                        <span>Intrusion Attempts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="netlify-auth.js"></script>
+    <script>
+        // Community system
+        class CommunitySystem {
+            constructor() {
+                this.simulateRealTimeData();
+                this.loadDiscussions();
+                this.setupForumCategories();
+            }
+
+            simulateRealTimeData() {
+                // Simulate live users
+                setInterval(() => {
+                    const liveUsers = Math.floor(20 + Math.random() * 30);
+                    const activeScenarios = Math.floor(2 + Math.random() * 4);
+                    
+                    document.getElementById('liveUsers').textContent = liveUsers;
+                    document.getElementById('activeScenarios').textContent = activeScenarios;
+                    document.getElementById('activeNow').textContent = liveUsers;
+
+                    this.updateParticipants();
+                    this.updateScenarios();
+                    this.updateThreatMap();
+                }, 5000);
+            }
+
+            updateParticipants() {
+                const participants = [
+                    { name: 'CyberSamurai', role: 'Pentester', status: 'active' },
+                    { name: 'CodeCracker', role: 'Researcher', status: 'active' },
+                    { name: 'NetHunter', role: 'Analyst', status: 'busy' },
+                    { name: 'ByteShield', role: 'Engineer', status: 'active' }
+                ];
+
+                const participantsList = document.getElementById('participantsList');
+                participantsList.innerHTML = participants.map(p => `
+                    <div class="participant ${p.status}">
+                        <div class="participant-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="participant-info">
+                            <div class="participant-name">${p.name}</div>
+                            <div class="participant-role">${p.role}</div>
+                        </div>
+                        <div class="participant-status ${p.status}"></div>
+                    </div>
+                `).join('');
+            }
+
+            updateScenarios() {
+                const scenarios = [
+                    { name: 'Corporate Network PenTest', players: 8, difficulty: 'advanced' },
+                    { name: 'Web App Security', players: 12, difficulty: 'intermediate' },
+                    { name: 'Incident Response', players: 6, difficulty: 'beginner' }
+                ];
+
+                const scenariosList = document.getElementById('scenariosList');
+                scenariosList.innerHTML = scenarios.map(s => `
+                    <div class="scenario-card ${s.difficulty}">
+                        <div class="scenario-info">
+                            <h4>${s.name}</h4>
+                            <div class="scenario-meta">
+                                <span><i class="fas fa-users"></i> ${s.players} players</span>
+                                <span class="difficulty ${s.difficulty}">${s.difficulty}</span>
+                            </div>
+                        </div>
+                        <button class="cyber-button small" onclick="joinScenario('${s.name}')">
+                            JOIN
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            loadDiscussions(category = 'all') {
+                const discussions = [
+                    {
+                        id: 1,
+                        title: 'Zero-day in popular web framework discovered',
+                        author: 'SecurityResearcher',
+                        category: 'vulnerabilities',
+                        replies: 42,
+                        views: 1284,
+                        lastActivity: '2 hours ago',
+                        pinned: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Best tools for network penetration testing in 2024',
+                        author: 'NetWarrior',
+                        category: 'tools',
+                        replies: 28,
+                        views: 856,
+                        lastActivity: '5 hours ago',
+                        pinned: false
+                    },
+                    {
+                        id: 3,
+                        title: 'How to transition from IT to cybersecurity?',
+                        author: 'CareerChanger',
+                        category: 'career',
+                        replies: 35,
+                        views: 942,
+                        lastActivity: '1 day ago',
+                        pinned: false
+                    }
+                ];
+
+                const filteredDiscussions = category === 'all' 
+                    ? discussions 
+                    : discussions.filter(d => d.category === category);
+
+                const discussionsList = document.getElementById('discussionsList');
+                discussionsList.innerHTML = filteredDiscussions.map(d => `
+                    <div class="discussion ${d.pinned ? 'pinned' : ''}">
+                        <div class="discussion-main">
+                            <h4>${d.pinned ? '<i class="fas fa-thumbtack"></i> ' : ''}${d.title}</h4>
+                            <div class="discussion-meta">
+                                <span>By ${d.author}</span>
+                                <span>In ${d.category}</span>
+                                <span>${d.lastActivity}</span>
+                            </div>
+                        </div>
+                        <div class="discussion-stats">
+                            <div class="stat">
+                                <i class="fas fa-comment"></i>
+                                <span>${d.replies}</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-eye"></i>
+                                <span>${d.views}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupForumCategories() {
+                document.querySelectorAll('.category').forEach(cat => {
+                    cat.addEventListener('click', () => {
+                        document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+                        cat.classList.add('active');
+                        this.loadDiscussions(cat.dataset.category);
+                    });
+                });
+            }
+
+            updateThreatMap() {
+                // Simulate threat map data
+                const attacksPerMinute = Math.floor(1000 + Math.random() * 500);
+                document.getElementById('attacksPerMinute').textContent = attacksPerMinute.toLocaleString();
+            }
+        }
+
+        const communitySystem = new CommunitySystem();
+
+        function joinCyberRange() {
+            netlifyAuth.showNotification('Connecting to Cyber Range...', 'info');
+            // In a real implementation, this would connect to WebSocket/real-time service
+        }
+
+        function createScenario() {
+            netlifyAuth.showNotification('Scenario creation interface loading...', 'info');
+        }
+
+        function joinScenario(scenarioName) {
+            netlifyAuth.showNotification(`Joining ${scenarioName}...`, 'info');
+        }
+
+        function showNewPostModal() {
+            netlifyAuth.showNotification('Post creation feature coming soon!', 'info');
+        }
+
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!netlifyAuth.isAuthenticated()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+
+    <style>
+        .collab-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .collab-room, .scenario-browser {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .room-participants {
+            margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .participant {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+        }
+
+        .participant-avatar {
+            width: 40px;
+            height: 40px;
+            background: #0088ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .participant-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+
+        .participant-status.active { background: #00ff00; }
+        .participant-status.busy { background: #ffaa00; }
+
+        .room-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .scenarios-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scenario-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+
+        .scenario-card.beginner { border-left-color: #00ff00; }
+        .scenario-card.intermediate { border-left-color: #ffaa00; }
+        .scenario-card.advanced { border-left-color: #ff4444; }
+
+        .scenario-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .difficulty {
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .difficulty.beginner { background: #00ff00; color: #000; }
+        .difficulty.intermediate { background: #ffaa00; color: #000; }
+        .difficulty.advanced { background: #ff4444; color: #fff; }
+
+        .forum-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .forum-sidebar {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0088ff;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .forum-stats {
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .forum-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .category:hover, .category.active {
+            background: rgba(0, 136, 255, 0.2);
+        }
+
+        .forum-main {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .discussions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .discussion {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .discussion:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateX(5px);
+        }
+
+        .discussion.pinned {
+            border-left: 4px solid #ff0080;
+        }
+
+        .discussion-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .discussion-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .threat-map-container {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            gap: 2rem;
+        }
+
+        .threat-map {
+            height: 400px;
+            background: linear-gradient(45deg, #0a0a0a, #001a00);
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .map-stats {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .map-stat {
+            text-align: center;
+        }
+
+        .threat-legend {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0088ff;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .legend-item.ddos .legend-color { background: #ff4444; }
+        .legend-item.malware .legend-color { background: #ffaa00; }
+        .legend-item.phishing .legend-color { background: #0088ff; }
+        .legend-item.intrusion .legend-color { background: #00ff00; }
+
+        @media (max-width: 768px) {
+            .collab-dashboard,
+            .forum-container,
+            .threat-map-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

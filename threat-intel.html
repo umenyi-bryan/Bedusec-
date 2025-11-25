@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intelligence | Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="#scanner" class="nav-link">Scanner</a></li>
+            <li><a href="#threats" class="nav-link">Live Threats</a></li>
+        </ul>
+    </nav>
+
+    <section class="cyber-hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
+                </div>
+                <span class="terminal-title">threat_intel@bedusec:~</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">threat_intel@bedusec:~$</span>
+                    <span class="command">initiate_global_threat_monitor</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Threat Intelligence Dashboard ACTIVE</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Real-time monitoring: ENABLED</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] AI Analysis: ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Scanner -->
+    <section id="scanner" class="cyber-services">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="AI_SECURITY_SCANNER">AI SECURITY SCANNER</h2>
+            
+            <div class="scanner-interface">
+                <div class="scanner-tabs">
+                    <button class="scanner-tab active" data-tab="website">Website Scanner</button>
+                    <button class="scanner-tab" data-tab="code">Code Analyzer</button>
+                </div>
+
+                <div class="scanner-content active" id="website-scanner">
+                    <div class="scanner-form">
+                        <input type="url" id="scanUrl" class="cyber-input" placeholder="https://example.com" />
+                        <button onclick="scanWebsite()" class="cyber-button">
+                            <i class="fas fa-search"></i> INITIATE SECURITY SCAN
+                        </button>
+                    </div>
+                    <div id="website-results" class="scan-results"></div>
+                </div>
+
+                <div class="scanner-content" id="code-scanner">
+                    <textarea id="codeInput" class="cyber-textarea" placeholder="Paste code for security analysis..." rows="10"></textarea>
+                    <select id="codeLanguage" class="cyber-input">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="php">PHP</option>
+                        <option value="java">Java</option>
+                    </select>
+                    <button onclick="analyzeCode()" class="cyber-button">
+                        <i class="fas fa-code"></i> ANALYZE CODE SECURITY
+                    </button>
+                    <div id="code-results" class="scan-results"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Threat Feed -->
+    <section id="threats" class="cyber-tools">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="LIVE_THREAT_FEED">LIVE THREAT FEED</h2>
+            
+            <div class="threat-dashboard">
+                <div class="threat-metrics">
+                    <div class="metric-card critical">
+                        <i class="fas fa-skull-crossbones"></i>
+                        <div class="metric-value" id="criticalThreats">0</div>
+                        <div class="metric-label">Critical Threats</div>
+                    </div>
+                    <div class="metric-card high">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="metric-value" id="highThreats">0</div>
+                        <div class="metric-label">High Risk</div>
+                    </div>
+                    <div class="metric-card medium">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="metric-value" id="mediumThreats">0</div>
+                        <div class="metric-label">Medium Risk</div>
+                    </div>
+                </div>
+
+                <div class="threat-list" id="threatList">
+                    <!-- Threats will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="netlify-auth.js"></script>
+    <script>
+        // Scanner functionality
+        async function scanWebsite() {
+            const url = document.getElementById('scanUrl').value;
+            if (!url) return;
+
+            const button = event.target;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SCANNING...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/.netlify/functions/security-scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, type: 'website' })
+                });
+
+                const data = await response.json();
+                displayResults(data, 'website-results');
+            } catch (error) {
+                netlifyAuth.showNotification('Scan failed: ' + error.message, 'error');
+            } finally {
+                button.innerHTML = '<i class="fas fa-search"></i> INITIATE SECURITY SCAN';
+                button.disabled = false;
+            }
+        }
+
+        async function analyzeCode() {
+            const code = document.getElementById('codeInput').value;
+            if (!code) return;
+
+            const button = event.target;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ANALYZING...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/.netlify/functions/security-scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code, type: 'code' })
+                });
+
+                const data = await response.json();
+                displayResults(data, 'code-results');
+            } catch (error) {
+                netlifyAuth.showNotification('Analysis failed: ' + error.message, 'error');
+            } finally {
+                button.innerHTML = '<i class="fas fa-code"></i> ANALYZE CODE SECURITY';
+                button.disabled = false;
+            }
+        }
+
+        function displayResults(data, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="scan-result">
+                    <h4>Security Analysis Results</h4>
+                    <div class="analysis-content">${formatAnalysis(data.analysis)}</div>
+                    <div class="scan-meta">
+                        <small>Scan performed: ${new Date(data.timestamp).toLocaleString()}</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatAnalysis(text) {
+            return text.split('\n').map(line => {
+                if (line.includes('**')) {
+                    return `<strong>${line.replace(/\*\*/g, '')}</strong>`;
+                }
+                if (line.includes('-') || line.match(/^\d\./)) {
+                    return `<div class="analysis-item">${line}</div>`;
+                }
+                return `<p>${line}</p>`;
+            }).join('');
+        }
+
+        // Simulate live threat feed
+        function simulateThreatFeed() {
+            const threats = [
+                { level: 'critical', type: 'Ransomware', description: 'New variant detected in wild', count: 12 },
+                { level: 'high', type: 'Phishing', description: 'Targeted campaign against financial sector', count: 8 },
+                { level: 'medium', type: 'DDoS', description: 'Increased attack volume observed', count: 5 }
+            ];
+
+            document.getElementById('criticalThreats').textContent = threats[0].count;
+            document.getElementById('highThreats').textContent = threats[1].count;
+            document.getElementById('mediumThreats').textContent = threats[2].count;
+
+            const threatList = document.getElementById('threatList');
+            threatList.innerHTML = threats.map(threat => `
+                <div class="threat-item ${threat.level}">
+                    <div class="threat-icon">
+                        <i class="fas fa-${threat.level === 'critical' ? 'skull' : 'exclamation-triangle'}"></i>
+                    </div>
+                    <div class="threat-info">
+                        <div class="threat-type">${threat.type}</div>
+                        <div class="threat-desc">${threat.description}</div>
+                    </div>
+                    <div class="threat-count">${threat.count} incidents</div>
+                </div>
+            `).join('');
+        }
+
+        // Tab switching
+        document.querySelectorAll('.scanner-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.scanner-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.scanner-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + '-scanner').classList.add('active');
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            simulateThreatFeed();
+            setInterval(simulateThreatFeed, 30000); // Update every 30 seconds
+        });
+    </script>
+
+    <style>
+        .scanner-interface {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .scanner-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scanner-tab {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scanner-tab.active {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .scanner-content {
+            display: none;
+        }
+
+        .scanner-content.active {
+            display: block;
+        }
+
+        .scan-results {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            border: 1px solid #0088ff;
+        }
+
+        .threat-dashboard {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .threat-metrics {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .metric-card.critical { border-color: #ff4444; }
+        .metric-card.high { border-color: #ffaa00; }
+        .metric-card.medium { border-color: #0088ff; }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .threat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .threat-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 20, 0, 0.6);
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+
+        .threat-item.critical { border-left-color: #ff4444; }
+        .threat-item.high { border-left-color: #ffaa00; }
+        .threat-item.medium { border-left-color: #0088ff; }
+
+        .analysis-content {
+            line-height: 1.6;
+        }
+
+        .analysis-item {
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .threat-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Training | Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="threat-intel.html" class="nav-link">Threat Intel</a></li>
+            <li><a href="#challenges" class="nav-link">Challenges</a></li>
+            <li><a href="#progress" class="nav-link">Progress</a></li>
+        </ul>
+    </nav>
+
+    <section class="cyber-hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
+                </div>
+                <span class="terminal-title">training@bedusec:~</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">training@bedusec:~$</span>
+                    <span class="command">initiate_cyber_training_protocol</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Training System: ONLINE</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Challenge Modules: LOADED</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output" style="color: #00ff00">[+] Ready for Training Operative</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Dashboard -->
+    <section id="progress" class="cyber-services">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="TRAINING_PROGRESS">TRAINING PROGRESS</h2>
+            
+            <div class="progress-dashboard">
+                <div class="progress-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="completedChallenges">0</div>
+                        <div class="stat-label">Challenges Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="currentLevel">1</div>
+                        <div class="stat-label">Current Level</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="skillScore">0</div>
+                        <div class="stat-label">Skill Score</div>
+                    </div>
+                </div>
+
+                <div class="skill-tree">
+                    <h3>Skill Development</h3>
+                    <div class="skills-grid">
+                        <div class="skill" data-skill="recon">
+                            <i class="fas fa-search"></i>
+                            <span>Reconnaissance</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="0"></div>
+                            </div>
+                        </div>
+                        <div class="skill" data-skill="vuln">
+                            <i class="fas fa-bug"></i>
+                            <span>Vulnerability Analysis</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="0"></div>
+                            </div>
+                        </div>
+                        <div class="skill" data-skill="exploit">
+                            <i class="fas fa-terminal"></i>
+                            <span>Exploitation</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="0"></div>
+                            </div>
+                        </div>
+                        <div class="skill" data-skill="web">
+                            <i class="fas fa-globe"></i>
+                            <span>Web Security</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Challenges -->
+    <section id="challenges" class="cyber-tools">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="INTERACTIVE_CHALLENGES">INTERACTIVE CHALLENGES</h2>
+            
+            <div class="challenges-grid">
+                <div class="challenge-card" data-difficulty="beginner">
+                    <div class="challenge-header">
+                        <span class="difficulty-badge beginner">BEGINNER</span>
+                        <h3>Password Cracking Simulation</h3>
+                    </div>
+                    <div class="challenge-description">
+                        Learn password security by attempting to crack weak passwords. Understand hashing and salting.
+                    </div>
+                    <div class="challenge-stats">
+                        <span><i class="fas fa-users"></i> 85% Completion</span>
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <button class="cyber-button" onclick="startChallenge('password-cracking')">
+                        <i class="fas fa-play"></i> START CHALLENGE
+                    </button>
+                </div>
+
+                <div class="challenge-card" data-difficulty="intermediate">
+                    <div class="challenge-header">
+                        <span class="difficulty-badge intermediate">INTERMEDIATE</span>
+                        <h3>SQL Injection Defense</h3>
+                    </div>
+                    <div class="challenge-description">
+                        Identify and prevent SQL injection attacks in a vulnerable web application.
+                    </div>
+                    <div class="challenge-stats">
+                        <span><i class="fas fa-users"></i> 62% Completion</span>
+                        <span><i class="fas fa-star"></i> 4.6</span>
+                    </div>
+                    <button class="cyber-button" onclick="startChallenge('sql-injection')">
+                        <i class="fas fa-play"></i> START CHALLENGE
+                    </button>
+                </div>
+
+                <div class="challenge-card" data-difficulty="advanced">
+                    <div class="challenge-header">
+                        <span class="difficulty-badge advanced">ADVANCED</span>
+                        <h3>Network Penetration</h3>
+                    </div>
+                    <div class="challenge-description">
+                        Complete network penetration test from reconnaissance to exploitation.
+                    </div>
+                    <div class="challenge-stats">
+                        <span><i class="fas fa-users"></i> 28% Completion</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                    <button class="cyber-button" onclick="startChallenge('network-pen')">
+                        <i class="fas fa-play"></i> START CHALLENGE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live CTF Section -->
+    <section class="cyber-contact">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="LIVE_CTF">CAPTURE THE FLAG</h2>
+            
+            <div class="ctf-container">
+                <div class="ctf-timer">
+                    <h3>Next CTF Event</h3>
+                    <div class="countdown" id="ctfCountdown">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ctf-leaderboard">
+                    <h3>Top Performers</h3>
+                    <div class="leaderboard-list" id="leaderboard">
+                        <!-- Leaderboard will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="netlify-auth.js"></script>
+    <script>
+        // Training progress system
+        class TrainingSystem {
+            constructor() {
+                this.progress = JSON.parse(localStorage.getItem('bedusec_training') || '{}');
+                this.init();
+            }
+
+            init() {
+                this.updateProgressUI();
+                this.setupCountdown();
+                this.loadLeaderboard();
+            }
+
+            completeChallenge(challengeId, points = 100) {
+                if (!this.progress.challenges) this.progress.challenges = {};
+                if (!this.progress.challenges[challengeId]) {
+                    this.progress.challenges[challengeId] = {
+                        completed: true,
+                        points: points,
+                        completedAt: new Date().toISOString()
+                    };
+                    this.saveProgress();
+                    this.updateProgressUI();
+                    netlifyAuth.showNotification(`Challenge completed! +${points} points`, 'success');
+                }
+            }
+
+            updateSkill(skill, points) {
+                if (!this.progress.skills) this.progress.skills = {};
+                this.progress.skills[skill] = (this.progress.skills[skill] || 0) + points;
+                this.saveProgress();
+                this.updateProgressUI();
+            }
+
+            saveProgress() {
+                localStorage.setItem('bedusec_training', JSON.stringify(this.progress));
+            }
+
+            updateProgressUI() {
+                const completed = Object.values(this.progress.challenges || {}).filter(c => c.completed).length;
+                const totalScore = Object.values(this.progress.challenges || {}).reduce((sum, c) => sum + c.points, 0);
+                const level = Math.floor(totalScore / 500) + 1;
+
+                document.getElementById('completedChallenges').textContent = completed;
+                document.getElementById('currentLevel').textContent = level;
+                document.getElementById('skillScore').textContent = totalScore;
+
+                // Update skill bars
+                const skills = ['recon', 'vuln', 'exploit', 'web'];
+                skills.forEach(skill => {
+                    const skillLevel = this.progress.skills?.[skill] || 0;
+                    const levelBar = document.querySelector(`[data-skill="${skill}"] .level-bar`);
+                    if (levelBar) {
+                        const width = Math.min((skillLevel / 1000) * 100, 100);
+                        levelBar.style.width = `${width}%`;
+                        levelBar.setAttribute('data-level', Math.floor(skillLevel / 100));
+                    }
+                });
+            }
+
+            setupCountdown() {
+                const nextCTF = new Date();
+                nextCTF.setDate(nextCTF.getDate() + 7); // Next week
+                nextCTF.setHours(18, 0, 0, 0); // 6 PM
+
+                function updateCountdown() {
+                    const now = new Date();
+                    const diff = nextCTF - now;
+
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 60000);
+            }
+
+            loadLeaderboard() {
+                const leaderboard = [
+                    { name: 'CyberNinja', score: 2850, avatar: '👑' },
+                    { name: 'CodeBreaker', score: 2420, avatar: '🔥' },
+                    { name: 'NetHunter', score: 2180, avatar: '⚡' },
+                    { name: 'ByteSmasher', score: 1950, avatar: '💻' },
+                    { name: 'CryptoQueen', score: 1820, avatar: '🔒' }
+                ];
+
+                const leaderboardEl = document.getElementById('leaderboard');
+                leaderboardEl.innerHTML = leaderboard.map((player, index) => `
+                    <div class="leaderboard-item ${index < 3 ? 'podium' : ''}">
+                        <div class="rank">${index + 1}</div>
+                        <div class="player-avatar">${player.avatar}</div>
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="player-score">${player.score} pts</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        const trainingSystem = new TrainingSystem();
+
+        function startChallenge(challengeId) {
+            // Simulate challenge completion
+            setTimeout(() => {
+                trainingSystem.completeChallenge(challengeId, 150);
+                
+                // Update relevant skills
+                const skillPoints = {
+                    'password-cracking': { recon: 50, vuln: 30 },
+                    'sql-injection': { web: 80, vuln: 40 },
+                    'network-pen': { recon: 60, exploit: 70 }
+                };
+
+                const skills = skillPoints[challengeId];
+                if (skills) {
+                    Object.entries(skills).forEach(([skill, points]) => {
+                        trainingSystem.updateSkill(skill, points);
+                    });
+                }
+            }, 2000);
+
+            netlifyAuth.showNotification('Challenge started! Good luck!', 'info');
+        }
+
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!netlifyAuth.isAuthenticated()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+
+    <style>
+        .progress-dashboard {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .progress-stats {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tree {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0088ff;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+        }
+
+        .skill-level {
+            flex: 1;
+            background: #333;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .level-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #0088ff);
+            transition: width 0.5s ease;
+        }
+
+        .challenges-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .challenge-card {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .challenge-card[data-difficulty="beginner"] { border-color: #00ff00; }
+        .challenge-card[data-difficulty="intermediate"] { border-color: #ffaa00; }
+        .challenge-card[data-difficulty="advanced"] { border-color: #ff4444; }
+
+        .difficulty-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .difficulty-badge.beginner { background: #00ff00; color: #000; }
+        .difficulty-badge.intermediate { background: #ffaa00; color: #000; }
+        .difficulty-badge.advanced { background: #ff4444; color: #fff; }
+
+        .challenge-header {
+            margin-bottom: 1rem;
+        }
+
+        .challenge-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .ctf-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .ctf-timer {
+            text-align: center;
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff0080;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .ctf-leaderboard {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0088ff;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .leaderboard-list {
+            margin-top: 1rem;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+        }
+
+        .leaderboard-item.podium {
+            background: linear-gradient(90deg, rgba(255,215,0,0.2), transparent);
+        }
+
+        .rank {
+            font-weight: bold;
+            color: #00ff00;
+            min-width: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .progress-dashboard,
+            .ctf-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .countdown {
+                gap: 1rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</body>
+</html>
