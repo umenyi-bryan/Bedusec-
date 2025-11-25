@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login | Bedusec Mega Organization</title>
+    <link rel="stylesheet" href="auth-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">BEDUSEC</div>
+                <div class="auth-subtitle">MEGA ORGANIZATION ACCESS</div>
+                <div class="secure-connection">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Encrypted Connection</span>
+                </div>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">
+                        <i class="fas fa-envelope"></i> ORGANIZATION EMAIL
+                    </label>
+                    <input type="email" id="email" class="cyber-input" placeholder="admin@bedusec.com" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">
+                        <i class="fas fa-key"></i> ENCRYPTED PASSWORD
+                    </label>
+                    <div class="input-with-icon">
+                        <input type="password" id="password" class="cyber-input" placeholder="••••••••••••" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="toggle-slider"></span>
+                        Remember this device
+                    </label>
+                </div>
+
+                <button type="submit" class="cyber-button" id="loginButton">
+                    <i class="fas fa-terminal"></i> INITIATE SECURE LOGIN
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>New to Bedusec? <a href="register-enhanced.html" class="auth-link">Create Secure Account</a></p>
+                <p><a href="forgot-password.html" class="auth-link">Recover Encrypted Access</a></p>
+            </div>
+
+            <div class="security-features">
+                <div class="security-title">
+                    <i class="fas fa-shield-check"></i> ACTIVE SECURITY PROTOCOLS
+                </div>
+                <ul class="security-list">
+                    <li>End-to-End Encryption</li>
+                    <li>Multi-Factor Authentication Ready</li>
+                    <li>Real-time Threat Detection</li>
+                    <li>Session Timeout Protection</li>
+                    <li>Advanced Rate Limiting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="session-timer" id="sessionTimer" style="display: none;">
+        <i class="fas fa-clock"></i>
+        <span id="timerText">Session: 59:59</span>
+    </div>
+
+    <script src="auth-enhanced.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Clear previous errors
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+
+            const formData = { email, password, rememberMe };
+            const validation = validateForm(formData);
+
+            if (!validation.isValid) {
+                Object.entries(validation.errors).forEach(([field, error]) => {
+                    document.getElementById(`${field}Error`).textContent = error;
+                });
+                return;
+            }
+
+            const button = document.getElementById('loginButton');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<div class="loading"></div> AUTHENTICATING...';
+            button.disabled = true;
+
+            try {
+                await authSystem.login({ email, password });
+            } catch (error) {
+                // Error handling is done in authSystem.login()
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
+
+        // Real-time email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            if (this.value && !validateEmail(this.value)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid organization email';
+            } else {
+                document.getElementById('emailError').textContent = '';
+            }
+        });
+
+        // Session timer for demo
+        function updateSessionTimer() {
+            const timer = document.getElementById('sessionTimer');
+            const timerText = document.getElementById('timerText');
+            
+            let timeLeft = 3600; // 1 hour in seconds
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timer.style.display = 'none';
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerText.textContent = `Session: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Initialize session timer
+        updateSessionTimer();
+    </script>
+</body>
+</html>

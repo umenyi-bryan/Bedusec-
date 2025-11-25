@@ -1,0 +1,470 @@
+/* Enhanced Authentication Styles for Bedusec Mega Organization */
+:root {
+    --cyber-green: #00ff00;
+    --cyber-blue: #0088ff;
+    --cyber-pink: #ff0080;
+    --cyber-purple: #8000ff;
+    --dark-bg: #0a0a0a;
+    --darker-bg: #050505;
+    --card-bg: rgba(0, 20, 0, 0.8);
+    --input-bg: rgba(0, 0, 0, 0.6);
+    --success-color: #00ff88;
+    --warning-color: #ffaa00;
+    --error-color: #ff4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background: var(--dark-bg);
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -2;
+    animation: matrixMove 20s linear infinite;
+}
+
+@keyframes matrixMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(50px); }
+}
+
+.auth-card {
+    background: var(--card-bg);
+    border: 2px solid var(--cyber-green);
+    border-radius: 8px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: #88ff88;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--cyber-green);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cyber-input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+    padding: 1rem;
+    color: #ffffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+    outline: none;
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+}
+
+.cyber-input.error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--cyber-green);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--cyber-blue);
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.strength-fill {
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.strength-fill.weak {
+    width: 25%;
+    background: var(--error-color);
+}
+
+.strength-fill.medium {
+    width: 50%;
+    background: var(--warning-color);
+}
+
+.strength-fill.strong {
+    width: 75%;
+    background: var(--cyber-blue);
+}
+
+.strength-fill.very-strong {
+    width: 100%;
+    background: var(--success-color);
+}
+
+.strength-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.strength-requirements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.requirement.met {
+    color: var(--success-color);
+}
+
+.requirement.unmet {
+    color: #888;
+}
+
+.cyber-button {
+    width: 100%;
+    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    color: #000000;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cyber-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 0, 0.4);
+}
+
+.cyber-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.auth-link {
+    color: var(--cyber-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: var(--cyber-green);
+    text-decoration: underline;
+}
+
+.security-features {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(0, 20, 0, 0.6);
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+}
+
+.security-title {
+    color: var(--cyber-green);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.security-list {
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.security-list li {
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.security-list li::before {
+    content: '✓';
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* Notifications */
+.security-notification {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: var(--card-bg);
+    border: 2px solid;
+    border-radius: 4px;
+    padding: 1rem;
+    max-width: 400px;
+    z-index: 10000;
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.security-notification.success {
+    border-color: var(--success-color);
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.security-notification.error {
+    border-color: var(--error-color);
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.security-notification.warning {
+    border-color: var(--warning-color);
+    background: rgba(255, 170, 0, 0.1);
+}
+
+.security-notification.info {
+    border-color: var(--cyber-blue);
+    background: rgba(0, 136, 255, 0.1);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* Form validation */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Loading states */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1rem;
+    }
+    
+    .auth-card {
+        padding: 2rem;
+    }
+    
+    .auth-logo {
+        font-size: 2rem;
+    }
+    
+    .strength-requirements {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Advanced security indicators */
+.secure-connection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--success-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.encryption-badge {
+    background: rgba(0, 255, 0, 0.2);
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.session-timer {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Two-factor authentication */
+.two-factor-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 20, 0, 0.6);
+    border: 1px solid var(--cyber-blue);
+    border-radius: 4px;
+}
+
+.two-factor-title {
+    color: var(--cyber-blue);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.totp-input {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+    text-align: center;
+}
