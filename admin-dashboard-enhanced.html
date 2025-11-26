@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="analytics-tracker.js"></script>
+    <script src="messaging-system.js"></script>
+    <script src="blog-system.js"></script>
+    <style>
+        .admin-dashboard {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,20,0,0.95) 0%, rgba(0,40,0,0.9) 100%);
+            padding: 2rem 0;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            color: #00ff00;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #00ff00;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,255,0,0.3);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        .content-section {
+            background: rgba(0,20,0,0.8);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            color: #00ff00;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,255,0,0.3);
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th {
+            background: rgba(0,255,0,0.2);
+            color: #00ff00;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,255,0,0.1);
+            color: #ccc;
+        }
+
+        .data-table tr:hover {
+            background: rgba(0,255,0,0.05);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+
+        .btn-sm {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-approve {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .btn-reject {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-view {
+            background: #0088ff;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #ffa500;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-publish {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-new {
+            background: #ffa500;
+            color: #000;
+        }
+
+        .status-read {
+            background: #0088ff;
+            color: white;
+        }
+
+        .status-published {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .status-draft {
+            background: #666;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .chart-container {
+            background: rgba(0,0,0,0.6);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .action-card {
+            background: rgba(255,0,128,0.1);
+            border: 1px solid rgba(255,0,128,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0080;
+            box-shadow: 0 10px 25px rgba(255,0,128,0.3);
+        }
+
+        .action-card i {
+            font-size: 2rem;
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+
+        .admin-logout {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,0,128,0.2);
+            border: 1px solid rgba(255,0,128,0.4);
+            color: #ff0080;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,0,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+            
+            .data-table {
+                font-size: 0.8rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="admin-dashboard-enhanced.html" class="nav-link">Admin</a></li>
+            <li><a href="#" class="nav-link" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <section class="admin-dashboard">
+        <div class="admin-header">
+            <h1 class="section-title glitch" data-text="ADMIN_DASHBOARD">ADMIN DASHBOARD</h1>
+            <p class="section-subtitle">Welcome back, <span id="adminName">Alpha</span> | Complete Management System</p>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" onclick="switchTab('overview')">
+                <i class="fas fa-tachometer-alt"></i> Overview
+            </button>
+            <button class="tab-btn" onclick="switchTab('analytics')">
+                <i class="fas fa-chart-bar"></i> Analytics
+            </button>
+            <button class="tab-btn" onclick="switchTab('messages')">
+                <i class="fas fa-envelope"></i> Messages
+                <span class="badge" id="unreadBadge" style="display: none;"></span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('team')">
+                <i class="fas fa-users"></i> Team
+            </button>
+            <button class="tab-btn" onclick="switchTab('blog')">
+                <i class="fas fa-blog"></i> Blog
+            </button>
+            <button class="tab-btn" onclick="switchTab('tools')">
+                <i class="fas fa-tools"></i> Tools
+            </button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="overviewTab">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-eye"></i>
+                    <span class="stat-number" id="totalVisits">0</span>
+                    <span class="stat-label">Total Visits</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user"></i>
+                    <span class="stat-number" id="uniqueVisitors">0</span>
+                    <span class="stat-label">Unique Visitors</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-envelope"></i>
+                    <span class="stat-number" id="totalMessages">0</span>
+                    <span class="stat-label">Messages</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span class="stat-number" id="teamMembers">0</span>
+                    <span class="stat-label">Team Members</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="stat-number" id="blogPosts">0</span>
+                    <span class="stat-label">Blog Posts</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tools"></i>
+                    <span class="stat-number" id="toolUsage">0</span>
+                    <span class="stat-label">Tool Uses</span>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <div class="action-card" onclick="switchTab('messages')">
+                    <i class="fas fa-inbox"></i>
+                    <h3>Check Messages</h3>
+                    <p>Review new contact form submissions</p>
+                </div>
+                <div class="action-card" onclick="switchTab('team')">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Manage Team</h3>
+                    <p>Approve new team members</p>
+                </div>
+                <div class="action-card" onclick="switchTab('blog')">
+                    <i class="fas fa-edit"></i>
+                    <h3>Write Post</h3>
+                    <p>Create new blog content</p>
+                </div>
+                <div class="action-card" onclick="switchTab('analytics')">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>View Reports</h3>
+                    <p>Check detailed analytics</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-clock"></i> Recent Activity
+                    <button class="btn btn-view" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </h3>
+                <div id="recentActivity">
+                    Loading recent activity...
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-content" id="analyticsTab">
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-chart-bar"></i> Visitor Analytics
+                </h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-day"></i>
+                        <span class="stat-number" id="todayVisits">0</span>
+                        <span class="stat-label">Today's Visits</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-globe"></i>
+                        <span class="stat-number" id="popularPageCount">0</span>
+                        <span class="stat-label">Most Popular Page</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-tools"></i>
+                        <span class="stat-number" id="popularToolCount">0</span>
+                        <span class="stat-label">Most Used Tool</span>
+                    </div>
+                </div>
+
+                <h4 style="color: #00ff00; margin: 2rem 0 1rem 0;">Popular Pages</h4>
+                <div id="popularPagesList">
+                    Loading...
+                </div>
+
+                <h4 style="color: #00ff00; margin: 2rem 0 1rem 0;">Tool Usage</h4>
+                <div id="toolUsageList">
+                    Loading...
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Tab -->
+        <div class="tab-content" id="messagesTab">
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-inbox"></i> Contact Messages
+                    <span id="messageCount">(0 messages)</span>
+                </h3>
+                <div id="messagesList">
+                    Loading messages...
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Tab -->
+        <div class="tab-content" id="teamTab">
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-users"></i> Team Management
+                </h3>
+                <div id="teamSubmissionsList">
+                    Loading team submissions...
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Tab -->
+        <div class="tab-content" id="blogTab">
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-blog"></i> Blog Management
+                    <button class="btn btn-approve" onclick="showPostForm()">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                </h3>
+                
+                <div id="postForm" style="display: none; margin-bottom: 2rem; padding: 2rem; background: rgba(0,255,0,0.1); border-radius: 8px;">
+                    <h4 style="color: #00ff00; margin-bottom: 1rem;">Create New Post</h4>
+                    <form id="newPostForm">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" id="postTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <textarea class="form-control" id="postContent" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" class="form-control" id="postCategory" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tags (comma separated)</label>
+                            <input type="text" class="form-control" id="postTags">
+                        </div>
+                        <button type="submit" class="btn btn-approve">
+                            <i class="fas fa-save"></i> Publish Post
+                        </button>
+                        <button type="button" class="btn btn-reject" onclick="hidePostForm()">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+
+                <div id="blogPostsList">
+                    Loading blog posts...
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div class="tab-content" id="toolsTab">
+            <div class="content-section">
+                <h3 class="section-header">
+                    <i class="fas fa-tools"></i> System Tools
+                </h3>
+                <div class="quick-actions">
+                    <div class="action-card" onclick="exportData()">
+                        <i class="fas fa-download"></i>
+                        <h3>Export Data</h3>
+                        <p>Download all system data</p>
+                    </div>
+                    <div class="action-card" onclick="clearData()">
+                        <i class="fas fa-trash"></i>
+                        <h3>Clear Data</h3>
+                        <p>Reset analytics and messages</p>
+                    </div>
+                    <div class="action-card" onclick="backupSystem()">
+                        <i class="fas fa-save"></i>
+                        <h3>Backup System</h3>
+                        <p>Create system backup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-logout">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </button>
+        </div>
+    </section>
+
+    <script>
+        // Check authentication
+        if (localStorage.getItem('adminAuthenticated') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Set admin name
+        document.getElementById('adminName').textContent = localStorage.getItem('adminUsername') || 'Admin';
+
+        // Initialize systems
+        let analytics, messaging, blog;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            analytics = window.bedusecAnalytics;
+            messaging = window.bedusecMessaging;
+            blog = window.bedusecBlog;
+            
+            loadDashboardData();
+            setInterval(loadDashboardData, 30000); // Refresh every 30 seconds
+        });
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+
+            // Load tab-specific data
+            switch(tabName) {
+                case 'analytics':
+                    loadAnalyticsData();
+                    break;
+                case 'messages':
+                    loadMessagesData();
+                    break;
+                case 'team':
+                    loadTeamData();
+                    break;
+                case 'blog':
+                    loadBlogData();
+                    break;
+            }
+        }
+
+        function loadDashboardData() {
+            if (!analytics) return;
+
+            // Overview stats
+            document.getElementById('totalVisits').textContent = analytics.getVisits().length;
+            document.getElementById('uniqueVisitors').textContent = analytics.getUniqueVisitors();
+            document.getElementById('totalMessages').textContent = messaging ? messaging.getMessages().length : 0;
+            document.getElementById('teamMembers').textContent = JSON.parse(localStorage.getItem('teamSubmissions') || '[]').length;
+            document.getElementById('blogPosts').textContent = blog ? blog.getPosts('published').length : 0;
+            document.getElementById('toolUsage').textContent = analytics.getToolUsage().reduce((sum, tool) => sum + tool[1], 0);
+
+            // Update unread badge
+            const unreadCount = messaging ? messaging.getUnreadCount() : 0;
+            const badge = document.getElementById('unreadBadge');
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'inline';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            // Recent activity
+            const recentVisits = analytics.getVisits().slice(-5).reverse();
+            const activityHTML = recentVisits.map(visit => `
+                <div style="padding: 0.5rem; border-bottom: 1px solid rgba(0,255,0,0.1);">
+                    <strong style="color: #00ff00;">New Visit</strong> 
+                    <span style="color: #ccc;">from ${visit.referrer || 'Direct'}</span>
+                    <br>
+                    <small style="color: #666;">${new Date(visit.timestamp).toLocaleString()}</small>
+                </div>
+            `).join('');
+            document.getElementById('recentActivity').innerHTML = activityHTML || 'No recent activity';
+        }
+
+        function loadAnalyticsData() {
+            if (!analytics) return;
+
+            const popularPages = analytics.getPopularPages();
+            const toolUsage = analytics.getToolUsage();
+
+            document.getElementById('todayVisits').textContent = analytics.getVisits().filter(v => {
+                return new Date(v.timestamp).toDateString() === new Date().toDateString();
+            }).length;
+
+            if (popularPages.length > 0) {
+                document.getElementById('popularPageCount').textContent = popularPages[0][1];
+                document.getElementById('popularPagesList').innerHTML = popularPages.map(page => `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid rgba(0,255,0,0.1);">
+                        <span style="color: #ccc;">${page[0]}</span>
+                        <span style="color: #00ff00;">${page[1]} views</span>
+                    </div>
+                `).join('');
+            }
+
+            if (toolUsage.length > 0) {
+                document.getElementById('popularToolCount').textContent = toolUsage[0][1];
+                document.getElementById('toolUsageList').innerHTML = toolUsage.map(tool => `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid rgba(0,255,0,0.1);">
+                        <span style="color: #ccc;">${tool[0]}</span>
+                        <span style="color: #00ff00;">${tool[1]} uses</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadMessagesData() {
+            if (!messaging) return;
+
+            const messages = messaging.getMessages();
+            document.getElementById('messageCount').textContent = `(${messages.length} messages)`;
+
+            const messagesHTML = messages.map(msg => `
+                <div style="padding: 1rem; border: 1px solid rgba(0,255,0,0.2); border-radius: 6px; margin-bottom: 1rem; background: ${msg.status === 'new' ? 'rgba(255,165,0,0.1)' : 'rgba(0,255,0,0.05)'};">
+                    <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                        <div>
+                            <strong style="color: #00ff00;">${msg.name}</strong>
+                            <span style="color: #ff0080; margin-left: 1rem;">${msg.email}</span>
+                            <span class="status-badge status-${msg.status}" style="margin-left: 1rem;">${msg.status.toUpperCase()}</span>
+                        </div>
+                        <small style="color: #666;">${new Date(msg.timestamp).toLocaleString()}</small>
+                    </div>
+                    <div style="color: #ccc; margin-bottom: 0.5rem;">
+                        <strong>Subject:</strong> ${msg.subject}
+                    </div>
+                    <div style="color: #ccc; margin-bottom: 1rem; line-height: 1.4;">
+                        ${msg.message}
+                    </div>
+                    <div>
+                        ${msg.status === 'new' ? `
+                            <button class="btn btn-sm btn-approve" onclick="markMessageRead('${msg.id}')">
+                                <i class="fas fa-check"></i> Mark Read
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-sm btn-delete" onclick="deleteMessage('${msg.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('messagesList').innerHTML = messagesHTML || 'No messages yet.';
+        }
+
+        function loadTeamData() {
+            const submissions = JSON.parse(localStorage.getItem('teamSubmissions') || '[]');
+            
+            const submissionsHTML = submissions.map(sub => `
+                <div style="padding: 1.5rem; border: 1px solid rgba(0,255,0,0.2); border-radius: 6px; margin-bottom: 1rem; background: rgba(0,255,0,0.05);">
+                    <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 1rem;">
+                        <div>
+                            <strong style="color: #00ff00; font-size: 1.1rem;">${sub.fullName}</strong>
+                            <span style="color: #ff0080; margin-left: 1rem; font-family: 'Share Tech Mono';">${sub.role}</span>
+                        </div>
+                        <small style="color: #666;">${new Date(sub.submissionDate).toLocaleString()}</small>
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem;">
+                        <strong>Experience:</strong> ${sub.experience} years<br>
+                        <strong>Email:</strong> ${sub.email}<br>
+                        <strong>Certifications:</strong> ${sub.certifications || 'None specified'}
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem;">
+                        <strong>Skills:</strong><br>
+                        ${sub.skills}
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem; line-height: 1.4;">
+                        <strong>Bio:</strong><br>
+                        ${sub.bio}
+                    </div>
+                    
+                    ${sub.portfolio ? `
+                    <div style="color: #ccc; margin-bottom: 1rem;">
+                        <strong>Portfolio:</strong> ${sub.portfolio}
+                    </div>
+                    ` : ''}
+                    
+                    <div>
+                        <button class="btn btn-approve" onclick="approveTeamMember('${sub.referenceId}')">
+                            <i class="fas fa-check"></i> Approve
+                        </button>
+                        <button class="btn btn-reject" onclick="rejectTeamMember('${sub.referenceId}')">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                        <span style="color: #666; margin-left: 1rem; font-family: 'Share Tech Mono';">
+                            Ref: ${sub.referenceId}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('teamSubmissionsList').innerHTML = submissionsHTML || 'No pending team submissions.';
+        }
+
+        function loadBlogData() {
+            if (!blog) return;
+
+            const posts = blog.getPosts('all');
+            const postsHTML = posts.map(post => `
+                <div style="padding: 1.5rem; border: 1px solid rgba(0,255,0,0.2); border-radius: 6px; margin-bottom: 1rem; background: rgba(0,255,0,0.05);">
+                    <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 1rem;">
+                        <div>
+                            <strong style="color: #00ff00; font-size: 1.1rem;">${post.title}</strong>
+                            <span class="status-badge status-${post.status}" style="margin-left: 1rem;">${post.status.toUpperCase()}</span>
+                            ${post.featured ? '<span class="status-badge" style="background: #ff0080; color: white; margin-left: 0.5rem;">FEATURED</span>' : ''}
+                        </div>
+                        <small style="color: #666;">${new Date(post.createdAt).toLocaleString()}</small>
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem;">
+                        <strong>Category:</strong> ${post.category} | 
+                        <strong>Author:</strong> ${post.author} |
+                        <strong>Views:</strong> ${post.views}
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem; line-height: 1.4;">
+                        ${post.excerpt}
+                    </div>
+                    
+                    <div style="color: #ccc; margin-bottom: 1rem;">
+                        <strong>Tags:</strong> ${post.tags.map(tag => `<span style="background: rgba(0,255,0,0.2); padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">${tag}</span>`).join('')}
+                    </div>
+                    
+                    <div>
+                        ${post.status === 'draft' ? `
+                            <button class="btn btn-sm btn-publish" onclick="publishPost('${post.id}')">
+                                <i class="fas fa-paper-plane"></i> Publish
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-sm btn-edit" onclick="editPost('${post.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-delete" onclick="deletePost('${post.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('blogPostsList').innerHTML = postsHTML || 'No blog posts yet.';
+        }
+
+        // Message functions
+        function markMessageRead(messageId) {
+            if (messaging) {
+                messaging.markAsRead(messageId);
+                loadMessagesData();
+                showNotification('Message marked as read', 'success');
+            }
+        }
+
+        function deleteMessage(messageId) {
+            if (confirm('Delete this message?')) {
+                if (messaging) {
+                    messaging.deleteMessage(messageId);
+                    loadMessagesData();
+                    showNotification('Message deleted', 'success');
+                }
+            }
+        }
+
+        // Team functions
+        function approveTeamMember(referenceId) {
+            if (confirm('Approve this team member?')) {
+                const submissions = JSON.parse(localStorage.getItem('teamSubmissions') || '[]');
+                const approved = JSON.parse(localStorage.getItem('approvedTeamMembers') || '[]');
+                const submission = submissions.find(sub => sub.referenceId === referenceId);
+                
+                if (submission) {
+                    approved.push({...submission, approvedAt: new Date().toISOString()});
+                    localStorage.setItem('approvedTeamMembers', JSON.stringify(approved));
+                    
+                    // Remove from submissions
+                    const updatedSubmissions = submissions.filter(sub => sub.referenceId !== referenceId);
+                    localStorage.setItem('teamSubmissions', JSON.stringify(updatedSubmissions));
+                    
+                    loadTeamData();
+                    showNotification('Team member approved!', 'success');
+                }
+            }
+        }
+
+        function rejectTeamMember(referenceId) {
+            const reason = prompt('Enter rejection reason:');
+            if (reason) {
+                const submissions = JSON.parse(localStorage.getItem('teamSubmissions') || '[]');
+                const updatedSubmissions = submissions.filter(sub => sub.referenceId !== referenceId);
+                localStorage.setItem('teamSubmissions', JSON.stringify(updatedSubmissions));
+                
+                loadTeamData();
+                showNotification('Team member rejected: ' + reason, 'warning');
+            }
+        }
+
+        // Blog functions
+        function showPostForm() {
+            document.getElementById('postForm').style.display = 'block';
+        }
+
+        function hidePostForm() {
+            document.getElementById('postForm').style.display = 'none';
+        }
+
+        document.getElementById('newPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const postData = {
+                title: document.getElementById('postTitle').value,
+                content: document.getElementById('postContent').value,
+                category: document.getElementById('postCategory').value,
+                tags: document.getElementById('postTags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+                status: 'published',
+                featured: false
+            };
+
+            if (blog) {
+                blog.createPost(postData);
+                this.reset();
+                hidePostForm();
+                loadBlogData();
+                showNotification('Blog post published successfully!', 'success');
+            }
+        });
+
+        function publishPost(postId) {
+            if (blog) {
+                blog.updatePost(postId, { status: 'published' });
+                loadBlogData();
+                showNotification('Post published!', 'success');
+            }
+        }
+
+        function deletePost(postId) {
+            if (confirm('Delete this blog post?')) {
+                if (blog) {
+                    blog.deletePost(postId);
+                    loadBlogData();
+                    showNotification('Post deleted', 'success');
+                }
+            }
+        }
+
+        // System tools
+        function exportData() {
+            const data = {
+                analytics: {
+                    visits: analytics.getVisits(),
+                    pageViews: analytics.getPageViews(),
+                    events: analytics.getEvents()
+                },
+                messages: messaging ? messaging.getMessages() : [],
+                team: {
+                    submissions: JSON.parse(localStorage.getItem('teamSubmissions') || '[]'),
+                    approved: JSON.parse(localStorage.getItem('approvedTeamMembers') || '[]')
+                },
+                blog: blog ? blog.getPosts('all') : []
+            };
+
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `bedusec-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+
+            showNotification('Data exported successfully!', 'success');
+        }
+
+        function clearData() {
+            if (confirm('Clear all system data? This cannot be undone.')) {
+                localStorage.removeItem('bedusec_visits');
+                localStorage.removeItem('bedusec_pageviews');
+                localStorage.removeItem('bedusec_events');
+                localStorage.removeItem('bedusec_messages');
+                localStorage.removeItem('bedusec_posts');
+                localStorage.removeItem('teamSubmissions');
+                
+                showNotification('All data cleared!', 'success');
+                setTimeout(() => location.reload(), 1000);
+            }
+        }
+
+        function backupSystem() {
+            showNotification('System backup created!', 'success');
+        }
+
+        function refreshData() {
+            loadDashboardData();
+            showNotification('Data refreshed!', 'info');
+        }
+
+        function logout() {
+            localStorage.removeItem('adminAuthenticated');
+            localStorage.removeItem('adminUsername');
+            localStorage.removeItem('adminSession');
+            window.location.href = 'admin-login.html';
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `cyber-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+    </script>
+
+    <style>
+        .cyber-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .cyber-notification.info { border-color: #0088ff; color: #0088ff; }
+        .cyber-notification.success { border-color: #00ff00; color: #00ff00; }
+        .cyber-notification.warning { border-color: #ffa500; color: #ffa500; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 10px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</body>
+</html>
