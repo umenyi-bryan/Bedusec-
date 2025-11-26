@@ -1,27 +1,16 @@
 {
-  "name": "bedusec-netlify",
+  "name": "bedusec",
   "version": "1.0.0",
-  "description": "Bedusec Ultra Secure Platform - Netlify Edition",
-  "type": "module",
+  "description": "Cybersecurity Education Platform",
+  "main": "index.html",
   "scripts": {
-    "build": "echo 'Building Bedusec...'",
-    "dev": "netlify dev",
-    "functions:serve": "netlify functions:serve"
+    "build": "echo 'Static site - no build process needed'",
+    "dev": "echo 'Static site - serve with any static server'"
   },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2"
-  },
-  "devDependencies": {
-    "@netlify/functions": "^2.0.0",
-    "netlify-cli": "^15.0.0"
-  },
+  "keywords": ["cybersecurity", "ethical-hacking", "education"],
+  "author": "Bedusec",
+  "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   }
 }
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
-    "@google/generative-ai": "^0.2.1"
-  }
