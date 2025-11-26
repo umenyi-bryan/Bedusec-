@@ -12,6 +12,34 @@
     <!-- Matrix Background -->
     <div class="matrix-bg"></div>
 
+    <!-- Hacking Terminal Overlay -->
+    <div id="hackingOverlay" class="hacking-overlay">
+        <div class="hacking-terminal">
+            <div class="hacking-header">
+                <span class="hacking-title">SYSTEM BREACH DETECTED</span>
+                <span class="hacking-close" onclick="closeHackingOverlay()">✕</span>
+            </div>
+            <div class="hacking-content" id="hackingContent">
+                <!-- Hacking animation will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Threat Feed -->
+    <div class="threat-feed">
+        <div class="threat-header">
+            <i class="fas fa-radar"></i>
+            LIVE THREAT INTELLIGENCE
+        </div>
+        <div class="threat-items" id="threatItems">
+            <div class="threat-item critical">
+                <span class="threat-type">CVE-2024-001</span>
+                <span class="threat-desc">Zero-day in Apache Server</span>
+                <span class="threat-time">2m ago</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="cyber-nav">
         <div class="nav-brand">
@@ -23,6 +51,7 @@
             <li><a href="#contact" class="nav-link">Contact</a></li>
             <li><a href="tools.html" class="nav-link">OSINT Tools</a></li>
             <li><a href="partners.html" class="nav-link">Partnerships</a></li>
+            <li><a href="cybersecurity-academy.html" class="nav-link">Academy</a></li>
             <li><a href="dashboard.html" class="nav-login">
                 <i class="fas fa-terminal"></i> Command Center
             </a></li>
@@ -57,9 +86,32 @@
                 </div>
                 <div class="terminal-line">
                     <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">system_status --security</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">[SECURITY] Threat Level: <span class="threat-level" id="threatLevel">LOW</span> | Active Operations: <span id="activeOps">12</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
                     <span class="command typed-command"></span>
                     <span class="cursor">|</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Quick Access Cards -->
+        <div class="quick-access">
+            <div class="access-card" onclick="showHackingAnimation()">
+                <i class="fas fa-bolt"></i>
+                <span>Live Demo</span>
+            </div>
+            <div class="access-card" onclick="window.location.href='cybersecurity-academy.html'">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Start Learning</span>
+            </div>
+            <div class="access-card" onclick="runSecurityScan()">
+                <i class="fas fa-shield-alt"></i>
+                <span>Security Scan</span>
             </div>
         </div>
     </section>
@@ -80,6 +132,12 @@
                         <span class="tag">Networks</span>
                         <span class="tag">Mobile</span>
                     </div>
+                    <div class="service-stats">
+                        <div class="stat">
+                            <span class="number">500+</span>
+                            <span class="label">Tests Completed</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="service-card">
@@ -93,6 +151,12 @@
                         <span class="tag">Reverse Engineering</span>
                         <span class="tag">Exploit Development</span>
                     </div>
+                    <div class="service-stats">
+                        <div class="stat">
+                            <span class="number">47</span>
+                            <span class="label">CVEs Discovered</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="service-card">
@@ -105,6 +169,49 @@
                         <span class="tag">Phishing</span>
                         <span class="tag">Physical Security</span>
                         <span class="tag">Training</span>
+                    </div>
+                    <div class="service-stats">
+                        <div class="stat">
+                            <span class="number">92%</span>
+                            <span class="label">Success Rate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats Section -->
+    <section class="live-stats">
+        <div class="container">
+            <h2 class="section-title glitch" data-text="GLOBAL_OPERATIONS">GLOBAL OPERATIONS</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <div class="stat-content">
+                        <span class="stat-number" id="globalClients">156</span>
+                        <span class="stat-label">Global Clients</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="stat-content">
+                        <span class="stat-number" id="vulnerabilitiesFound">2,847</span>
+                        <span class="stat-label">Vulnerabilities Found</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-content">
+                        <span class="stat-number" id="responseTime">24/7</span>
+                        <span class="stat-label">Response Time</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <div class="stat-content">
+                        <span class="stat-number" id="successRate">99.8%</span>
+                        <span class="stat-label">Success Rate</span>
                     </div>
                 </div>
             </div>
@@ -149,6 +256,19 @@
                     <span>John the Ripper</span>
                 </div>
             </div>
+
+            <!-- Tool Details Panel -->
+            <div class="tools-details" id="toolsDetails">
+                <div class="tool-detail active" data-tool="nmap">
+                    <h3>Nmap - Network Mapper</h3>
+                    <p>Advanced network discovery and security auditing tool</p>
+                    <div class="tool-commands">
+                        <code>nmap -sS -A target.com</code>
+                        <code>nmap -p 1-1000 --script vuln target.com</code>
+                    </div>
+                </div>
+                <!-- More tool details would go here -->
+            </div>
         </div>
     </section>
 
@@ -170,13 +290,51 @@
                 <div class="contact-form">
                     <input type="text" placeholder="[SUBJECT]" class="cyber-input">
                     <textarea placeholder="[ENCRYPTED_MESSAGE]" class="cyber-textarea"></textarea>
-                    <button class="cyber-button">
+                    <button class="cyber-button" onclick="sendEncryptedMessage()">
                         <i class="fas fa-paper-plane"></i> SEND ENCRYPTED
                     </button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="cyber-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BEDUSEC</h3>
+                    <p>Securing digital frontiers through ethical cybersecurity practices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#">Penetration Testing</a>
+                    <a href="#">Vulnerability Research</a>
+                    <a href="#">Incident Response</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="cybersecurity-academy.html">Cybersecurity Academy</a>
+                    <a href="#">Research Papers</a>
+                    <a href="#">Security Tools</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <a href="#">Get in Touch</a>
+                    <a href="#">Emergency Response</a>
+                    <a href="#">Careers</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BEDUSEC. All rights reserved. | <span id="currentYear"></span></p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 
@@ -197,7 +355,7 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="chatbot-messages" id="shadowGPTMessages">
             <div class="message ai-message">
                 <div class="message-sender">ShadowGPT</div>
@@ -207,7 +365,7 @@
                 <div class="message-time" id="currentTime"></div>
             </div>
         </div>
-        
+
         <div class="chatbot-input">
             <input type="text" id="shadowGPTInput" placeholder="Ask about pentesting or just chat..." onkeypress="handleShadowGPTKeypress(event)">
             <button onclick="sendShadowGPTMessage()" id="sendButton">
@@ -229,374 +387,590 @@
     </button>
 
     <script src="shadowgpt-enhanced.js"></script>
-    <style>
-    .shadowgpt-chatbot {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 400px;
-        height: 550px;
-        background: rgba(0, 20, 0, 0.98);
-        border: 2px solid #ff0080;
-        border-radius: 8px;
-        box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
-        display: none;
-        flex-direction: column;
-        z-index: 10000;
-        backdrop-filter: blur(10px);
-        font-family: 'Share Tech Mono', monospace;
-    }
 
-    .shadowgpt-chatbot.active {
-        display: flex;
-    }
-
-    .chatbot-header {
-        background: rgba(255, 0, 128, 0.2);
-        padding: 1rem;
-        border-bottom: 1px solid #ff0080;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .chatbot-title {
-        color: #ff0080;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.9rem;
-    }
-
-    .status-indicator {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #00ff00;
-        animation: pulse 2s infinite;
-    }
-
-    .chatbot-controls {
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .chatbot-btn {
-        background: none;
-        border: none;
-        color: #ff0080;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0.3rem;
-        border-radius: 3px;
-        transition: all 0.3s ease;
-    }
-
-    .chatbot-btn:hover {
-        background: rgba(255, 0, 128, 0.2);
-    }
-
-    .chatbot-messages {
-        flex: 1;
-        padding: 1rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .message {
-        max-width: 85%;
-        padding: 0.8rem;
-        border-radius: 8px;
-        animation: messageSlide 0.3s ease;
-    }
-
-    .user-message {
-        align-self: flex-end;
-        background: rgba(0, 136, 255, 0.2);
-        border: 1px solid #0088ff;
-        color: #ffffff;
-    }
-
-    .ai-message {
-        align-self: flex-start;
-        background: rgba(255, 0, 128, 0.1);
-        border: 1px solid #ff0080;
-        color: #ff88cc;
-    }
-
-    .message-sender {
-        font-weight: bold;
-        color: #ff0080;
-        font-size: 0.8rem;
-        margin-bottom: 0.3rem;
-    }
-
-    .user-message .message-sender {
-        color: #0088ff;
-    }
-
-    .message-content {
-        line-height: 1.4;
-        white-space: pre-wrap;
-        font-size: 0.9rem;
-    }
-
-    .message-time {
-        font-size: 0.7rem;
-        color: #88ff88;
-        margin-top: 0.3rem;
-        text-align: right;
-    }
-
-    .chatbot-input {
-        display: flex;
-        padding: 1rem;
-        border-top: 1px solid rgba(255, 0, 128, 0.3);
-        gap: 0.5rem;
-    }
-
-    .chatbot-input input {
-        flex: 1;
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid #ff0080;
-        border-radius: 4px;
-        padding: 0.8rem;
-        color: #ffffff;
-        font-family: 'Share Tech Mono', monospace;
-        font-size: 0.9rem;
-    }
-
-    .chatbot-input input:focus {
-        outline: none;
-        border-color: #00ff00;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-    }
-
-    .chatbot-input button {
-        background: #ff0080;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        padding: 0.8rem 1rem;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
-
-    .chatbot-input button:hover {
-        background: #ff3399;
-        box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
-    }
-
-    .quick-actions {
-        display: flex;
-        padding: 0.5rem 1rem;
-        gap: 0.5rem;
-        border-top: 1px solid rgba(255, 0, 128, 0.2);
-        flex-wrap: wrap;
-    }
-
-    .quick-btn {
-        background: rgba(255, 0, 128, 0.2);
-        border: 1px solid #ff0080;
-        color: #ff88cc;
-        padding: 0.4rem 0.8rem;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-family: 'Share Tech Mono', monospace;
-    }
-
-    .quick-btn:hover {
-        background: rgba(255, 0, 128, 0.4);
-        transform: translateY(-2px);
-    }
-
-    .shadowgpt-toggle {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #ff0080, #8000ff);
-        border: none;
-        border-radius: 50%;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        box-shadow: 0 0 30px rgba(255, 0, 128, 0.6);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-    .shadowgpt-toggle:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 40px rgba(255, 0, 128, 0.8);
-    }
-
-    .pulse-dot {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        width: 12px;
-        height: 12px;
-        background: #00ff00;
-        border-radius: 50%;
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(0.95); opacity: 1; }
-        50% { transform: scale(1.1); opacity: 0.7; }
-        100% { transform: scale(0.95); opacity: 1; }
-    }
-
-    @keyframes messageSlide {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .chatbot-messages::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .chatbot-messages::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.3);
-    }
-
-    .chatbot-messages::-webkit-scrollbar-thumb {
-        background: #ff0080;
-        border-radius: 3px;
-    }
-
-    .message-content pre {
-        background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #333;
-        border-radius: 4px;
-        padding: 0.8rem;
-        overflow-x: auto;
-        margin: 0.5rem 0;
-        font-size: 0.8rem;
-    }
-
-    .message-content code {
-        background: rgba(0, 0, 0, 0.6);
-        padding: 0.2rem 0.4rem;
-        border-radius: 3px;
-        font-family: 'Courier New', monospace;
-        color: #88ff88;
-    }
-    </style>
-
+    <!-- Enhanced JavaScript for new features -->
     <script>
-    let shadowGPTChat = null;
-
-    window.addEventListener('DOMContentLoaded', function() {
-        shadowGPTChat = new ShadowGPT();
-        updateTime();
-    });
-
-    function toggleShadowGPT() {
-        const chatbot = document.getElementById('shadowGPTChatbot');
-        const isActive = chatbot.classList.contains('active');
-        
-        if (isActive) {
-            chatbot.classList.remove('active');
-        } else {
-            chatbot.classList.add('active');
-            setTimeout(() => {
-                document.getElementById('shadowGPTInput').focus();
-            }, 300);
-        }
-    }
-
-    function sendShadowGPTMessage() {
-        const input = document.getElementById('shadowGPTInput');
-        const message = input.value.trim();
-        
-        if (!message || !shadowGPTChat) return;
-        
-        addMessageToChat('user', message, 'You');
-        input.value = '';
-        
-        shadowGPTChat.sendMessage(message).then(response => {
-            addMessageToChat('ai', response, 'ShadowGPT');
+        // New Features JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Start live threat feed
+            startThreatFeed();
+            
+            // Animate stats
+            animateStats();
+            
+            // Start terminal animation
+            startTerminalAnimation();
         });
-    }
 
-    function handleShadowGPTKeypress(event) {
-        if (event.key === 'Enter') {
-            sendShadowGPTMessage();
+        // Live Threat Feed
+        function startThreatFeed() {
+            const threats = [
+                { type: 'CVE-2024-001', desc: 'Zero-day in Apache Server', severity: 'critical', time: '2m ago' },
+                { type: 'APT-29', desc: 'Cozy Bear activity detected', severity: 'high', time: '5m ago' },
+                { type: 'MAL-8472', desc: 'New ransomware variant', severity: 'medium', time: '10m ago' },
+                { type: 'CVE-2023-4863', desc: 'Chrome zero-day patch', severity: 'info', time: '15m ago' }
+            ];
+
+            let currentThreat = 0;
+            
+            setInterval(() => {
+                const threatItems = document.getElementById('threatItems');
+                const threat = threats[currentThreat];
+                
+                const threatElement = document.createElement('div');
+                threatElement.className = `threat-item ${threat.severity}`;
+                threatElement.innerHTML = `
+                    <span class="threat-type">${threat.type}</span>
+                    <span class="threat-desc">${threat.desc}</span>
+                    <span class="threat-time">${threat.time}</span>
+                `;
+                
+                threatItems.appendChild(threatElement);
+                
+                // Remove old threats
+                if (threatItems.children.length > 4) {
+                    threatItems.removeChild(threatItems.children[0]);
+                }
+                
+                currentThreat = (currentThreat + 1) % threats.length;
+            }, 5000);
         }
-    }
 
-    function addMessageToChat(type, content, sender) {
-        const messagesContainer = document.getElementById('shadowGPTMessages');
-        
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${type}-message`;
-        
-        const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        
-        messageElement.innerHTML = `
-            <div class="message-sender">${sender}</div>
-            <div class="message-content">${formatMessageContent(content)}</div>
-            <div class="message-time">${time}</div>
-        `;
-        
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
+        // Animated Stats
+        function animateStats() {
+            const stats = {
+                globalClients: 156,
+                vulnerabilitiesFound: 2847,
+                responseTime: '24/7',
+                successRate: '99.8%'
+            };
 
-    function formatMessageContent(content) {
-        let formatted = content
-            .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/\n/g, '<br>');
-        
-        return formatted;
-    }
+            Object.keys(stats).forEach(statId => {
+                const element = document.getElementById(statId);
+                if (element) {
+                    animateValue(element, 0, stats[statId], 2000);
+                }
+            });
+        }
 
-    function clearShadowGPT() {
-        const messagesContainer = document.getElementById('shadowGPTMessages');
-        messagesContainer.innerHTML = `
-            <div class="message ai-message">
-                <div class="message-sender">ShadowGPT</div>
-                <div class="message-content">
-                    Conversation cleared. ShadowGPT ready for new inquiries.
+        function animateValue(element, start, end, duration) {
+            if (typeof end === 'string') {
+                element.textContent = end;
+                return;
+            }
+
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Hacking Animation Overlay
+        function showHackingAnimation() {
+            const overlay = document.getElementById('hackingOverlay');
+            const content = document.getElementById('hackingContent');
+            
+            overlay.style.display = 'block';
+            
+            const hackingScript = [
+                'Initializing penetration sequence...',
+                'Scanning target network...',
+                'Identifying vulnerabilities...',
+                'Exploiting weak points...',
+                'Bypassing security measures...',
+                'Gaining access...',
+                'Access granted! System compromised.',
+                'Cleaning traces...',
+                'Mission complete.'
+            ];
+            
+            content.innerHTML = '';
+            let line = 0;
+            
+            const typeLine = () => {
+                if (line < hackingScript.length) {
+                    const lineElement = document.createElement('div');
+                    lineElement.className = 'hacking-line';
+                    lineElement.textContent = `[${String(line + 1).padStart(2, '0')}] ${hackingScript[line]}`;
+                    content.appendChild(lineElement);
+                    content.scrollTop = content.scrollHeight;
+                    line++;
+                    setTimeout(typeLine, 800);
+                }
+            };
+            
+            typeLine();
+        }
+
+        function closeHackingOverlay() {
+            document.getElementById('hackingOverlay').style.display = 'none';
+        }
+
+        // Security Scan
+        function runSecurityScan() {
+            const threatLevel = document.getElementById('threatLevel');
+            const activeOps = document.getElementById('activeOps');
+            
+            threatLevel.textContent = 'SCANNING';
+            threatLevel.className = 'threat-level scanning';
+            
+            setTimeout(() => {
+                const levels = ['LOW', 'MEDIUM', 'HIGH'];
+                const randomLevel = levels[Math.floor(Math.random() * levels.length)];
+                const randomOps = Math.floor(Math.random() * 20) + 5;
+                
+                threatLevel.textContent = randomLevel;
+                threatLevel.className = `threat-level ${randomLevel.toLowerCase()}`;
+                activeOps.textContent = randomOps;
+                
+                // Show notification
+                showNotification(`Security scan complete: Threat level ${randomLevel}`, 'info');
+            }, 3000);
+        }
+
+        // Terminal Animation
+        function startTerminalAnimation() {
+            const commands = [
+                'scan_network --target 192.168.1.0/24',
+                'analyze_vulnerabilities --deep-scan',
+                'deploy_countermeasures --auto',
+                'monitor_threats --real-time',
+                'update_firewall_rules'
+            ];
+            
+            let currentCommand = 0;
+            const typedCommand = document.querySelector('.typed-command');
+            
+            setInterval(() => {
+                const command = commands[currentCommand];
+                let charIndex = 0;
+                
+                const typeCommand = () => {
+                    if (charIndex < command.length) {
+                        typedCommand.textContent += command.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeCommand, 100);
+                    } else {
+                        setTimeout(() => {
+                            typedCommand.textContent = '';
+                            currentCommand = (currentCommand + 1) % commands.length;
+                        }, 2000);
+                    }
+                };
+                
+                typedCommand.textContent = '';
+                typeCommand();
+            }, 8000);
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `cyber-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${getNotificationIcon(type)}"></i>
+                    <span>${message}</span>
                 </div>
-                <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-            </div>
-        `;
-        
-        if (shadowGPTChat) {
-            shadowGPTChat.clearConversation();
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
         }
-    }
 
-    function insertQuickQuestion(question) {
-        const input = document.getElementById('shadowGPTInput');
-        input.value = question;
-        input.focus();
-    }
-
-    function updateTime() {
-        const timeElement = document.getElementById('currentTime');
-        if (timeElement) {
-            timeElement.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        function getNotificationIcon(type) {
+            const icons = {
+                'info': 'info-circle',
+                'success': 'check-circle',
+                'warning': 'exclamation-triangle',
+                'error': 'times-circle'
+            };
+            return icons[type] || 'info-circle';
         }
-    }
 
-    setInterval(updateTime, 60000);
+        // Encrypted Message Send
+        function sendEncryptedMessage() {
+            showNotification('Message encrypted and sent securely', 'success');
+            
+            // Simulate encryption process
+            setTimeout(() => {
+                showNotification('Message delivered to secure inbox', 'info');
+            }, 1500);
+        }
     </script>
+
+    <style>
+        /* New Styles for Enhanced Features */
+        
+        /* Hacking Overlay */
+        .hacking-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .hacking-terminal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 800px;
+            background: #000;
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(255, 0, 128, 0.6);
+        }
+
+        .hacking-header {
+            background: #ff0080;
+            color: #000;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .hacking-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .hacking-content {
+            height: 400px;
+            padding: 2rem;
+            overflow-y: auto;
+            color: #00ff00;
+        }
+
+        .hacking-line {
+            margin-bottom: 0.5rem;
+            animation: typeLine 0.5s ease;
+        }
+
+        @keyframes typeLine {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Threat Feed */
+        .threat-feed {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid #ff4444;
+            border-radius: 8px;
+            z-index: 1000;
+            font-family: 'Share Tech Mono', monospace;
+            backdrop-filter: blur(10px);
+        }
+
+        .threat-header {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            padding: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid #ff4444;
+        }
+
+        .threat-items {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .threat-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255, 68, 68, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .threat-item.critical { background: rgba(255, 68, 68, 0.1); }
+        .threat-item.high { background: rgba(255, 165, 0, 0.1); }
+        .threat-item.medium { background: rgba(255, 255, 0, 0.1); }
+        .threat-item.info { background: rgba(0, 255, 0, 0.1); }
+
+        .threat-type {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .threat-desc {
+            color: #ccc;
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+
+        .threat-time {
+            color: #666;
+            font-size: 0.7rem;
+        }
+
+        /* Quick Access Cards */
+        .quick-access {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .access-card {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            color: #00ff00;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+        }
+
+        .access-card:hover {
+            background: rgba(0, 255, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .access-card i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Live Stats Section */
+        .live-stats {
+            background: rgba(0, 20, 0, 0.8);
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 3rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .stat-label {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        /* Service Stats */
+        .service-stats {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.2);
+        }
+
+        .service-stats .stat {
+            text-align: center;
+        }
+
+        .service-stats .number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .service-stats .label {
+            font-size: 0.8rem;
+            color: #88ff88;
+        }
+
+        /* Threat Level Indicators */
+        .threat-level {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .threat-level.low { color: #00ff00; }
+        .threat-level.medium { color: #ffa500; }
+        .threat-level.high { color: #ff4444; }
+        .threat-level.scanning { 
+            color: #0088ff; 
+            animation: pulse 1s infinite;
+        }
+
+        /* Notifications */
+        .cyber-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cyber-notification.info { border-color: #0088ff; color: #0088ff; }
+        .cyber-notification.success { border-color: #00ff00; color: #00ff00; }
+        .cyber-notification.warning { border-color: #ffa500; color: #ffa500; }
+        .cyber-notification.error { border-color: #ff4444; color: #ff4444; }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Enhanced Footer */
+        .cyber-footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #88ff88;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00ff00;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00ff00;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.2);
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .threat-feed {
+                position: relative;
+                top: auto;
+                right: auto;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .quick-access {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                justify-content: center;
+                margin-top: 2rem;
+            }
+            
+            .access-card {
+                min-width: 100px;
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
 </body>
 </html>

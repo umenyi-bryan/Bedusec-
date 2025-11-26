@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Academy | Bedusec - World's Most Comprehensive Cyber Education</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="#paths" class="nav-link">Learning Paths</a></li>
+            <li><a href="#ai-tutor" class="nav-link">AI Cyber Mentor</a></li>
+            <li><a href="#labs" class="nav-link">Cyber Range</a></li>
+            <li><a href="#certifications" class="nav-link">Certifications</a></li>
+            <li><a href="#specializations" class="nav-link">Specializations</a></li>
+            <li><a href="dashboard.html" class="nav-login">
+                <i class="fas fa-user"></i> My Academy
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Academy Hero Section -->
+    <section class="academy-hero">
+        <div class="academy-container">
+            <div class="academy-header">
+                <h1 class="academy-title">
+                    <span class="cyber-text">BEDUSEC</span>
+                    <span class="academy-subtitle">GLOBAL CYBERSECURITY ACADEMY</span>
+                </h1>
+                <p class="academy-tagline">The World's Most Comprehensive Cybersecurity Education Platform</p>
+                
+                <div class="academy-stats">
+                    <div class="stat">
+                        <div class="stat-number" id="totalStudents">47,892</div>
+                        <div class="stat-label">Active Cyber Warriors</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="coursesAvailable">324</div>
+                        <div class="stat-label">Courses & Labs</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="certifications">26</div>
+                        <div class="stat-label">Certifications</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="successRate">96%</div>
+                        <div class="stat-label">Career Success</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="cta-button primary" onclick="startLearning()">
+                        <i class="fas fa-rocket"></i> BEGIN YOUR CYBER JOURNEY
+                    </button>
+                    <button class="cta-button secondary" onclick="scrollToPaths()">
+                        <i class="fas fa-map"></i> EXPLORE 47 CAREER PATHS
+                    </button>
+                </div>
+            </div>
+
+            <div class="academy-visual">
+                <div class="visual-container">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Cyber Mentor</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-vial"></i>
+                        <span>Live Cyber Range</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>26 Certifications</span>
+                    </div>
+                    <div class="floating-card card-4">
+                        <i class="fas fa-globe"></i>
+                        <span>Global Community</span>
+                    </div>
+                    <div class="floating-card card-5">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Career Portal</span>
+                    </div>
+                    <div class="floating-card card-6">
+                        <i class="fas fa-trophy"></i>
+                        <span>CTF Arena</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths Mega Section -->
+    <section id="paths" class="learning-paths">
+        <div class="academy-container">
+            <h2 class="section-title glitch" data-text="47_CAREER_LEARNING_PATHS">47 PROFESSIONAL CYBER PATHS</h2>
+            <p class="section-subtitle">From absolute beginner to CISO - structured paths for every cybersecurity role</p>
+
+            <div class="paths-categories">
+                <div class="category active" data-category="all">All Paths</div>
+                <div class="category" data-category="offensive">Offensive Security</div>
+                <div class="category" data-category="defensive">Defensive Security</div>
+                <div class="category" data-category="governance">Governance & Compliance</div>
+                <div class="category" data-category="emerging">Emerging Technologies</div>
+                <div class="category" data-category="specialized">Specialized Roles</div>
+            </div>
+
+            <div class="paths-grid">
+                <!-- Offensive Security Paths -->
+                <div class="path-card" data-path="ethical-hacker" data-category="offensive">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <h3>Certified Ethical Hacker</h3>
+                        <span class="path-level beginner">Beginner</span>
+                    </div>
+                    <div class="path-description">
+                        Master penetration testing, vulnerability assessment, and ethical hacking methodologies.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>180 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>32 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>8 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">Penetration Testing</span>
+                        <span class="tag">Vulnerability Assessment</span>
+                        <span class="tag">Exploitation</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('ethical-hacker')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <div class="path-card" data-path="red-team" data-category="offensive">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3>Red Team Operator</h3>
+                        <span class="path-level advanced">Advanced</span>
+                    </div>
+                    <div class="path-description">
+                        Advanced adversary simulation, covert operations, and advanced persistence techniques.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>240 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>45 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>12 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">Adversary Simulation</span>
+                        <span class="tag">Covert Ops</span>
+                        <span class="tag">Advanced Persistence</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('red-team')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <!-- Defensive Security Paths -->
+                <div class="path-card" data-path="soc-analyst" data-category="defensive">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>SOC Analyst</h3>
+                        <span class="path-level beginner">Beginner</span>
+                    </div>
+                    <div class="path-description">
+                        Security Operations Center fundamentals, threat monitoring, and incident detection.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>120 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>24 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>5 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">SIEM</span>
+                        <span class="tag">Threat Hunting</span>
+                        <span class="tag">Incident Response</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('soc-analyst')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <div class="path-card" data-path="threat-hunter" data-category="defensive">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-binoculars"></i>
+                        </div>
+                        <h3>Threat Hunter</h3>
+                        <span class="path-level intermediate">Intermediate</span>
+                    </div>
+                    <div class="path-description">
+                        Proactive threat detection, advanced analytics, and hunting for sophisticated adversaries.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>160 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>28 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>6 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">Threat Intelligence</span>
+                        <span class="tag">Behavioral Analytics</span>
+                        <span class="tag">APT Detection</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('threat-hunter')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <!-- Governance Paths -->
+                <div class="path-card" data-path="ciso" data-category="governance">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>CISO Executive</h3>
+                        <span class="path-level advanced">Executive</span>
+                    </div>
+                    <div class="path-description">
+                        Chief Information Security Officer training: strategy, governance, risk management, and leadership.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>200 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>35 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>8 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Risk Management</span>
+                        <span class="tag">Strategy</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('ciso')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <!-- Emerging Technologies -->
+                <div class="path-card" data-path="quantum-security" data-category="emerging">
+                    <div class="path-header">
+                        <div class="path-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>Quantum Cryptography</h3>
+                        <span class="path-level advanced">Cutting Edge</span>
+                    </div>
+                    <div class="path-description">
+                        Post-quantum cryptography, quantum key distribution, and preparing for quantum computing threats.
+                    </div>
+                    <div class="path-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>140 hours</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>22 modules</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <span>4 projects</span>
+                        </div>
+                    </div>
+                    <div class="path-tags">
+                        <span class="tag">Quantum Computing</span>
+                        <span class="tag">Post-Quantum Crypto</span>
+                        <span class="tag">Future Threats</span>
+                    </div>
+                    <button class="path-button" onclick="enrollPath('quantum-security')">
+                        <i class="fas fa-play"></i> START PATH
+                    </button>
+                </div>
+
+                <!-- More paths would continue here... -->
+            </div>
+
+            <div class="view-all-paths">
+                <button class="cta-button secondary" onclick="showAllPaths()">
+                    <i class="fas fa-arrow-right"></i> VIEW ALL 47 CAREER PATHS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Cyber Mentor Section -->
+    <section id="ai-tutor" class="ai-tutor-section">
+        <div class="academy-container">
+            <h2 class="section-title glitch" data-text="AI_CYBER_MENTOR">AI CYBER MENTOR v4.0</h2>
+            <p class="section-subtitle">Your personal 24/7 cybersecurity mentor with expertise across all domains</p>
+
+            <div class="ai-tutor-container">
+                <div class="tutor-interface">
+                    <div class="tutor-header">
+                        <div class="tutor-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="tutor-info">
+                            <h3>CyberAI Mentor v4.0</h3>
+                            <span class="tutor-status">Online & Ready to Train You</span>
+                        </div>
+                        <div class="tutor-specialties">
+                            <span class="specialty">Penetration Testing</span>
+                            <span class="specialty">Digital Forensics</span>
+                            <span class="specialty">Malware Analysis</span>
+                            <span class="specialty">Cloud Security</span>
+                        </div>
+                    </div>
+
+                    <div class="tutor-chat" id="tutorChat">
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                <strong>CyberAI Mentor:</strong> Welcome to your AI cybersecurity mentor! I can help you with: penetration testing techniques, code security reviews, incident response procedures, threat intelligence analysis, career guidance, and much more. What would you like to work on today?
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutor-input">
+                        <div class="quick-questions">
+                            <button class="quick-question" onclick="askTutor('Explain advanced SQL injection techniques with examples')">
+                                SQL Injection
+                            </button>
+                            <button class="quick-question" onclick="askTutor('How do I set up a SOC monitoring environment?')">
+                                SOC Setup
+                            </button>
+                            <button class="quick-question" onclick="askTutor('Review this Python code for security vulnerabilities')">
+                                Code Review
+                            </button>
+                            <button class="quick-question" onclick="askTutor('Explain zero-trust architecture implementation')">
+                                Zero Trust
+                            </button>
+                        </div>
+
+                        <div class="input-container">
+                            <textarea id="tutorInput" placeholder="Ask me anything about cybersecurity... I cover all domains including: offensive security, defense, forensics, cloud, IoT, automotive, quantum, and more..." rows="3"></textarea>
+                            <button onclick="sendToTutor()" class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutor-features">
+                    <h4>Mentor Capabilities:</h4>
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-code"></i>
+                            <span>Multi-language Code Review</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-brain"></i>
+                            <span>Threat Intelligence Analysis</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security Architecture Design</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bug"></i>
+                            <span>Vulnerability Research</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-cloud"></i>
+                            <span>Cloud Security Guidance</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>Automotive Security</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mobile"></i>
+                            <span>Mobile App Security</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-industry"></i>
+                            <span>ICS/SCADA Security</span>
+                        </div>
+                    </div>
+
+                    <div class="tutor-stats">
+                        <h4>Global Training Stats</h4>
+                        <div class="stats-grid">
+                            <div class="tutor-stat">
+                                <div class="stat-value" id="questionsAnswered">287,451</div>
+                                <div class="stat-label">Questions Answered</div>
+                            </div>
+                            <div class="tutor-stat">
+                                <div class="stat-value" id="conceptsExplained">1,247</div>
+                                <div class="stat-label">Concepts Mastered</div>
+                            </div>
+                            <div class="tutor-stat">
+                                <div class="stat-value" id="codeReviews">42,836</div>
+                                <div class="stat-label">Code Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specializations Section -->
+    <section id="specializations" class="specializations">
+        <div class="academy-container">
+            <h2 class="section-title glitch" data-text="EMERGING_SPECIALIZATIONS">EMERGING CYBER SPECIALIZATIONS</h2>
+            <p class="section-subtitle">Master the cybersecurity domains of the future</p>
+
+            <div class="specializations-grid">
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <h3>Automotive Cybersecurity</h3>
+                    <p>Vehicle network security, ECU hardening, automotive penetration testing, and connected car security.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">CAN Bus</span>
+                        <span class="meta-tag">AutoSAR</span>
+                        <span class="meta-tag">V2X</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Medical Device Security</h3>
+                    <p>IoMT security, medical device penetration testing, FDA compliance, and healthcare infrastructure protection.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">IoMT</span>
+                        <span class="meta-tag">HIPAA</span>
+                        <span class="meta-tag">FDA</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>ICS/SCADA Security</h3>
+                    <p>Industrial control systems, critical infrastructure protection, PLC security, and OT network defense.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">OT</span>
+                        <span class="meta-tag">PLC</span>
+                        <span class="meta-tag">Critical Infrastructure</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Space Systems Security</h3>
+                    <p>Satellite security, space communication protocols, GPS security, and space infrastructure protection.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">Satellite</span>
+                        <span class="meta-tag">GPS</span>
+                        <span class="meta-tag">Space Comms</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Security & Adversarial ML</h3>
+                    <p>Protecting AI systems, adversarial machine learning, model security, and AI supply chain security.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">Adversarial AI</span>
+                        <span class="meta-tag">ML Security</span>
+                        <span class="meta-tag">Model Poisoning</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+
+                <div class="specialization-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-bitcoin"></i>
+                    </div>
+                    <h3>Blockchain & DeFi Security</h3>
+                    <p>Smart contract auditing, blockchain forensics, DeFi security, and cryptocurrency protection.</p>
+                    <div class="spec-meta">
+                        <span class="meta-tag">Smart Contracts</span>
+                        <span class="meta-tag">DeFi</span>
+                        <span class="meta-tag">Blockchain</span>
+                    </div>
+                    <button class="spec-button">EXPLORE</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Cyber Range Section -->
+    <section id="labs" class="live-labs">
+        <div class="academy-container">
+            <h2 class="section-title glitch" data-text="GLOBAL_CYBER_RANGE">GLOBAL CYBER RANGE</h2>
+            <p class="section-subtitle">The world's largest collection of real-world cybersecurity labs and scenarios</p>
+
+            <div class="labs-container">
+                <div class="labs-categories">
+                    <div class="category active" data-category="all">All Labs (247)</div>
+                    <div class="category" data-category="beginner">Beginner (89)</div>
+                    <div class="category" data-category="intermediate">Intermediate (98)</div>
+                    <div class="category" data-category="advanced">Advanced (47)</div>
+                    <div class="category" data-category="expert">Expert (13)</div>
+                    <div class="category" data-category="web">Web Security</div>
+                    <div class="category" data-category="network">Network</div>
+                    <div class="category" data-category="forensics">Forensics</div>
+                    <div class="category" data-category="cloud">Cloud</div>
+                    <div class="category" data-category="mobile">Mobile</div>
+                </div>
+
+                <div class="labs-grid" id="labsGrid">
+                    <!-- Labs will be dynamically loaded -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Mega Section -->
+    <section id="certifications" class="certifications">
+        <div class="academy-container">
+            <h2 class="section-title glitch" data-text="26_GLOBAL_CERTIFICATIONS">26 INDUSTRY-RECOGNIZED CERTIFICATIONS</h2>
+            <p class="section-subtitle">From foundational to executive-level certifications recognized worldwide</p>
+
+            <div class="certifications-tabs">
+                <div class="cert-tab active" data-tab="foundational">Foundational</div>
+                <div class="cert-tab" data-tab="technical">Technical</div>
+                <div class="cert-tab" data-tab="advanced">Advanced</div>
+                <div class="cert-tab" data-tab="executive">Executive</div>
+                <div class="cert-tab" data-tab="specialized">Specialized</div>
+            </div>
+
+            <div class="certifications-grid">
+                <!-- Foundational Certs -->
+                <div class="certification-card" data-level="foundational">
+                    <div class="cert-badge foundational">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Bedusec Certified Security Analyst (BCSA)</h3>
+                    <p>Entry-level certification covering fundamental security concepts, operations, and basic threat detection.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 40 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 8 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Beginner</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Global Recognition</span>
+                        <span class="recognition-tag">Industry Standard</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('bcsa')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <div class="certification-card" data-level="foundational">
+                    <div class="cert-badge foundational">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Bedusec Network Defender (BND)</h3>
+                    <p>Network security fundamentals, firewall configuration, and basic network monitoring techniques.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 60 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 12 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Beginner</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Vendor Neutral</span>
+                        <span class="recognition-tag">Hands-on</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('bnd')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <!-- Technical Certs -->
+                <div class="certification-card" data-level="technical">
+                    <div class="cert-badge technical">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Bedusec Certified Ethical Hacker (BCEH)</h3>
+                    <p>Comprehensive ethical hacking, penetration testing, and vulnerability assessment certification.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 120 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 24 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Intermediate</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Offensive Security</span>
+                        <span class="recognition-tag">Hands-on Labs</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('bceh')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <div class="certification-card" data-level="technical">
+                    <div class="cert-badge technical">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Bedusec Cloud Security Expert (BCSE)</h3>
+                    <p>Multi-cloud security across AWS, Azure, GCP with advanced cloud architecture and threat protection.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 100 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 20 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Intermediate</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Multi-Cloud</span>
+                        <span class="recognition-tag">Architecture Focus</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('bcse')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <!-- Advanced Certs -->
+                <div class="certification-card" data-level="advanced">
+                    <div class="cert-badge advanced">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Bedusec Red Team Operator (BRTO)</h3>
+                    <p>Advanced adversary simulation, covert operations, and advanced persistent threat emulation.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 200 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 35 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Advanced</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Elite Level</span>
+                        <span class="recognition-tag">Real-world Scenarios</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('brto')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <!-- Executive Certs -->
+                <div class="certification-card" data-level="executive">
+                    <div class="cert-badge executive">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Bedusec Chief Information Security Officer (BCISO)</h3>
+                    <p>Executive-level certification for cybersecurity leadership, strategy, and organizational governance.</p>
+                    <div class="cert-details">
+                        <span class="detail"><i class="fas fa-clock"></i> 180 hours</span>
+                        <span class="detail"><i class="fas fa-book"></i> 30 modules</span>
+                        <span class="detail"><i class="fas fa-star"></i> Executive</span>
+                    </div>
+                    <div class="cert-recognition">
+                        <span class="recognition-tag">Board Level</span>
+                        <span class="recognition-tag">Strategic Focus</span>
+                    </div>
+                    <button class="cert-button" onclick="viewCertification('bciso')">
+                        VIEW DETAILS
+                    </button>
+                </div>
+
+                <!-- More certifications would continue... -->
+            </div>
+
+            <div class="certifications-footer">
+                <p>All certifications include hands-on practical exams, real-world scenarios, and are recognized by global employers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academy Footer -->
+    <footer class="academy-footer">
+        <div class="academy-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+                    <p>Global Cybersecurity Academy</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Learning</h4>
+                        <a href="#paths">Career Paths</a>
+                        <a href="#labs">Cyber Range</a>
+                        <a href="#certifications">Certifications</a>
+                        <a href="#ai-tutor">AI Mentor</a>
+                        <a href="#specializations">Specializations</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">CTF Arena</a>
+                        <a href="#">Research Papers</a>
+                        <a href="#">Cyber News</a>
+                        <a href="#">Community Forums</a>
+                        <a href="#">Career Portal</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Enterprise</h4>
+                        <a href="#">Team Training</a>
+                        <a href="#">Custom Labs</a>
+                        <a href="#">Academic Partnerships</a>
+                        <a href="#">Government Programs</a>
+                        <a href="#">Bulk Certifications</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Help Center</a>
+                        <a href="#">Contact Mentors</a>
+                        <a href="#">Technical Support</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Status</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Bedusec Global Cybersecurity Academy. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p>Training the next generation of cyber defenders across 156 countries</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="academy-system.js"></script>
+    <script>
+        // Initialize the academy system
+        const academySystem = new AcademySystem();
+        
+        // Global functions for HTML onclick handlers
+        function askTutor(question) {
+            academySystem.askTutor(question);
+        }
+
+        function sendToTutor() {
+            const input = document.getElementById('tutorInput');
+            const question = input.value.trim();
+            if (question) {
+                academySystem.askTutor(question);
+            }
+        }
+
+        function enrollPath(pathId) {
+            academySystem.enrollPath(pathId);
+        }
+
+        function startLearning() {
+            if (!netlifyAuth || !netlifyAuth.isAuthenticated()) {
+                window.location.href = 'login.html';
+            } else {
+                scrollToPaths();
+            }
+        }
+
+        function scrollToPaths() {
+            document.getElementById('paths').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showAllPaths() {
+            // Implementation to show all 47 paths
+            academySystem.showAllPaths();
+        }
+
+        function viewCertification(certId) {
+            academySystem.viewCertification(certId);
+        }
+
+        // Add event listener for Enter key in tutor input
+        document.getElementById('tutorInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendToTutor();
+            }
+        });
+    </script>
+</body>
+</html>
