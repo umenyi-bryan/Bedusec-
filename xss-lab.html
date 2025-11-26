@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Learning Lab - Bedusec</title>
+    <style>
+        .xss-lab {
+            background: rgba(0,20,0,0.8);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .lab-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .vulnerable-section, .secure-section {
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+        .section-title {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            color: #88ff88;
+            margin-bottom: 0.5rem;
+        }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .output-area {
+            background: rgba(0,0,0,0.9);
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 1rem;
+            min-height: 200px;
+            color: #ccc;
+            margin-top: 1rem;
+        }
+        .execute-button {
+            background: #ff0080;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .execute-button:hover {
+            background: #ff3399;
+        }
+        .example-payloads {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255,0,128,0.1);
+            border: 1px solid rgba(255,0,128,0.3);
+            border-radius: 4px;
+        }
+        .payload-item {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            color: #ff88cc;
+            font-size: 0.9rem;
+        }
+        .payload-item:hover {
+            color: #ff0080;
+        }
+        .explanation {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 4px;
+            color: #88ff88;
+        }
+        .danger {
+            color: #ff4444;
+            font-weight: bold;
+        }
+        .safe {
+            color: #00ff00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="xss-lab">
+        <h3 style="color: #00ff00; text-align: center;">XSS (CROSS-SITE SCRIPTING) LEARNING LAB</h3>
+        <p style="text-align: center; color: #ccc;">Learn how XSS attacks work and how to prevent them</p>
+        
+        <div class="lab-container">
+            <!-- Vulnerable Application -->
+            <div class="vulnerable-section">
+                <div class="section-title">🔓 VULNERABLE APPLICATION</div>
+                <div class="input-group">
+                    <label>Enter your name:</label>
+                    <input type="text" id="vulnerableInput" placeholder="Try: <script>alert('XSS')</script>">
+                </div>
+                <button class="execute-button" onclick="executeVulnerable()">SUBMIT</button>
+                <div class="output-area" id="vulnerableOutput">
+                    Welcome! Enter your name above to see how this vulnerable application works.
+                </div>
+            </div>
+
+            <!-- Secure Application -->
+            <div class="secure-section">
+                <div class="section-title">🔒 SECURE APPLICATION</div>
+                <div class="input-group">
+                    <label>Enter your name:</label>
+                    <input type="text" id="secureInput" placeholder="Same input, but safe">
+                </div>
+                <button class="execute-button" onclick="executeSecure()">SUBMIT</button>
+                <div class="output-area" id="secureOutput">
+                    This application properly sanitizes input to prevent XSS attacks.
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Payloads -->
+        <div class="example-payloads">
+            <div style="color: #ff0080; margin-bottom: 1rem;">💡 EXAMPLE XSS PAYLOADS (Click to try):</div>
+            <div class="payload-item" onclick="loadPayload('<script>alert(\"XSS\")</script>')">
+                Basic XSS: &lt;script&gt;alert("XSS")&lt;/script&gt;
+            </div>
+            <div class="payload-item" onclick="loadPayload('<img src=x onerror=alert(\"XSS\")>')">
+                Image XSS: &lt;img src=x onerror=alert("XSS")&gt;
+            </div>
+            <div class="payload-item" onclick="loadPayload('<svg onload=alert(\"XSS\")>')">
+                SVG XSS: &lt;svg onload=alert("XSS")&gt;
+            </div>
+            <div class="payload-item" onclick="loadPayload('javascript:alert(\"XSS\")')">
+                JavaScript URL: javascript:alert("XSS")
+            </div>
+            <div class="payload-item" onclick="loadPayload('<div style=\"background:url(javascript:alert(\"XSS\"))\">')">
+                CSS XSS: &lt;div style="background:url(javascript:alert('XSS'))"&gt;
+            </div>
+        </div>
+
+        <!-- Explanation -->
+        <div class="explanation">
+            <div style="color: #00ff00; margin-bottom: 1rem;">🎓 HOW XSS WORKS:</div>
+            <p><span class="danger">VULNERABLE SIDE:</span> Directly inserts user input into HTML without sanitization, allowing script execution.</p>
+            <p><span class="safe">SECURE SIDE:</span> Sanitizes input by escaping HTML characters, preventing script execution.</p>
+            <p><strong>Prevention Methods:</strong></p>
+            <ul>
+                <li>HTML Entity Encoding (&lt; becomes &amp;lt;)</li>
+                <li>Content Security Policy (CSP)</li>
+                <li>Input Validation and Sanitization</li>
+                <li>Using Text Content instead of InnerHTML</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function executeVulnerable() {
+            const input = document.getElementById('vulnerableInput').value;
+            const output = document.getElementById('vulnerableOutput');
+            
+            // VULNERABLE: Directly inserts user input without sanitization
+            output.innerHTML = `Welcome, ${input}!`;
+        }
+
+        function executeSecure() {
+            const input = document.getElementById('secureInput').value;
+            const output = document.getElementById('secureOutput');
+            
+            // SECURE: Sanitizes input by escaping HTML characters
+            const sanitizedInput = escapeHtml(input);
+            output.textContent = `Welcome, ${sanitizedInput}!`;
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function loadPayload(payload) {
+            document.getElementById('vulnerableInput').value = payload;
+            document.getElementById('secureInput').value = payload;
+        }
+
+        // Demo some payloads on load
+        setTimeout(() => {
+            loadPayload('<script>alert("This is dangerous!")</script>');
+        }, 1000);
+    </script>
+</body>
+</html>

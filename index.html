@@ -974,3 +974,78 @@
     </style>
 </body>
 </html>
+
+    <!-- Quick Tools Access -->
+    <section class="quick-tools">
+        <div class="container">
+            <h3 class="tools-title">QUICK SECURITY TOOLS</h3>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="window.location.href='password-strength.html'">
+                    <i class="fas fa-key"></i>
+                    <span>Password Analyzer</span>
+                </div>
+                <div class="tool-card" onclick="window.location.href='header-scanner.html'">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Header Scanner</span>
+                </div>
+                <div class="tool-card" onclick="window.location.href='xss-lab.html'">
+                    <i class="fas fa-bug"></i>
+                    <span>XSS Lab</span>
+                </div>
+                <div class="tool-card" onclick="window.location.href='security-tools.html'">
+                    <i class="fas fa-tools"></i>
+                    <span>All Tools</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .quick-tools {
+            background: rgba(0, 30, 0, 0.8);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        .tools-title {
+            text-align: center;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tool-card {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .tool-card:hover {
+            background: rgba(0, 255, 0, 0.2);
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3);
+        }
+        .tool-card i {
+            font-size: 2rem;
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .tool-card span {
+            color: #88ff88;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+        }
+    </style>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Tools - Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tools-hero {
+            background: linear-gradient(135deg, rgba(0,20,0,0.9) 0%, rgba(0,40,0,0.8) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tool-card {
+            background: rgba(0,20,0,0.6);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 30px rgba(0,255,0,0.2);
+        }
+        .tool-icon {
+            font-size: 3rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+        .tool-card h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+        .tool-card p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .tool-button {
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .tool-button:hover {
+            background: #00ff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="security-tools.html" class="nav-link">Security Tools</a></li>
+            <li><a href="cybersecurity-academy.html" class="nav-link">Academy</a></li>
+            <li><a href="dashboard.html" class="nav-login">
+                <i class="fas fa-terminal"></i> Command Center
+            </a></li>
+        </ul>
+    </nav>
+
+    <section class="tools-hero">
+        <div class="container">
+            <h1 class="section-title glitch" data-text="SECURITY_TOOLS">SECURITY TOOLS</h1>
+            <p class="section-subtitle">Interactive cybersecurity tools for learning and testing</p>
+        </div>
+    </section>
+
+    <section class="tools-section">
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3>Password Strength Analyzer</h3>
+                <p>Test your password security with advanced entropy analysis and crack time estimation.</p>
+                <a href="password-strength.html" class="tool-button">OPEN TOOL</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Security Header Scanner</h3>
+                <p>Scan any website for security headers and get recommendations for improvement.</p>
+                <a href="header-scanner.html" class="tool-button">OPEN TOOL</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <h3>XSS Learning Lab</h3>
+                <p>Learn about Cross-Site Scripting vulnerabilities with interactive examples.</p>
+                <a href="xss-lab.html" class="tool-button">OPEN TOOL</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3>Network Scanner</h3>
+                <p>Basic network scanning simulation to understand port scanning techniques.</p>
+                <a href="#" class="tool-button" onclick="showNotification('Coming Soon!', 'info')">COMING SOON</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-encode"></i>
+                </div>
+                <h3>Encryption Playground</h3>
+                <p>Experiment with different encryption algorithms and learn how they work.</p>
+                <a href="#" class="tool-button" onclick="showNotification('Coming Soon!', 'info')">COMING SOON</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>OSINT Toolkit</h3>
+                <p>Open Source Intelligence tools for information gathering and reconnaissance.</p>
+                <a href="#" class="tool-button" onclick="showNotification('Coming Soon!', 'info')">COMING SOON</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `cyber-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'info' ? 'info-circle' : type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        .cyber-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .cyber-notification.info { border-color: #0088ff; color: #0088ff; }
+        .cyber-notification.success { border-color: #00ff00; color: #00ff00; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>
