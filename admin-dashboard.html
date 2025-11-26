@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-dashboard {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,20,0,0.95) 0%, rgba(0,40,0,0.9) 100%);
+            padding: 2rem 0;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .action-card {
+            background: rgba(255,0,128,0.1);
+            border: 1px solid rgba(255,0,128,0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0080;
+            box-shadow: 0 10px 30px rgba(255,0,128,0.3);
+        }
+
+        .action-card i {
+            font-size: 2.5rem;
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+
+        .action-card h3 {
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+
+        .action-card p {
+            color: #ff88cc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .pending-submissions {
+            background: rgba(0,20,0,0.8);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .submission-list {
+            margin-top: 1.5rem;
+        }
+
+        .submission-item {
+            background: rgba(0,255,0,0.05);
+            border: 1px solid rgba(0,255,0,0.2);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submission-item:hover {
+            border-color: #00ff00;
+            background: rgba(0,255,0,0.1);
+        }
+
+        .submission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .submission-name {
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .submission-role {
+            color: #ff0080;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .submission-details {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .submission-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-approve {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .btn-reject {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-view {
+            background: #0088ff;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .admin-logout {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,0,128,0.2);
+            border: 1px solid rgba(255,0,128,0.4);
+            color: #ff0080;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,0,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .admin-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .submission-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .submission-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="admin-dashboard.html" class="nav-link">Admin Dashboard</a></li>
+            <li><a href="#" class="nav-link" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <section class="admin-dashboard">
+        <div class="admin-header">
+            <h1 class="section-title glitch" data-text="ADMIN_DASHBOARD">ADMIN DASHBOARD</h1>
+            <p class="section-subtitle">Welcome back, <span id="adminName">Alpha</span> | Team Management Portal</p>
+        </div>
+
+        <div class="admin-stats">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <span class="stat-number" id="totalMembers">47</span>
+                <span class="stat-label">Team Members</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <span class="stat-number" id="pendingReviews">12</span>
+                <span class="stat-label">Pending Reviews</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <span class="stat-number" id="approvedToday">3</span>
+                <span class="stat-label">Approved Today</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shield-alt"></i>
+                <span class="stat-number" id="securityScore">98%</span>
+                <span class="stat-label">System Security</span>
+            </div>
+        </div>
+
+        <div class="admin-actions">
+            <div class="action-card" onclick="viewPendingSubmissions()">
+                <i class="fas fa-user-check"></i>
+                <h3>Review Submissions</h3>
+                <p>Review and verify new team member applications</p>
+            </div>
+            <div class="action-card" onclick="manageTeam()">
+                <i class="fas fa-cog"></i>
+                <h3>Manage Team</h3>
+                <p>Edit team member profiles and permissions</p>
+            </div>
+            <div class="action-card" onclick="viewAnalytics()">
+                <i class="fas fa-chart-bar"></i>
+                <h3>View Analytics</h3>
+                <p>Access system analytics and performance metrics</p>
+            </div>
+            <div class="action-card" onclick="systemSettings()">
+                <i class="fas fa-sliders-h"></i>
+                <h3>System Settings</h3>
+                <p>Configure admin settings and security options</p>
+            </div>
+        </div>
+
+        <div class="pending-submissions">
+            <h3 style="color: #00ff00; margin-bottom: 1rem;">
+                <i class="fas fa-clock"></i> PENDING TEAM SUBMISSIONS
+            </h3>
+            
+            <div class="submission-list" id="submissionList">
+                <!-- Submissions will be loaded here -->
+                <div class="submission-item">
+                    <div class="submission-header">
+                        <span class="submission-name">John Smith</span>
+                        <span class="submission-role">Penetration Tester</span>
+                    </div>
+                    <div class="submission-details">
+                        <strong>Experience:</strong> 5-10 years<br>
+                        <strong>Skills:</strong> Python, Nmap, Metasploit, Web App Security<br>
+                        <strong>Certifications:</strong> OSCP, CEH
+                    </div>
+                    <div class="submission-actions">
+                        <button class="btn btn-approve" onclick="approveSubmission(1)">
+                            <i class="fas fa-check"></i> Approve
+                        </button>
+                        <button class="btn btn-reject" onclick="rejectSubmission(1)">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                        <button class="btn btn-view" onclick="viewSubmission(1)">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+
+                <div class="submission-item">
+                    <div class="submission-header">
+                        <span class="submission-name">Sarah Johnson</span>
+                        <span class="submission-role">Security Researcher</span>
+                    </div>
+                    <div class="submission-details">
+                        <strong>Experience:</strong> 2-5 years<br>
+                        <strong>Skills:</strong> Malware Analysis, Reverse Engineering, Threat Intelligence<br>
+                        <strong>Certifications:</strong> GCIH, GCFA
+                    </div>
+                    <div class="submission-actions">
+                        <button class="btn btn-approve" onclick="approveSubmission(2)">
+                            <i class="fas fa-check"></i> Approve
+                        </button>
+                        <button class="btn btn-reject" onclick="rejectSubmission(2)">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                        <button class="btn btn-view" onclick="viewSubmission(2)">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-logout">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </button>
+        </div>
+    </section>
+
+    <script>
+        // Check authentication
+        if (localStorage.getItem('adminAuthenticated') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Set admin name
+        document.getElementById('adminName').textContent = localStorage.getItem('adminUsername') || 'Admin';
+
+        // Admin functions
+        function logout() {
+            localStorage.removeItem('adminAuthenticated');
+            localStorage.removeItem('adminUsername');
+            localStorage.removeItem('adminSession');
+            window.location.href = 'admin-login.html';
+        }
+
+        function viewPendingSubmissions() {
+            document.getElementById('submissionList').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function manageTeam() {
+            showNotification('Team management feature coming soon!', 'info');
+        }
+
+        function viewAnalytics() {
+            showNotification('Analytics dashboard coming soon!', 'info');
+        }
+
+        function systemSettings() {
+            showNotification('System settings panel coming soon!', 'info');
+        }
+
+        function approveSubmission(id) {
+            if (confirm('Approve this team member submission?')) {
+                showNotification('Submission approved! Team member added.', 'success');
+                // In production, this would update the database
+                setTimeout(() => {
+                    document.querySelector(`[onclick="approveSubmission(${id})"]`).closest('.submission-item').remove();
+                    updateStats();
+                }, 1000);
+            }
+        }
+
+        function rejectSubmission(id) {
+            const reason = prompt('Enter rejection reason:');
+            if (reason) {
+                showNotification('Submission rejected: ' + reason, 'warning');
+                // In production, this would update the database and notify user
+                setTimeout(() => {
+                    document.querySelector(`[onclick="rejectSubmission(${id})"]`).closest('.submission-item').remove();
+                    updateStats();
+                }, 1000);
+            }
+        }
+
+        function viewSubmission(id) {
+            showNotification('Viewing submission details for ID: ' + id, 'info');
+            // In production, this would show a modal with full details
+        }
+
+        function updateStats() {
+            const pendingItems = document.querySelectorAll('.submission-item').length;
+            document.getElementById('pendingReviews').textContent = pendingItems;
+            document.getElementById('approvedToday').textContent = parseInt(document.getElementById('approvedToday').textContent) + 1;
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `cyber-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        // Auto-logout after 2 hours
+        setTimeout(() => {
+            const sessionTime = parseInt(localStorage.getItem('adminSession') || '0');
+            if (Date.now() - sessionTime > 2 * 60 * 60 * 1000) {
+                logout();
+            }
+        }, 5000);
+    </script>
+
+    <style>
+        .cyber-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .cyber-notification.info { border-color: #0088ff; color: #0088ff; }
+        .cyber-notification.success { border-color: #00ff00; color: #00ff00; }
+        .cyber-notification.warning { border-color: #ffa500; color: #ffa500; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>
