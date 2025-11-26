@@ -59,46 +59,62 @@
     </nav>
 
     <!-- Hero Section -->
-<section class="cyber-hero">
-    <div class="terminal-window">
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <span class="terminal-btn close"></span>
-                <span class="terminal-btn minimize"></span>
-                <span class="terminal-btn maximize"></span>
+    <section class="cyber-hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-btn close"></span>
+                    <span class="terminal-btn minimize"></span>
+                    <span class="terminal-btn maximize"></span>
+                </div>
+                <span class="terminal-title">root@bedusec:~</span>
             </div>
-            <span class="terminal-title">root@bedusec:~</span>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">whoami</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">ethical_hacker | cybersecurity_specialist | penetration_tester</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">cat mission.txt</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">"Securing digital frontiers through ethical penetration testing and vulnerability assessment."</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command">system_status --security</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">[SECURITY] Threat Level: <span class="threat-level" id="threatLevel">LOW</span> | Active Operations: <span id="activeOps">12</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">root@bedusec:~$</span>
+                    <span class="command typed-command"></span>
+                    <span class="cursor">|</span>
+                </div>
+            </div>
         </div>
-        <div class="terminal-body">
-            <div class="terminal-line">
-                <span class="prompt">root@bedusec:~$</span>
-                <span class="command">whoami</span>
+
+        <!-- Quick Access Cards -->
+        <div class="quick-access">
+            <div class="access-card" onclick="showHackingAnimation()">
+                <i class="fas fa-bolt"></i>
+                <span>Live Demo</span>
             </div>
-            <div class="terminal-line">
-                <span class="output">ethical_hacker | cybersecurity_specialist | penetration_tester</span>
+            <div class="access-card" onclick="window.location.href='cybersecurity-academy.html'">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Start Learning</span>
             </div>
-            <div class="terminal-line">
-                <span class="prompt">root@bedusec:~$</span>
-                <span class="command">cat mission.txt</span>
-            </div>
-            <div class="terminal-line">
-                <span class="output">"Securing digital frontiers through ethical penetration testing and vulnerability assessment."</span>
-            </div>
-            <div class="terminal-line">
-                <span class="prompt">root@bedusec:~$</span>
-                <span class="command">system_status --security</span>
-            </div>
-            <div class="terminal-line">
-                <span class="output">[SECURITY] Threat Level: <span class="threat-level" id="threatLevel">LOW</span> | Active Operations: <span id="activeOps">12</span></span>
-            </div>
-            <div class="terminal-line">
-                <span class="prompt">root@bedusec:~$</span>
-                <span class="command typed-command"></span>
-                <span class="cursor">|</span>
+            <div class="access-card" onclick="runSecurityScan()">
+                <i class="fas fa-shield-alt"></i>
+                <span>Security Scan</span>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="cyber-services">

