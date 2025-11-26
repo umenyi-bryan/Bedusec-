@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Bedusec Team - Submission Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .team-portal {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,20,0,0.9) 0%, rgba(0,40,0,0.8) 100%);
+            padding: 2rem 0;
+        }
+
+        .portal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portal-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 30px rgba(0,255,0,0.2);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #00ff00;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .step-card h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: #88ff88;
+            line-height: 1.6;
+        }
+
+        .submission-form {
+            background: rgba(0,20,0,0.8);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00ff00;
+            margin-bottom: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #00ff00;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 15px rgba(255,0,128,0.3);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #00ff00, #008800);
+            color: #000;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #88ff88, #00ff00);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,255,0,0.4);
+        }
+
+        .admin-verification {
+            background: rgba(255,0,128,0.1);
+            border: 1px solid rgba(255,0,128,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .admin-verification h4 {
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+
+        .verification-note {
+            color: #ff88cc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: #88ff88;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .portal-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .submission-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="team.html" class="nav-link">Our Team</a></li>
+            <li><a href="team-submission.html" class="nav-link">Join Team</a></li>
+            <li><a href="cybersecurity-academy.html" class="nav-link">Academy</a></li>
+        </ul>
+    </nav>
+
+    <section class="team-portal">
+        <div class="portal-container">
+            <div class="portal-header">
+                <h1 class="section-title glitch" data-text="JOIN_BEDUSEC_TEAM">JOIN BEDUSEC TEAM</h1>
+                <p class="section-subtitle">Submit your profile for admin verification and join our elite cybersecurity team</p>
+            </div>
+
+            <div class="portal-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Submit Profile</h3>
+                    <p>Fill out the team submission form with your details, skills, and experience</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Admin Review</h3>
+                    <p>Our team leads will review your submission and verify your qualifications</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Approved</h3>
+                    <p>Once verified, your profile will be added to our official team page</p>
+                </div>
+            </div>
+
+            <div class="submission-form">
+                <h3 style="color: #00ff00; text-align: center; margin-bottom: 2rem;">TEAM MEMBER SUBMISSION FORM</h3>
+                
+                <form id="teamSubmissionForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
+                            <input type="text" id="fullName" class="form-control" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                            <input type="email" id="email" class="form-control" required placeholder="your.email@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="role"><i class="fas fa-briefcase"></i> Desired Role *</label>
+                            <select id="role" class="form-control" required>
+                                <option value="">Select your role</option>
+                                <option value="penetration-tester">Penetration Tester</option>
+                                <option value="security-researcher">Security Researcher</option>
+                                <option value="malware-analyst">Malware Analyst</option>
+                                <option value="incident-responder">Incident Responder</option>
+                                <option value="security-engineer">Security Engineer</option>
+                                <option value="cybersecurity-trainer">Cybersecurity Trainer</option>
+                                <option value="threat-intelligence">Threat Intelligence Analyst</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience"><i class="fas fa-chart-line"></i> Years of Experience *</label>
+                            <select id="experience" class="form-control" required>
+                                <option value="">Select experience level</option>
+                                <option value="0-2">0-2 years</option>
+                                <option value="2-5">2-5 years</option>
+                                <option value="5-10">5-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills"><i class="fas fa-tools"></i> Technical Skills *</label>
+                        <textarea id="skills" class="form-control" required placeholder="List your technical skills (e.g., Python, Nmap, Metasploit, Burp Suite, Reverse Engineering...)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certifications"><i class="fas fa-certificate"></i> Certifications</label>
+                        <input type="text" id="certifications" class="form-control" placeholder="CEH, OSCP, CISSP, Security+, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio"><i class="fas fa-file-alt"></i> Professional Bio *</label>
+                        <textarea id="bio" class="form-control" required placeholder="Tell us about your background, achievements, and why you want to join Bedusec..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portfolio"><i class="fas fa-link"></i> Portfolio Links</label>
+                        <input type="text" id="portfolio" class="form-control" placeholder="GitHub, LinkedIn, Personal website, etc.">
+                    </div>
+
+                    <div class="admin-verification">
+                        <h4><i class="fas fa-shield-alt"></i> ADMIN VERIFICATION REQUIRED</h4>
+                        <p class="verification-note">
+                            All team member submissions undergo strict verification by our admin team. 
+                            This ensures we maintain the highest standards of expertise and professionalism. 
+                            You will be notified via email once your submission is reviewed.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> SUBMIT FOR VERIFICATION
+                    </button>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>SUBMISSION RECEIVED!</h3>
+                    <p>Your team member application has been submitted for admin verification. We will review your qualifications and contact you within 3-5 business days.</p>
+                    <p><strong>Reference ID: <span id="referenceId"></span></strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('teamSubmissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Generate reference ID
+            const refId = 'BED-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('referenceId').textContent = refId;
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Simulate form submission (in real implementation, this would send to backend)
+            setTimeout(() => {
+                // Reset form
+                this.reset();
+                
+                // Show notification
+                showNotification('Team submission sent for admin verification!', 'success');
+            }, 2000);
+        });
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `cyber-notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+
+    <style>
+        .cyber-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .cyber-notification.success { border-color: #00ff00; color: #00ff00; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>

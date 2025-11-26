@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Policy - Bedusec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .policy-hero {
+            background: linear-gradient(135deg, rgba(0,20,0,0.9) 0%, rgba(0,40,0,0.8) 100%);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .policy-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .policy-section {
+            background: rgba(0,20,0,0.6);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        .policy-section h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,255,0,0.3);
+            padding-bottom: 0.5rem;
+        }
+        .policy-list {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .policy-list li {
+            margin-bottom: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="security-policy.html" class="nav-link">Security Policy</a></li>
+        </ul>
+    </nav>
+
+    <section class="policy-hero">
+        <h1 class="section-title glitch" data-text="SECURITY_POLICY">SECURITY POLICY</h1>
+        <p class="section-subtitle">Our Commitment to Ethical Cybersecurity Practices</p>
+    </section>
+
+    <div class="policy-content">
+        <div class="policy-section">
+            <h3><i class="fas fa-shield-alt"></i> ETHICAL GUIDELINES</h3>
+            <ul class="policy-list">
+                <li>All security testing conducted with explicit written authorization</li>
+                <li>Strict adherence to responsible disclosure practices</li>
+                <li>No unauthorized access to systems or data</li>
+                <li>Compliance with all applicable laws and regulations</li>
+                <li>Protection of client confidentiality and data privacy</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h3><i class="fas fa-user-secret"></i> RESPONSIBLE DISCLOSURE</h3>
+            <ul class="policy-list">
+                <li>90-day disclosure policy for vulnerabilities</li>
+                <li>Coordination with vendors and maintainers</li>
+                <li>Public disclosure only after patches are available</li>
+                <li>No exploitation of vulnerabilities for personal gain</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        fetch('enhanced-footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+</body>
+</html>

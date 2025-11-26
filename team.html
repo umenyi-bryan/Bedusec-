@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Bedusec Cybersecurity Experts</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .team-hero {
+            background: linear-gradient(135deg, rgba(0,20,0,0.9) 0%, rgba(0,40,0,0.8) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .team-stat {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-stat i {
+            font-size: 2.5rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .team-stat .number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-stat .label {
+            color: #88ff88;
+            font-size: 0.9rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: rgba(0,20,0,0.6);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: #00ff00;
+            box-shadow: 0 15px 40px rgba(0,255,0,0.3);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #00ff00, #008800);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #000;
+            border: 3px solid #00ff00;
+        }
+
+        .member-name {
+            color: #00ff00;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .member-role {
+            color: #ff0080;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .member-bio {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 4px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            color: #88ff88;
+        }
+
+        .member-contact {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: #00ff00;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .join-team-cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255,0,128,0.1);
+            border-top: 2px solid rgba(255,0,128,0.3);
+            border-bottom: 2px solid rgba(255,0,128,0.3);
+            margin: 3rem 0;
+        }
+
+        .join-team-cta h2 {
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+
+        .join-team-cta p {
+            color: #ff88cc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff0080, #ff3399);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #ff3399, #ff66aa);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,0,128,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .team-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <nav class="cyber-nav">
+        <div class="nav-brand">
+            <span class="glitch" data-text="BEDUSEC">BEDUSEC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="team.html" class="nav-link">Our Team</a></li>
+            <li><a href="team-submission.html" class="nav-link">Join Team</a></li>
+            <li><a href="cybersecurity-academy.html" class="nav-link">Academy</a></li>
+        </ul>
+    </nav>
+
+    <section class="team-hero">
+        <div class="container">
+            <h1 class="section-title glitch" data-text="BEDUSEC_TEAM">BEDUSEC TEAM</h1>
+            <p class="section-subtitle">Elite Cybersecurity Experts Protecting Digital Frontiers</p>
+        </div>
+    </section>
+
+    <div class="team-stats">
+        <div class="team-stat">
+            <i class="fas fa-user-shield"></i>
+            <span class="number">47</span>
+            <span class="label">Security Experts</span>
+        </div>
+        <div class="team-stat">
+            <i class="fas fa-bug"></i>
+            <span class="number">2,847</span>
+            <span class="label">Vulnerabilities Found</span>
+        </div>
+        <div class="team-stat">
+            <i class="fas fa-globe"></i>
+            <span class="number">156</span>
+            <span class="label">Global Clients</span>
+        </div>
+        <div class="team-stat">
+            <i class="fas fa-trophy"></i>
+            <span class="number">99.8%</span>
+            <span class="label">Success Rate</span>
+        </div>
+    </div>
+
+    <div class="team-grid">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <div class="member-avatar">
+                <i class="fas fa-user-secret"></i>
+            </div>
+            <h3 class="member-name">ALEX CHEN</h3>
+            <div class="member-role">CHIEF SECURITY OFFICER</div>
+            <p class="member-bio">15+ years in cybersecurity leadership. Former head of security at Fortune 500 companies. Specializes in threat intelligence and incident response.</p>
+            <div class="member-skills">
+                <span class="skill-tag">Threat Intelligence</span>
+                <span class="skill-tag">Incident Response</span>
+                <span class="skill-tag">CISSP</span>
+                <span class="skill-tag">CISM</span>
+            </div>
+            <div class="member-contact">
+                <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="contact-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <div class="member-avatar">
+                <i class="fas fa-bug"></i>
+            </div>
+            <h3 class="member-name">SARAH MARTINEZ</h3>
+            <div class="member-role">SENIOR PENETRATION TESTER</div>
+            <p class="member-bio">OSCP, OSCE certified. 8 years in offensive security. Discovered 47 CVEs. Expert in web application security and network penetration testing.</p>
+            <div class="member-skills">
+                <span class="skill-tag">Penetration Testing</span>
+                <span class="skill-tag">Web Security</span>
+                <span class="skill-tag">OSCP</span>
+                <span class="skill-tag">OSCE</span>
+            </div>
+            <div class="member-contact">
+                <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="contact-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="team-member">
+            <div class="member-avatar">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="member-name">MIKE JOHNSON</h3>
+            <div class="member-role">SECURITY RESEARCHER</div>
+            <p class="member-bio">Malware analysis and reverse engineering specialist. Published researcher on advanced persistent threats. Creator of multiple security tools.</p>
+            <div class="member-skills">
+                <span class="skill-tag">Malware Analysis</span>
+                <span class="skill-tag">Reverse Engineering</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Ghidra</span>
+            </div>
+            <div class="member-contact">
+                <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="contact-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="join-team-cta">
+        <div class="container">
+            <h2>READY TO JOIN OUR ELITE TEAM?</h2>
+            <p>We're always looking for talented cybersecurity professionals to join our mission of securing digital frontiers.</p>
+            <a href="team-submission.html" class="cta-button">
+                <i class="fas fa-user-plus"></i> JOIN BEDUSEC TEAM
+            </a>
+        </div>
+    </div>
+
+    <!-- Include the enhanced footer -->
+    <script>
+        // Load enhanced footer
+        fetch('enhanced-footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('beforeend', html);
+            })
+            .catch(err => {
+                console.log('Failed to load footer:', err);
+                // Fallback to basic footer
+                document.body.insertAdjacentHTML('beforeend', `
+                    <footer style="background: #000; color: #00ff00; text-align: center; padding: 2rem; border-top: 1px solid #00ff00;">
+                        <p>&copy; 2024 BEDUSEC. All rights reserved. | Securing digital frontiers through ethical cybersecurity</p>
+                    </footer>
+                `);
+            });
+    </script>
+</body>
+</html>

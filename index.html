@@ -956,6 +956,22 @@
             }
         }
     </style>
+    <!-- Enhanced Footer -->
+    <script>
+        fetch("enhanced-footer.html")
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML("beforeend", html);
+            })
+            .catch(err => {
+                console.log("Footer load failed, using fallback");
+                document.body.insertAdjacentHTML("beforeend", `
+                    <footer style="background: #000; color: #00ff00; text-align: center; padding: 2rem; border-top: 1px solid #00ff00;">
+                        <p>&copy; 2024 BEDUSEC. All rights reserved. | Securing digital frontiers through ethical cybersecurity</p>
+                    </footer>
+                `);
+            });
+    </script>
 </body>
 </html>
 
